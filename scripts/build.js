@@ -273,13 +273,15 @@ function buildAudioVersions() {
 }
 
 function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
-  const typeColors = {};
+  const typeInfo = {};
   types.forEach((t) => {
-    if (t && t.name) typeColors[t.name] = t.color || '#ccc';
+    if (!t || !t.slug) return;
+    const label = t.name?.de || t.name || t.slug;
+    typeInfo[t.slug] = { name: label, color: t.color || '#ccc' };
   });
 
-  const badgeCss = Object.entries(typeColors)
-    .map(([name, color]) => `.type-${name.replace(/\\s+/g, '-').toLowerCase()} { background: ${color}; color: #111; }`)
+  const badgeCss = Object.entries(typeInfo)
+    .map(([slug, info]) => `.type-${slug.replace(/\\s+/g, '-').toLowerCase()} { background: ${info.color}; color: #111; }`)
     .join('\\n');
 
   return `<!DOCTYPE html>
@@ -406,9 +408,9 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       border-radius: 12px;
       border: 2px solid var(--border);
       background: #fff;
-      padding: 10px 16px;
+      padding: 8px 10px;
       min-height: 48px;
-      min-width: 120px;
+      min-width: 48px;
       cursor: pointer;
     }
     .pager button:disabled {
@@ -673,8 +675,8 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       }
       .overlay.active { display: block; }
       .pager button {
-        min-width: 140px;
-        font-size: 18px;
+        min-width: 56px;
+        font-size: 20px;
       }
     }
     ${badgeCss}
@@ -693,9 +695,9 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         </div>
         <div class=\"list\" id=\"list\"></div>
         <div class=\"pager\">
-          <button type=\"button\" id=\"page-prev\">◀ Zurück</button>
+          <button type=\"button\" id=\"page-prev\" aria-label=\"Vorherige Seite\">◀</button>
           <div class=\"page-info\" id=\"page-info\">Seite 1 von 1</div>
-          <button type=\"button\" id=\"page-next\">Weiter ▶</button>
+          <button type=\"button\" id=\"page-next\" aria-label=\"Nächste Seite\">▶</button>
         </div>
       </div>
       <div class=\"panel detail\" id=\"detail\">
@@ -705,8 +707,8 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     <div class=\"overlay\" id=\"overlay\"></div>
   </div>
   <script>
-    const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeColors)} };
-    const typeNames = ${JSON.stringify(types.map((t) => t?.name).filter(Boolean))};
+    const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeInfo)} };
+    const typeNames = ${JSON.stringify(types.map((t) => t?.slug).filter(Boolean))};
     const moveSlugs = ${JSON.stringify(moves.map((m) => m?.slug).filter(Boolean))};
     const audioVersions = ${JSON.stringify(audioVersions)};
     const assetVersion = '${assetVersion}';
@@ -743,12 +745,20 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       overlayEl?.classList.remove('active');
     };
     const badgeHtml = (t) => {
-      const color = state.types?.[t] || state.types?.[(t || '').toString().toLowerCase()];
-      const style = color ? ' style=\"background:'+color+';color:#111;\"' : '';
-      return '<span class=\"badge '+typeClass(t)+'\" data-type=\"'+t+'\"'+style+'>'+t+'</span>';
+      const info = state.types?.[t];
+      const label = info?.name || t || 'Typ';
+      const style = info?.color ? ' style=\"background:'+info.color+';color:#111;\"' : '';
+      return '<span class=\"badge '+typeClass(t)+'\" data-type=\"'+t+'\"'+style+'>'+label+'</span>';
     };
 
   const pageSize = 32;
+
+  const resetListScroll = () => {
+    listEl.scrollTop = 0;
+    if (listEl.parentElement) {
+      listEl.parentElement.scrollTop = 0;
+    }
+  };
 
   function renderList(items) {
     const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
@@ -834,7 +844,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         const targetName = e?.target_name || e?.target || e || '???';
         const targetId = e?.target_id ? e.target_id : null;
         const hasTarget = targetName !== '???' && targetId;
-        const cond = e && e.condition ? e.condition : '';
+        const cond = hasTarget && e && e.condition ? e.condition : '';
         const thumb = hasTarget
           ? '<div class=\"evo-thumb\"><img src=\"'+spritePath(targetId)+'\" alt=\"'+targetName+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>'
           : '<div class=\"evo-thumb missing\"></div>';
@@ -890,6 +900,16 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
           audio.play().catch(() => {});
         });
       });
+      detailEl.querySelectorAll('.moves .badge[data-type]').forEach((el) => {
+        el.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const typeName = el.getAttribute('data-type');
+          if (!typeName) return;
+          const audio = new Audio(typeAudioPath(typeName));
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        });
+      });
       detailEl.querySelectorAll('.move-name[data-move]').forEach((el) => {
         el.addEventListener('click', (event) => {
           event.stopPropagation();
@@ -922,7 +942,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       } else {
         state.filtered = state.pokemon.filter((p) => {
           const name = (p.name?.de || '').toLowerCase();
-          const types = (p.types || []).join(' ').toLowerCase();
+          const types = (p.types || []).map((t) => state.types?.[t]?.name || t).join(' ').toLowerCase();
           return name.includes(term) || types.includes(term);
         });
       }
@@ -951,6 +971,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         if (state.page > 1) {
           state.page -= 1;
           renderList(state.filtered);
+          resetListScroll();
         }
       });
       pageNextEl?.addEventListener('click', () => {
@@ -958,6 +979,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         if (state.page < totalPages) {
           state.page += 1;
           renderList(state.filtered);
+          resetListScroll();
         }
       });
       if (state.pokemon.length) {

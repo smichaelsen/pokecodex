@@ -5,8 +5,8 @@ name:
 entry:
   de: Fliegt durch die Lüfte und speit Feuer, das alles schmilzt.
 types:
-  - Feuer
-  - Flug
+  - fire
+  - flying
 height_m: 1.7
 weight_kg: 90.5
 evolves_from: 5

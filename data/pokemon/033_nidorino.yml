@@ -1,0 +1,15 @@
+id: 33
+slug: nidorino
+name:
+  de: Nidorino
+entry:
+  de: Es überwacht mit seinen riesigen Ohren die Umgebung. Registriert es eine Bewegung, greift es an.
+types:
+  - poison
+height_m: 0.9
+weight_kg: 19.5
+evolves_from: 32
+signature_move: horn-attack
+evolutions:
+  - target: 34
+    condition: Mondstein

@@ -1,18 +1,60 @@
-- name: Pflanze
+- slug: grass
+  name:
+    de: Pflanze
   color: '#4caf50'
   tts: Pflanze
-- name: Gift
+- slug: poison
+  name:
+    de: Gift
   color: '#9c27b0'
   tts: Gift
-- name: Feuer
+- slug: fire
+  name:
+    de: Feuer
   color: '#ff7043'
   tts: Feuer
-- name: Wasser
+- slug: water
+  name:
+    de: Wasser
   color: '#42a5f5'
   tts: Wasser
-- name: Elektro
+- slug: electric
+  name:
+    de: Elektro
   color: '#fdd835'
   tts: Elektro
-- name: Normal
+- slug: normal
+  name:
+    de: Normal
   color: '#bdbdbd'
   tts: Normal
+- slug: ground
+  name:
+    de: Boden
+  color: '#b58d4a'
+  tts: Boden
+- slug: flying
+  name:
+    de: Flug
+  color: '#90caf9'
+  tts: Flug
+- slug: rock
+  name:
+    de: Gestein
+  color: '#a1887f'
+  tts: Gestein
+- slug: psychic
+  name:
+    de: Psycho
+  color: '#f06292'
+  tts: Psycho
+- slug: bug
+  name:
+    de: Käfer
+  color: '#8bc34a'
+  tts: Käfer
+- slug: ice
+  name:
+    de: Eis
+  color: '#81d4fa'
+  tts: Eis

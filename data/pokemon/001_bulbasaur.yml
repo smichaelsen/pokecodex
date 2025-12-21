@@ -5,8 +5,8 @@ name:
 entry:
   de: Bisasam speichert Energie in seinem Samen auf dem Rücken. Es liebt Sonnenlicht und beginnt zu blühen, wenn es kräftig wächst.
 types:
-  - Pflanze
-  - Gift
+  - grass
+  - poison
 height_m: 0.7
 weight_kg: 6.9
 signature_move: leech-seed

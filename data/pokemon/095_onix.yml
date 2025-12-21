@@ -5,8 +5,8 @@ name:
 entry:
   de: Es gräbt sich durch die Erde. Beim Tunnelbau frisst es Felsen und mineralische Erde.
 types:
-  - Gestein
-  - Boden
+  - rock
+  - ground
 height_m: 8.8
 weight_kg: 210.0
 signature_move: rock-throw

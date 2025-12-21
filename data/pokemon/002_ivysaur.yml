@@ -5,8 +5,8 @@ name:
 entry:
   de: Die Knospe auf seinem Rücken sammelt Sonnenlicht. Kurz vor der Entwicklung wird sie schwer.
 types:
-  - Pflanze
-  - Gift
+  - grass
+  - poison
 height_m: 1.0
 weight_kg: 13.0
 evolves_from: 1

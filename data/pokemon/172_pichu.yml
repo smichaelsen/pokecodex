@@ -7,7 +7,7 @@ name_tts:
 entry:
   de: Sie spielen miteinander, indem sie ihre Schweifspitzen aneinanderhalten und Funken fliegen lassen.
 types:
-  - Elektro
+  - electric
 height_m: 0.3
 weight_kg: 2.0
 signature_move: thunder-wave

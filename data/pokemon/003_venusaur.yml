@@ -5,8 +5,8 @@ name:
 entry:
   de: Die Blume auf seinem Rücken verströmt ein beruhigendes Aroma. Sie blüht, wenn sie Sonnenlicht aufnimmt.
 types:
-  - Pflanze
-  - Gift
+  - grass
+  - poison
 height_m: 2.0
 weight_kg: 100.0
 evolves_from: 2

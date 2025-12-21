@@ -7,7 +7,7 @@ name_tts:
 entry:
   de: Es untersucht die Umgebung, indem es die Ohren spitzt und lauscht. Sein giftiges Horn schützt es.
 types:
-  - Gift
+  - poison
 height_m: 0.5
 weight_kg: 9.0
 signature_move: poison-sting

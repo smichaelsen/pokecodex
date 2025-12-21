@@ -3,7 +3,7 @@
     de: Egelsamen
     en: Leech Seed
   tts: Egelsamen
-  type: Pflanze
+  type: grass
   power: 0
   description:
     de: Ziel wird bepflanzt und verliert jede Runde KP, die ein Pokémon aus dem Team des Anwenders heilen.
@@ -12,7 +12,7 @@
     de: Schlafpuder
     en: Sleep Powder
   tts: Schlafpuder
-  type: Pflanze
+  type: grass
   power: 0
   description:
     de: Verstreut Schlafpuder, der das Ziel eventuell in Schlaf versetzt.
@@ -21,7 +21,7 @@
     de: Solarstrahl
     en: Solar Beam
   tts: Solarstrahl
-  type: Pflanze
+  type: grass
   power: 120
   description:
     de: Absorbiert Licht in Runde 1. In Runde 2 erfolgt der Angriff.
@@ -30,7 +30,7 @@
     de: Glut
     en: Ember
   tts: Glut
-  type: Feuer
+  type: fire
   power: 40
   description:
     de: Schwache Feuer-Attacke, durch die das Ziel eventuell Verbrennungen erleidet.
@@ -39,7 +39,7 @@
     de: Flammenwurf
     en: Flamethrower
   tts: Flammenwurf
-  type: Feuer
+  type: fire
   power: 90
   description:
     de: Starke Feuer-Attacke, durch die das Ziel eventuell Verbrennungen erleidet.
@@ -48,7 +48,7 @@
     de: Feuersturm
     en: Fire Blast
   tts: Feuersturm
-  type: Feuer
+  type: fire
   power: 110
   description:
     de: Feuersbrunst, die das Ziel versengt und ihm eventuell eine Verbrennung zufügt.
@@ -57,7 +57,7 @@
     de: Aquaknarre
     en: Water Gun
   tts: Aquaknarre
-  type: Wasser
+  type: water
   power: 40
   description:
     de: Das Ziel wird mit Wasser bespritzt.
@@ -66,7 +66,7 @@
     de: Panzerschutz
     en: Withdraw
   tts: Panzerschutz
-  type: Wasser
+  type: water
   power: 0
   description:
     de: Rückzug in den harten Panzer. Erhöht den Verteidigungs-Wert.
@@ -75,7 +75,7 @@
     de: Hydropumpe
     en: Hydro Pump
   tts: Hydropumpe
-  type: Wasser
+  type: water
   power: 110
   description:
     de: Spritzt eine Menge Wasser mit Hochdruck auf das Ziel.
@@ -84,7 +84,7 @@
     de: Donnerschock
     en: Thunder Shock
   tts: Donnerschock
-  type: Elektro
+  type: electric
   power: 40
   description:
     de: Eine Elektro-Attacke, die das Ziel eventuell paralysiert.
@@ -93,7 +93,7 @@
     de: Donner
     en: Thunder
   tts: Donner
-  type: Elektro
+  type: electric
   power: 110
   description:
     de: Eine verheerende Elektro-Attacke, die das Ziel eventuell paralysiert.
@@ -102,7 +102,7 @@
     de: Giftstachel
     en: Poison Sting
   tts: Giftstachel
-  type: Gift
+  type: poison
   power: 15
   description:
     de: Angriff mit Giftstachel. Das Ziel wird eventuell vergiftet.
@@ -111,7 +111,7 @@
     de: Teleport
     en: Teleport
   tts: Teleport
-  type: Psycho
+  type: psychic
   power: 0
   description:
     de: Ermöglicht die sofortige Flucht vor wilden Pokémon. Kann den Anwender außerdem zum zuletzt besuchten Pokémon-Center teleportieren.
@@ -120,7 +120,7 @@
     de: Psychokinese
     en: Psychic
   tts: Psychokinese
-  type: Psycho
+  type: psychic
   power: 90
   description:
     de: Starke Psycho-Attacke, die eventuell die Spezial-Verteidigung des Zieles senkt.
@@ -129,7 +129,7 @@
     de: Eisspeer
     en: Icicle Spear
   tts: Eis Spehr
-  type: Eis
+  type: ice
   power: 25
   description:
     de: Feuert zwei bis fünf Eiszapfen auf das Ziel.
@@ -138,7 +138,7 @@
     de: Steinwurf
     en: Rock Throw
   tts: Steinwurf
-  type: Gestein
+  type: rock
   power: 50
   description:
     de: Das Ziel wird mit einem kleinen Stein beworfen.
@@ -147,7 +147,7 @@
     de: Steinkante
     en: Stone Edge
   tts: Steinkante
-  type: Gestein
+  type: rock
   power: 100
   description:
     de: Anwender sticht das Ziel mit spitzen Steinen. Hohe Volltrefferquote.
@@ -156,7 +156,43 @@
     de: Donnerwelle
     en: Thunder Wave
   tts: Donnerwelle
-  type: Elektro
+  type: electric
   power: 0
   description:
     de: Ein schwacher Stromstoß, der das Ziel paralysiert.
+- slug: quick-attack
+  name:
+    de: Ruckzuckhieb
+    en: Quick Attack
+  tts: Ruckzuckhieb
+  type: normal
+  power: 40
+  description:
+    de: Sehr schneller Angriff mit Erstschlaggarantie.
+- slug: crabhammer
+  name:
+    de: Krabbhammer
+    en: Crabhammer
+  tts: Krabbhammer
+  type: water
+  power: 100
+  description:
+    de: Schlägt mit Schere zu. Hohe Volltrefferquote.
+- slug: megahorn
+  name:
+    de: Vielender
+    en: Megahorn
+  tts: Vielender
+  type: bug
+  power: 120
+  description:
+    de: Brutaler Ramm-Angriff mit spitzem, beeindruckendem Horn.
+- slug: horn-attack
+  name:
+    de: Hornattacke
+    en: Horn Attack
+  tts: Hornattacke
+  type: normal
+  power: 65
+  description:
+    de: Spießt das Ziel mit einem spitzen Horn auf.

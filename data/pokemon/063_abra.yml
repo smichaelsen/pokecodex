@@ -5,7 +5,7 @@ name:
 entry:
   de: Es schläft 18 Stunden am Tag. Währenddessen setzt es eine Vielzahl zusätzlicher sensorischer Kräfte ein.
 types:
-  - Psycho
+  - psychic
 height_m: 0.9
 weight_kg: 19.5
 signature_move: teleport

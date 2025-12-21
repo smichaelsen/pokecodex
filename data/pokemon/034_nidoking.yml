@@ -1,0 +1,14 @@
+id: 34
+slug: nidoking
+name:
+  de: Nidoking
+entry:
+  de: Seine steinharte Haut und sein ausgeprägtes Horn sind seine Markenzeichen. Achte auf das Horn, denn es enthält Gift.
+types:
+  - poison
+  - ground
+height_m: 1.4
+weight_kg: 62.0
+evolves_from: 33
+signature_move: megahorn
+evolutions: []

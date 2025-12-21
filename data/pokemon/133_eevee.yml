@@ -1,0 +1,30 @@
+id: 133
+slug: eevee
+name:
+  de: Evoli
+name_tts:
+  de: Ehvoli
+entry:
+  de: Ein seltenes Pokémon, das sich seiner Umgebung anpasst, indem es sich in unterschiedliche Formen entwickelt.
+types:
+  - normal
+height_m: 0.3
+weight_kg: 6.5
+signature_move: quick-attack
+evolutions:
+  - target: 134
+    condition: Wasserstein
+  - target: 135
+    condition: Donnerstein
+  - target: 136
+    condition: Feuerstein
+  - target: 196
+    condition: Entwicklung durch hohe Freundschaft (tagsüber)
+  - target: 197
+    condition: Entwicklung durch hohe Freundschaft (nachts)
+  - target: 470
+    condition: Entwicklung durch Level-Up
+  - target: 471
+    condition: Entwicklung durch Level-Up
+  - target: 700
+    condition: Entwicklung durch Level-Up

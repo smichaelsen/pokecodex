@@ -5,7 +5,7 @@ name:
 entry:
   de: Versteckt sich in seinem Panzer und spritzt Wasser aus seinem Mund.
 types:
-  - Wasser
+  - water
 height_m: 0.5
 weight_kg: 9.0
 signature_move: water-gun

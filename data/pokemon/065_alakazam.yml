@@ -5,7 +5,7 @@ name:
 entry:
   de: Seine Gehirnzellen vervielfachen sich sein ganzes Leben lang. Daher kann es sich immer an alles erinnern.
 types:
-  - Psycho
+  - psychic
 height_m: 1.5
 weight_kg: 48.0
 evolves_from: 64

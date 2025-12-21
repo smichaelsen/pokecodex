@@ -5,7 +5,7 @@ name:
 entry:
   de: Sein dicker Schweif hilft beim Balancehalten im Wasser.
 types:
-  - Wasser
+  - water
 height_m: 1.0
 weight_kg: 22.5
 evolves_from: 7

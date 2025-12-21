@@ -1,0 +1,15 @@
+id: 134
+slug: vaporeon
+name:
+  de: Aquana
+name_tts:
+  de: Aquahna
+entry:
+  de: Es liebt schöne Ufer. Da seine Zellstruktur Wassermolekülen ähnlich ist, kann es mit Wasser verschmelzen.
+types:
+  - water
+height_m: 1.0
+weight_kg: 29.0
+evolves_from: 133
+signature_move: water-gun
+evolutions: []

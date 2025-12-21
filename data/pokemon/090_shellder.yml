@@ -5,7 +5,7 @@ name:
 entry:
   de: Es schwimmt rückwärts, indem es Wasser ausstößt. Selbst an Land überlebt es, wenn es seine Schale fest schließt.
 types:
-  - Wasser
+  - water
 height_m: 0.3
 weight_kg: 4.0
 signature_move: icicle-spear

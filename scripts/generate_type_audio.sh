@@ -95,13 +95,16 @@ downloaded=0
 skipped=0
 failed=0
 
+current_slug=""
 current_name=""
 current_tts=""
+in_name=0
 
 flush_type() {
-  local name="$1"
-  local tts="$2"
-  if [[ -z "${name:-}" ]]; then
+  local slug="$1"
+  local name="$2"
+  local tts="$3"
+  if [[ -z "${slug:-}" ]]; then
     return
   fi
   local spoken="${tts:-$name}"
@@ -109,14 +112,14 @@ flush_type() {
     ((failed++)) || true
     return
   fi
-  local dest="$OUT_DIR/${name}.mp3"
+  local dest="$OUT_DIR/${slug}.mp3"
   if [[ -f "$dest" && "$FORCE" -ne 1 ]]; then
-    echo "Skip type $name (audio exists: $dest)"
+    echo "Skip type $slug (audio exists: $dest)"
     ((skipped++)) || true
     return
   fi
   local safe_name
-  safe_name="$(printf '%s' "$name" | tr ' /' '__')"
+  safe_name="$(printf '%s' "$slug" | tr ' /' '__')"
   local tmp_wav
   tmp_wav="$(mktemp "$CACHE_DIR/tts-type-${safe_name}-XXXX.wav")"
   echo "Generate $dest"
@@ -128,7 +131,7 @@ flush_type() {
       ((failed++)) || true
     fi
   else
-    echo "Failed to generate audio for type $name"
+    echo "Failed to generate audio for type $slug"
     ((failed++)) || true
   fi
   rm -f "$tmp_wav"
@@ -136,17 +139,33 @@ flush_type() {
 
 while IFS= read -r line; do
   [[ -z "${line// }" ]] && continue
-  if [[ "$line" =~ ^-?[[:space:]]*name:[[:space:]]*(.*)$ ]]; then
-    flush_type "$current_name" "$current_tts"
-    current_name="$(strip_quotes "${BASH_REMATCH[1]}")"
+  if [[ "$line" =~ ^-?[[:space:]]*slug:[[:space:]]*(.*)$ ]]; then
+    flush_type "$current_slug" "$current_name" "$current_tts"
+    current_slug="$(strip_quotes "${BASH_REMATCH[1]}")"
     current_tts=""
+    current_name=""
+    in_name=0
     continue
   fi
   if [[ "$line" =~ ^[[:space:]]*tts:[[:space:]]*(.*)$ ]]; then
     current_tts="$(strip_quotes "${BASH_REMATCH[1]}")"
+    continue
+  fi
+  if [[ "$line" =~ ^[[:space:]]*name:[[:space:]]*$ ]]; then
+    in_name=1
+    continue
+  fi
+  if [[ $in_name -eq 1 ]]; then
+    if [[ "$line" == "    de:"* ]]; then
+      current_name="$(strip_quotes "${line#    de: }")"
+      continue
+    fi
+    if [[ "$line" != "    "* ]]; then
+      in_name=0
+    fi
   fi
 done < "$DATA_FILE"
 
-flush_type "$current_name" "$current_tts"
+flush_type "$current_slug" "$current_name" "$current_tts"
 
 echo "Done. generated=$downloaded skipped=$skipped failed=$failed"

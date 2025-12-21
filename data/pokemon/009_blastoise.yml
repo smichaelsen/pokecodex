@@ -5,7 +5,7 @@ name:
 entry:
   de: Seine Wasserdüsen können Stahlplatten durchdringen.
 types:
-  - Wasser
+  - water
 height_m: 1.6
 weight_kg: 85.5
 evolves_from: 8
