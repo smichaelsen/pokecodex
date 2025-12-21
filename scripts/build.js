@@ -855,9 +855,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         '<div class=\"detail-body\">' +
           '<div class=\"art clickable\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
           '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges pokemon-types\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
-          '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
-          '<div class=\"section\"><h4>Vorentwicklung</h4><div class=\"evo-list\">'+evolvesFrom+'</div></div>' +
-          '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"evo-list\">'+evolutions+'</div></div>' +
+          '<div class=\"section\"><h4>Entwicklung</h4><div class=\"evo-list\"><div class=\"evo-block\"><div class=\"meta\">Vorentwicklung</div>'+evolvesFrom+'</div><div class=\"evo-block\"><div class=\"meta\">Entwicklungen</div>'+evolutions+'</div></div></div>' +
           '<div class=\"section\"><h4>Signaturattacke</h4><div class=\"moves\">'+moveHtml+'</div></div>' +
         '</div>';
       const btn = detailEl.querySelector('.close');
