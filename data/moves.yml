@@ -2,6 +2,7 @@
   name:
     de: Egelsamen
     en: Leech Seed
+  tts: Egelsamen
   type: Pflanze
   power: 0
   description:
@@ -10,6 +11,7 @@
   name:
     de: Schlafpuder
     en: Sleep Powder
+  tts: Schlafpuder
   type: Pflanze
   power: 0
   description:
@@ -18,6 +20,7 @@
   name:
     de: Solarstrahl
     en: Solar Beam
+  tts: Solarstrahl
   type: Pflanze
   power: 120
   description:
@@ -26,6 +29,7 @@
   name:
     de: Glut
     en: Ember
+  tts: Glut
   type: Feuer
   power: 40
   description:
@@ -34,6 +38,7 @@
   name:
     de: Flammenwurf
     en: Flamethrower
+  tts: Flammenwurf
   type: Feuer
   power: 90
   description:
@@ -42,6 +47,7 @@
   name:
     de: Feuersturm
     en: Fire Blast
+  tts: Feuersturm
   type: Feuer
   power: 110
   description:
@@ -50,6 +56,7 @@
   name:
     de: Aquaknarre
     en: Water Gun
+  tts: Aquaknarre
   type: Wasser
   power: 40
   description:
@@ -58,6 +65,7 @@
   name:
     de: Panzerschutz
     en: Withdraw
+  tts: Panzerschutz
   type: Wasser
   power: 0
   description:
@@ -66,6 +74,7 @@
   name:
     de: Hydropumpe
     en: Hydro Pump
+  tts: Hydropumpe
   type: Wasser
   power: 110
   description:
@@ -74,6 +83,7 @@
   name:
     de: Donnerschock
     en: Thunder Shock
+  tts: Donnerschock
   type: Elektro
   power: 40
   description:
@@ -82,6 +92,7 @@
   name:
     de: Donner
     en: Thunder
+  tts: Donner
   type: Elektro
   power: 110
   description:
@@ -90,6 +101,7 @@
   name:
     de: Giftstachel
     en: Poison Sting
+  tts: Giftstachel
   type: Gift
   power: 15
   description:
@@ -98,6 +110,7 @@
   name:
     de: Teleport
     en: Teleport
+  tts: Teleport
   type: Psycho
   power: 0
   description:
@@ -106,6 +119,7 @@
   name:
     de: Psychokinese
     en: Psychic
+  tts: Psychokinese
   type: Psycho
   power: 90
   description:
@@ -114,6 +128,7 @@
   name:
     de: Eisspeer
     en: Icicle Spear
+  tts: Eisspeer
   type: Eis
   power: 25
   description:
@@ -122,6 +137,7 @@
   name:
     de: Steinwurf
     en: Rock Throw
+  tts: Steinwurf
   type: Gestein
   power: 50
   description:
@@ -130,6 +146,7 @@
   name:
     de: Steinkante
     en: Stone Edge
+  tts: Steinkante
   type: Gestein
   power: 100
   description:
@@ -138,6 +155,7 @@
   name:
     de: Donnerwelle
     en: Thunder Wave
+  tts: Donnerwelle
   type: Elektro
   power: 0
   description:

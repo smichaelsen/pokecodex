@@ -221,11 +221,13 @@ function buildAudioVersions() {
     chimes: {},
     names: {},
     types: {},
+    moves: {},
   };
 
   const chimeDir = path.join(PUBLIC_DIR, 'audio', 'chimes');
   const nameDir = path.join(PUBLIC_DIR, 'audio', 'de', 'pokemon');
   const typeDir = path.join(PUBLIC_DIR, 'audio', 'de', 'types');
+  const moveDir = path.join(PUBLIC_DIR, 'audio', 'de', 'moves');
 
   if (fs.existsSync(chimeDir)) {
     fs.readdirSync(chimeDir)
@@ -257,10 +259,20 @@ function buildAudioVersions() {
       });
   }
 
+  if (fs.existsSync(moveDir)) {
+    fs.readdirSync(moveDir)
+      .filter((file) => file.endsWith('.mp3'))
+      .forEach((file) => {
+        const key = file.replace(/\.mp3$/, '');
+        const stat = fs.statSync(path.join(moveDir, file));
+        versions.moves[key] = Math.floor(stat.mtimeMs);
+      });
+  }
+
   return versions;
 }
 
-function buildHtml(pokemon, types, assetVersion, audioVersions) {
+function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
   const typeColors = {};
   types.forEach((t) => {
     if (t && t.name) typeColors[t.name] = t.color || '#ccc';
@@ -695,6 +707,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
   <script>
     const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeColors)} };
     const typeNames = ${JSON.stringify(types.map((t) => t?.name).filter(Boolean))};
+    const moveSlugs = ${JSON.stringify(moves.map((m) => m?.slug).filter(Boolean))};
     const audioVersions = ${JSON.stringify(audioVersions)};
     const assetVersion = '${assetVersion}';
     const listEl = document.getElementById('list');
@@ -718,6 +731,10 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
   const typeAudioPath = (typeName) => {
     const version = audioVersions?.types?.[typeName] || assetVersion;
     return 'audio/de/types/' + typeName + '.mp3?v=' + version;
+  };
+  const moveAudioPath = (slug) => {
+    const version = audioVersions?.moves?.[slug] || assetVersion;
+    return 'audio/de/moves/' + slug + '.mp3?v=' + version;
   };
     const overlayEl = document.getElementById('overlay');
     const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
@@ -831,7 +848,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       const move = p.signature_move_data;
       const moveBadge = move?.type ? badgeHtml(move.type) : '<span class=\"badge\">Typ</span>';
       const moveHtml = move
-        ? '<div class=\"move\"><div><strong>'+(move.name?.de || 'Unbekannt')+'</strong><div class=\"meta\">'+(move.description?.de || '')+'</div></div><div class=\"meta\">'+moveBadge+'</div></div>'
+        ? '<div class=\"move\"><div><strong class=\"move-name\" data-move=\"'+(move.slug || '')+'\">'+(move.name?.de || 'Unbekannt')+'</strong><div class=\"meta\">'+(move.description?.de || '')+'</div></div><div class=\"meta\">'+moveBadge+'</div></div>'
         : '<div class=\"empty\">Keine Signaturattacke hinterlegt.</div>';
       const closeBtn = isMobile() ? '<button class=\"close\" aria-label=\"Schließen\">✕</button>' : '';
       detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title clickable\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
@@ -865,6 +882,16 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
           const typeName = el.getAttribute('data-type');
           if (!typeName) return;
           const audio = new Audio(typeAudioPath(typeName));
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        });
+      });
+      detailEl.querySelectorAll('.move-name[data-move]').forEach((el) => {
+        el.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const slug = el.getAttribute('data-move');
+          if (!slug) return;
+          const audio = new Audio(moveAudioPath(slug));
           audio.currentTime = 0;
           audio.play().catch(() => {});
         });
@@ -908,6 +935,11 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       searchEl.addEventListener('input', applyFilter);
       typeNames.forEach((typeName) => {
         const audio = new Audio(typeAudioPath(typeName));
+        audio.preload = 'auto';
+        audio.load();
+      });
+      moveSlugs.forEach((slug) => {
+        const audio = new Audio(moveAudioPath(slug));
         audio.preload = 'auto';
         audio.load();
       });
@@ -970,7 +1002,7 @@ function build() {
   writeJSON(path.join(OUT_DIR, 'data', 'pokemon.json'), resolvedPokemon);
   copyPublic();
 
-  const html = buildHtml(resolvedPokemon, types, assetVersion, audioVersions);
+  const html = buildHtml(resolvedPokemon, types, moves, assetVersion, audioVersions);
   fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
   console.log('Build complete. Open dist/index.html');
 }
