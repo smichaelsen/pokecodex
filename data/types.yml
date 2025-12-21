@@ -1,12 +1,18 @@
 - name: Pflanze
   color: '#4caf50'
+  tts: Pflanze
 - name: Gift
   color: '#9c27b0'
+  tts: Gift
 - name: Feuer
   color: '#ff7043'
+  tts: Feuer
 - name: Wasser
   color: '#42a5f5'
+  tts: Wasser
 - name: Elektro
   color: '#fdd835'
+  tts: Elektro
 - name: Normal
   color: '#bdbdbd'
+  tts: Normal

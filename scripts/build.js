@@ -214,10 +214,12 @@ function buildAudioVersions() {
   const versions = {
     chimes: {},
     names: {},
+    types: {},
   };
 
   const chimeDir = path.join(PUBLIC_DIR, 'audio', 'chimes');
   const nameDir = path.join(PUBLIC_DIR, 'audio', 'de', 'pokemon');
+  const typeDir = path.join(PUBLIC_DIR, 'audio', 'de', 'types');
 
   if (fs.existsSync(chimeDir)) {
     fs.readdirSync(chimeDir)
@@ -236,6 +238,16 @@ function buildAudioVersions() {
         const id = file.replace(/\.mp3$/, '');
         const stat = fs.statSync(path.join(nameDir, file));
         versions.names[id] = Math.floor(stat.mtimeMs);
+      });
+  }
+
+  if (fs.existsSync(typeDir)) {
+    fs.readdirSync(typeDir)
+      .filter((file) => file.endsWith('.mp3'))
+      .forEach((file) => {
+        const key = file.replace(/\.mp3$/, '');
+        const stat = fs.statSync(path.join(typeDir, file));
+        versions.types[key] = Math.floor(stat.mtimeMs);
       });
   }
 
@@ -676,6 +688,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
   </div>
   <script>
     const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeColors)} };
+    const typeNames = ${JSON.stringify(types.map((t) => t?.name).filter(Boolean))};
     const audioVersions = ${JSON.stringify(audioVersions)};
     const assetVersion = '${assetVersion}';
     const listEl = document.getElementById('list');
@@ -696,6 +709,10 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
     const version = audioVersions?.names?.[id] || assetVersion;
     return 'audio/de/pokemon/' + id + '.mp3?v=' + version;
   };
+  const typeAudioPath = (typeName) => {
+    const version = audioVersions?.types?.[typeName] || assetVersion;
+    return 'audio/de/types/' + typeName + '.mp3?v=' + version;
+  };
     const overlayEl = document.getElementById('overlay');
     const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
     const hideOverlay = () => {
@@ -705,10 +722,10 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
     const badgeHtml = (t) => {
       const color = state.types?.[t] || state.types?.[(t || '').toString().toLowerCase()];
       const style = color ? ' style=\"background:'+color+';color:#111;\"' : '';
-      return '<span class=\"badge '+typeClass(t)+'\"'+style+'>'+t+'</span>';
+      return '<span class=\"badge '+typeClass(t)+'\" data-type=\"'+t+'\"'+style+'>'+t+'</span>';
     };
 
-  const pageSize = 50;
+  const pageSize = 32;
 
   function renderList(items) {
     const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
@@ -813,7 +830,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title clickable\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
         '<div class=\"detail-body\">' +
           '<div class=\"art clickable\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
-          '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
+          '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges pokemon-types\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
           '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
           '<div class=\"section\"><h4>Vorentwicklung</h4><div class=\"evo-list\">'+evolvesFrom+'</div></div>' +
           '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"evo-list\">'+evolutions+'</div></div>' +
@@ -835,6 +852,16 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
           chimeAudio.play().catch(() => {});
         });
       }
+      detailEl.querySelectorAll('.pokemon-types .badge[data-type]').forEach((el) => {
+        el.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const typeName = el.getAttribute('data-type');
+          if (!typeName) return;
+          const audio = new Audio(typeAudioPath(typeName));
+          audio.currentTime = 0;
+          audio.play().catch(() => {});
+        });
+      });
       detailEl.querySelectorAll('.evo-link').forEach((el) => {
         el.addEventListener('click', () => {
           const slug = el.getAttribute('data-slug');
@@ -872,6 +899,11 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       state.page = 1;
       renderList(state.pokemon);
       searchEl.addEventListener('input', applyFilter);
+      typeNames.forEach((typeName) => {
+        const audio = new Audio(typeAudioPath(typeName));
+        audio.preload = 'auto';
+        audio.load();
+      });
       pagePrevEl?.addEventListener('click', () => {
         if (state.page > 1) {
           state.page -= 1;
