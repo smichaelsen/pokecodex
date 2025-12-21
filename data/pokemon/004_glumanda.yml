@@ -1,0 +1,26 @@
+id: 4
+slug: glumanda
+name:
+  de: Glumanda
+species:
+  de: Echse-Pokémon
+entry:
+  de: Die Flamme an seiner Schweifspitze zeigt seine Lebenskraft. Sie verlischt, wenn es schwer krank ist.
+types:
+  - Feuer
+height_m: 0.6
+weight_kg: 8.5
+moves:
+  - name: Glut
+    type: Feuer
+    power: 40
+    description:
+      de: Eine kleine Flamme, die das Ziel verbrennen kann.
+  - name: Kratzer
+    type: Normal
+    power: 40
+    description:
+      de: Greift mit scharfen Krallen an.
+evolutions:
+  - target: glutexo
+    condition: Entwicklung auf Level 16

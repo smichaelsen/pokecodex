@@ -1,0 +1,26 @@
+id: 7
+slug: schiggy
+name:
+  de: Schiggy
+species:
+  de: Kleine-Schildkröte-Pokémon
+entry:
+  de: Versteckt sich in seinem Panzer und spritzt Wasser aus seinem Mund.
+types:
+  - Wasser
+height_m: 0.5
+weight_kg: 9.0
+moves:
+  - name: Aquaknarre
+    type: Wasser
+    power: 40
+    description:
+      de: Schießt Wasser auf das Ziel.
+  - name: Rutenschlag
+    type: Normal
+    power: 0
+    description:
+      de: Senkt die Verteidigung des Ziels.
+evolutions:
+  - target: schillok
+    condition: Entwicklung auf Level 16

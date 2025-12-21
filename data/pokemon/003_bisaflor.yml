@@ -1,0 +1,25 @@
+id: 3
+slug: bisaflor
+name:
+  de: Bisaflor
+species:
+  de: Samen-Pokémon
+entry:
+  de: Die Blume auf seinem Rücken verströmt ein beruhigendes Aroma. Sie blüht, wenn sie Sonnenlicht aufnimmt.
+types:
+  - Pflanze
+  - Gift
+height_m: 2.0
+weight_kg: 100.0
+moves:
+  - name: Solarstrahl
+    type: Pflanze
+    power: 120
+    description:
+      de: Lädt Sonnenlicht und feuert einen Strahl ab.
+  - name: Matschbombe
+    type: Gift
+    power: 90
+    description:
+      de: Schleudert giftigen Schlamm.
+evolutions: []

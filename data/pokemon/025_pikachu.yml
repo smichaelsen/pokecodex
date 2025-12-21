@@ -1,0 +1,26 @@
+id: 25
+slug: pikachu
+name:
+  de: Pikachu
+species:
+  de: Maus-Pokémon
+entry:
+  de: Es speichert Elektrizität in seinen Backentaschen. Wenn es verärgert ist, entlädt es sie.
+types:
+  - Elektro
+height_m: 0.4
+weight_kg: 6.0
+moves:
+  - name: Donner-Schock
+    type: Elektro
+    power: 40
+    description:
+      de: Elektrischer Schlag, kann paralysieren.
+  - name: Ruckzuckhieb
+    type: Normal
+    power: 40
+    description:
+      de: Rascher Angriff mit Priorität.
+evolutions:
+  - target: raichu
+    condition: Donnerstein

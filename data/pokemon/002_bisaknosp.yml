@@ -1,0 +1,27 @@
+id: 2
+slug: bisaknosp
+name:
+  de: Bisaknosp
+species:
+  de: Samen-Pokémon
+entry:
+  de: Die Knospe auf seinem Rücken sammelt Sonnenlicht. Kurz vor der Entwicklung wird sie schwer.
+types:
+  - Pflanze
+  - Gift
+height_m: 1.0
+weight_kg: 13.0
+moves:
+  - name: Rasierblatt
+    type: Pflanze
+    power: 55
+    description:
+      de: Scharfe Blätter treffen das Ziel.
+  - name: Schlafpuder
+    type: Pflanze
+    power: 0
+    description:
+      de: Streut Pollen, die das Ziel einschläfern.
+evolutions:
+  - target: bisaflor
+    condition: Entwicklung auf Level 32

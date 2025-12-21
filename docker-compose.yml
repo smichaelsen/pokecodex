@@ -1,0 +1,25 @@
+version: "3"
+
+networks:
+  traefik-net:
+    external: true
+
+services:
+  web:
+    image: nginx:stable-alpine
+    container_name: pokedex-server
+    restart: unless-stopped
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-net"
+      - "traefik.http.routers.pokedex.rule=Host(`pokedex.michaelsen.io`)"
+      - "traefik.http.routers.pokedex.entrypoints=websecure,web"
+      - "traefik.http.routers.pokedex.tls=true"
+      - "traefik.http.routers.pokedex.tls.certresolver=letsencrypt"
+      - "traefik.http.middlewares.pokedex-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.pokedex-redirect.redirectscheme.permanent=true"
+      - "traefik.http.routers.pokedex.middlewares=pokedex-redirect"
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro

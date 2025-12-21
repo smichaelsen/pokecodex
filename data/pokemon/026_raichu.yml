@@ -1,0 +1,24 @@
+id: 26
+slug: raichu
+name:
+  de: Raichu
+species:
+  de: Maus-Pokémon
+entry:
+  de: Entlädt Strom mit höherer Spannung als Pikachu.
+types:
+  - Elektro
+height_m: 0.8
+weight_kg: 30.0
+moves:
+  - name: Donnerblitz
+    type: Elektro
+    power: 90
+    description:
+      de: Starker Blitzschlag.
+  - name: Rankenhieb
+    type: Pflanze
+    power: 45
+    description:
+      de: (Beispiel, eigentlich nicht im Moveset) schlägt mit Ranken.
+evolutions: []

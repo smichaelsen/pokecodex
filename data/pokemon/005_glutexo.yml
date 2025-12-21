@@ -1,0 +1,26 @@
+id: 5
+slug: glutexo
+name:
+  de: Glutexo
+species:
+  de: Flamme-Pokémon
+entry:
+  de: Es schwingt seinen brennenden Schweif, um Gegner einzuschüchtern.
+types:
+  - Feuer
+height_m: 1.1
+weight_kg: 19.0
+moves:
+  - name: Flammenwurf
+    type: Feuer
+    power: 90
+    description:
+      de: Spuckt eine kräftige Flammenattacke.
+  - name: Schwerttanz
+    type: Normal
+    power: 0
+    description:
+      de: Erhöht den Angriff stark.
+evolutions:
+  - target: glurak
+    condition: Entwicklung auf Level 36

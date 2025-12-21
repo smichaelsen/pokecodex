@@ -1,0 +1,25 @@
+id: 6
+slug: glurak
+name:
+  de: Glurak
+species:
+  de: Flammen-Pokémon
+entry:
+  de: Fliegt durch die Lüfte und speit Feuer, das alles schmilzt.
+types:
+  - Feuer
+  - Flug
+height_m: 1.7
+weight_kg: 90.5
+moves:
+  - name: Feuersturm
+    type: Feuer
+    power: 110
+    description:
+      de: Ein heftiger Feuerwirbel.
+  - name: Fliegen
+    type: Flug
+    power: 90
+    description:
+      de: Steigt auf und stürzt sich auf das Ziel.
+evolutions: []

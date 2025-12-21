@@ -1,0 +1,27 @@
+id: 1
+slug: bisasam
+name:
+  de: Bisasam
+species:
+  de: Samen-Pokémon
+entry:
+  de: Bisasam speichert Energie in seinem Samen auf dem Rücken. Es liebt Sonnenlicht und beginnt zu blühen, wenn es kräftig wächst.
+types:
+  - Pflanze
+  - Gift
+height_m: 0.7
+weight_kg: 6.9
+moves:
+  - name: Tackle
+    type: Normal
+    power: 40
+    description:
+      de: Ein einfacher Körperangriff.
+  - name: Egelsamen
+    type: Pflanze
+    power: 0
+    description:
+      de: Pflanzt Samen, die jede Runde KP absorbieren.
+evolutions:
+  - target: bisaknosp
+    condition: Entwicklung auf Level 16

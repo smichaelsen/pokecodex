@@ -1,0 +1,12 @@
+- name: Pflanze
+  color: '#4caf50'
+- name: Gift
+  color: '#9c27b0'
+- name: Feuer
+  color: '#ff7043'
+- name: Wasser
+  color: '#42a5f5'
+- name: Elektro
+  color: '#fdd835'
+- name: Normal
+  color: '#bdbdbd'

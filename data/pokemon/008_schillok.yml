@@ -1,0 +1,26 @@
+id: 8
+slug: schillok
+name:
+  de: Schillok
+species:
+  de: Schildkröten-Pokémon
+entry:
+  de: Sein dicker Schweif hilft beim Balancehalten im Wasser.
+types:
+  - Wasser
+height_m: 1.0
+weight_kg: 22.5
+moves:
+  - name: Blubber
+    type: Wasser
+    power: 40
+    description:
+      de: Blasen treffen das Ziel.
+  - name: Panzerpolitur
+    type: Stahl
+    power: 0
+    description:
+      de: Erhöht Initiative und Angriff.
+evolutions:
+  - target: turtok
+    condition: Entwicklung auf Level 36

@@ -1,0 +1,625 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.join(__dirname, '..');
+const DATA_DIR = path.join(ROOT, 'data');
+const OUT_DIR = path.join(ROOT, 'dist');
+const PUBLIC_DIR = path.join(ROOT, 'public');
+
+function parseScalar(value) {
+  if (value === '[]') return [];
+  if (value === '{}') return {};
+  if (value === 'null') return null;
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (!Number.isNaN(Number(value)) && value.trim() !== '') {
+    return Number(value);
+  }
+  return value;
+}
+
+function parseYAML(text) {
+  const lines = text.split(/\r?\n/);
+  const stack = [{ indent: -1, value: null, ref: null, key: null }];
+
+  const splitOnce = (str, sep) => {
+    const idx = str.indexOf(sep);
+    if (idx === -1) return [str];
+    return [str.slice(0, idx), str.slice(idx + sep.length)];
+  };
+
+  for (const rawLine of lines) {
+    if (!rawLine.trim()) continue;
+    const indent = rawLine.match(/^ */)[0].length;
+    const content = rawLine.trim();
+
+    while (stack.length > 1 && indent <= stack[stack.length - 1].indent) {
+      stack.pop();
+    }
+
+    const parent = stack[stack.length - 1];
+
+    if (content.startsWith('- ')) {
+      const valueStr = content.slice(2);
+
+      if (!Array.isArray(parent.value)) {
+        if (parent.ref && parent.key !== null && Object.keys(parent.value || {}).length === 0) {
+          parent.ref[parent.key] = [];
+          parent.value = parent.ref[parent.key];
+        } else if (parent.value == null) {
+          parent.value = [];
+          if (parent.ref && parent.key !== null) {
+            parent.ref[parent.key] = parent.value;
+          }
+        } else if (!Array.isArray(parent.value)) {
+          parent.value = parent.value || [];
+        }
+      }
+
+      if (valueStr === '') {
+        const obj = {};
+        parent.value.push(obj);
+        stack.push({ indent, value: obj, ref: parent.value, key: parent.value.length - 1 });
+      } else if (valueStr.includes(':')) {
+        const [key, rest] = splitOnce(valueStr, ':');
+        const obj = {};
+        obj[key.trim()] = parseScalar(rest.trim());
+        parent.value.push(obj);
+        stack.push({ indent, value: obj, ref: parent.value, key: parent.value.length - 1 });
+      } else {
+        parent.value.push(parseScalar(valueStr));
+      }
+    } else {
+      const [keyRaw, restRaw] = splitOnce(content, ':');
+      const key = keyRaw.trim();
+      const rest = restRaw === undefined ? '' : restRaw.trim();
+
+      if (rest === '') {
+        if (parent.value == null) parent.value = {};
+        if (parent.ref && parent.key !== null && parent.value !== parent.ref[parent.key]) {
+          parent.ref[parent.key] = parent.value;
+        }
+        parent.value[key] = {};
+        stack.push({ indent, value: parent.value[key], ref: parent.value, key });
+      } else {
+        if (parent.value == null) parent.value = {};
+        parent.value[key] = parseScalar(rest);
+      }
+    }
+  }
+
+  return stack[0].value;
+}
+
+function loadYAMLFile(filePath) {
+  const text = fs.readFileSync(filePath, 'utf8');
+  return parseYAML(text);
+}
+
+function loadTypes() {
+  const file = path.join(DATA_DIR, 'types.yml');
+  return loadYAMLFile(file) || [];
+}
+
+function loadPokemon() {
+  const dir = path.join(DATA_DIR, 'pokemon');
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith('.yml'));
+  const entries = files.map((file) => {
+    const data = loadYAMLFile(path.join(dir, file));
+    return data;
+  });
+  return entries.sort((a, b) => (a.id || 0) - (b.id || 0));
+}
+
+function padPokemonList(list) {
+  if (!list.length) return [];
+  const maxId = Math.max(...list.map((p) => p.id || 0));
+  const map = new Map(list.map((p) => [p.id, p]));
+  const padded = [];
+  for (let i = 1; i <= maxId; i += 1) {
+    if (map.has(i)) {
+      padded.push(map.get(i));
+    } else {
+      padded.push({ id: i, placeholder: true });
+    }
+  }
+  return padded;
+}
+
+function ensureDir(p) {
+  fs.mkdirSync(p, { recursive: true });
+}
+
+function writeJSON(outPath, data) {
+  fs.writeFileSync(outPath, JSON.stringify(data, null, 2), 'utf8');
+}
+
+function copyPublic() {
+  if (!fs.existsSync(PUBLIC_DIR)) return;
+  const entries = fs.readdirSync(PUBLIC_DIR, { withFileTypes: true });
+  for (const entry of entries) {
+    const src = path.join(PUBLIC_DIR, entry.name);
+    const dest = path.join(OUT_DIR, entry.name);
+    if (entry.isDirectory()) {
+      fs.cpSync(src, dest, { recursive: true });
+    } else {
+      ensureDir(path.dirname(dest));
+      fs.copyFileSync(src, dest);
+    }
+  }
+}
+
+function buildHtml(pokemon, types, assetVersion) {
+  const typeColors = {};
+  types.forEach((t) => {
+    if (t && t.name) typeColors[t.name] = t.color || '#ccc';
+  });
+
+  const badgeCss = Object.entries(typeColors)
+    .map(([name, color]) => `.type-${name.replace(/\\s+/g, '-').toLowerCase()} { background: ${color}; color: #111; }`)
+    .join('\\n');
+
+  return `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex MVP</title>
+  <style>
+    :root {
+      --bg: linear-gradient(135deg, #e53935 0%, #b71c1c 70%);
+      --panel: #f7f7f7;
+      --panel-dark: #ececec;
+      --accent: #ffca28;
+      --text: #1b1b1b;
+      --muted: #6b6b6b;
+      --border: #c62828;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .shell {
+      width: min(1200px, 100%);
+      background: linear-gradient(180deg, #ff5252 0%, #d32f2f 50%, #c62828 100%);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+      border: 4px solid #7f0000;
+      overflow: hidden;
+      max-height: calc(100vh - 32px);
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.08);
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    header .lights {
+      display: flex;
+      gap: 10px;
+    }
+    .light {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #42a5f5;
+      border: 2px solid #1565c0;
+      box-shadow: 0 0 12px rgba(66,165,245,0.7);
+    }
+    .content {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      min-height: 600px;
+      background: #d50000;
+      padding: 12px;
+      gap: 12px;
+      height: calc(100vh - 140px);
+    }
+    .panel {
+      background: var(--panel);
+      border-radius: 14px;
+      border: 2px solid var(--border);
+      box-shadow: inset 0 4px 0 rgba(255,255,255,0.7), inset 0 -4px 0 rgba(0,0,0,0.06);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .list-panel {
+      display: flex;
+      flex-direction: column;
+    }
+    .controls {
+      padding: 12px;
+      background: var(--panel-dark);
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .controls input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #c5c5c5;
+      font-size: 14px;
+      outline: none;
+    }
+    .list {
+      overflow: auto;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      flex: 1;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 120ms ease, box-shadow 120ms ease;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    .card.placeholder {
+      cursor: default;
+      opacity: 0.6;
+    }
+    .card.placeholder:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .card .id {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.5px;
+    }
+    .card .name {
+      font-weight: 700;
+      margin: 4px 0 6px;
+    }
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid #ececec;
+    }
+    .thumb img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+    .thumb.missing::after {
+      content: '–';
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .name.muted {
+      color: var(--muted);
+    }
+    .badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: #111;
+      background: #eee;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .detail {
+      padding: 16px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 12px;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7), transparent 35%), var(--panel);
+      overflow: auto;
+      position: relative;
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .detail .close {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: var(--muted);
+    }
+    .detail-title {
+      font-size: 24px;
+      margin: 0;
+    }
+    .detail-body {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      padding: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    .section h4 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .art {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      padding: 12px;
+      min-height: 260px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    .art img {
+      width: 100%;
+      max-width: 320px;
+      object-fit: contain;
+    }
+    .art.missing {
+      color: var(--muted);
+      font-style: italic;
+    }
+    .moves {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .move {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+      border: 1px solid #f0f0f0;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .move .meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 40px 16px;
+    }
+    .overlay {
+      display: none;
+    }
+    @media (max-width: 960px) {
+      .content { grid-template-columns: 1fr; height: auto; }
+      .detail-body { grid-template-columns: 1fr; }
+      .detail {
+        position: fixed;
+        inset: 12px;
+        z-index: 20;
+        display: none;
+        max-height: calc(100vh - 24px);
+      }
+      .detail.active {
+        display: grid;
+      }
+      .detail .close {
+        display: inline-block;
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.35);
+        backdrop-filter: blur(1px);
+        z-index: 15;
+      }
+      .overlay.active { display: block; }
+    }
+    ${badgeCss}
+  </style>
+</head>
+<body>
+  <div class=\"shell\">
+    <header>
+      <div class=\"lights\"><div class=\"light\"></div><div class=\"light\" style=\"background:#66bb6a;border-color:#2e7d32;box-shadow:0 0 12px rgba(102,187,106,0.7)\"></div><div class=\"light\" style=\"background:#ffee58;border-color:#fbc02d;box-shadow:0 0 12px rgba(255,238,88,0.7)\"></div></div>
+      <div>Pokédex – Kanto</div>
+    </header>
+    <div class=\"content\">
+      <div class=\"panel list-panel\">
+        <div class=\"controls\">
+          <input type=\"search\" placeholder=\"Suche nach Name oder Typ...\" id=\"search\">
+        </div>
+        <div class=\"list\" id=\"list\"></div>
+      </div>
+      <div class=\"panel detail\" id=\"detail\">
+        <div class=\"empty\">Wähle ein Pokémon aus der Liste aus.</div>
+      </div>
+    </div>
+    <div class=\"overlay\" id=\"overlay\"></div>
+  </div>
+  <script>
+    const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeColors)} };
+    const assetVersion = '${assetVersion}';
+    const listEl = document.getElementById('list');
+    const detailEl = document.getElementById('detail');
+    const searchEl = document.getElementById('search');
+
+    const padId = (id) => id.toString().padStart(3, '0');
+    const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
+    const spritePath = (id) => 'assets/sprites/' + padId(id) + '.png?v=' + assetVersion;
+    const overlayEl = document.getElementById('overlay');
+    const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
+    const hideOverlay = () => {
+      detailEl.classList.remove('active');
+      overlayEl?.classList.remove('active');
+    };
+    const badgeHtml = (t) => {
+      const color = state.types?.[t] || state.types?.[(t || '').toString().toLowerCase()];
+      const style = color ? ' style=\"background:'+color+';color:#111;\"' : '';
+      return '<span class=\"badge '+typeClass(t)+'\"'+style+'>'+t+'</span>';
+    };
+
+  function renderList(items) {
+    if (!items.length) {
+      listEl.innerHTML = '<div class=\"empty\" style=\"grid-column:1/-1\">Keine Ergebnisse</div>';
+      return;
+    }
+    listEl.innerHTML = items.map((p) => {
+      if (p.placeholder) {
+        return '<div class=\"card placeholder\" data-placeholder=\"1\">' +
+          '<div class=\"thumb missing\"></div>' +
+          '<div>' +
+            '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
+            '<div class=\"name muted\">—</div>' +
+            '<div class=\"badges\"></div>' +
+          '</div>' +
+        '</div>';
+      }
+      const img = spritePath(p.id);
+      const types = (p.types || []).map((t) => badgeHtml(t)).join('');
+      return '<div class=\"card\" data-slug=\"'+p.slug+'\">' +
+        '<div class=\"thumb\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Sprite')+'\" loading=\"lazy\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>' +
+        '<div>' +
+          '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
+          '<div class=\"name\">'+(p.name?.de || p.name || 'Unbekannt')+'</div>' +
+          '<div class=\"badges\">'+types+'</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+      listEl.querySelectorAll('.card').forEach((el) => {
+        if (el.dataset.placeholder) return;
+        el.addEventListener('click', () => {
+          const slug = el.getAttribute('data-slug');
+          const found = state.pokemon.find((p) => p.slug === slug);
+          if (found) showDetail(found);
+        });
+      });
+    }
+
+    function showDetail(p) {
+      if (p.placeholder) {
+        detailEl.innerHTML = '<div class=\"detail-header\"><h2 class=\"detail-title\">Nr. '+padId(p.id)+'</h2><div class=\"id\">Leer</div></div><div class=\"empty\">Keine Daten für diesen Eintrag.</div>';
+        hideOverlay();
+        return;
+      }
+      const img = spritePath(p.id);
+      const typeBadges = (p.types || []).map((t) => badgeHtml(t)).join('');
+      const evolutions = (p.evolutions || []).map((e) => {
+        const target = (e && (e.target || e)) || '';
+        const cond = e && e.condition ? ' · '+e.condition : '';
+        return '<div class=\"stat-row\"><span>'+target+'</span><strong>'+cond.replace(/^ · /,'')+'</strong></div>';
+      }).join('') || '<div class=\"empty\">Keine Entwicklung hinterlegt.</div>';
+      const moves = (p.moves || []).map((m) => {
+        const badge = m.type ? badgeHtml(m.type) : '<span class=\"badge\">Typ</span>';
+        return '<div class=\"move\"><div><strong>'+m.name+'</strong><div class=\"meta\">'+(m.description?.de || '')+'</div></div><div class=\"meta\">'+badge+'</div></div>';
+      }).join('') || '<div class=\"empty\">Keine Attacken hinterlegt.</div>';
+      const closeBtn = isMobile() ? '<button class=\"close\" aria-label=\"Schließen\">✕</button>' : '';
+      detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
+        '<div class=\"detail-body\">' +
+          '<div class=\"art\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
+          '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
+          '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
+          '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"stats\">'+evolutions+'</div></div>' +
+          '<div class=\"section\"><h4>Attacken</h4><div class=\"moves\">'+moves+'</div></div>' +
+        '</div>';
+      const btn = detailEl.querySelector('.close');
+      if (btn) btn.addEventListener('click', hideOverlay);
+      if (isMobile()) {
+        detailEl.classList.add('active');
+        overlayEl?.classList.add('active');
+      } else {
+        hideOverlay();
+      }
+    }
+
+    function applyFilter() {
+      const term = searchEl.value.toLowerCase().trim();
+      if (!term) {
+        state.filtered = [...state.pokemon];
+      } else {
+        state.filtered = state.pokemon.filter((p) => {
+          const name = (p.name?.de || '').toLowerCase();
+          const types = (p.types || []).join(' ').toLowerCase();
+          return name.includes(term) || types.includes(term);
+        });
+      }
+      renderList(state.filtered);
+    }
+
+    async function boot() {
+      const res = await fetch('data/pokemon.json?v=' + assetVersion);
+      state.pokemon = await res.json();
+      state.filtered = [...state.pokemon];
+      renderList(state.pokemon);
+      searchEl.addEventListener('input', applyFilter);
+      if (state.pokemon.length) {
+        const firstReal = state.pokemon.find((p) => !p.placeholder);
+        showDetail(firstReal || state.pokemon[0]);
+      }
+      overlayEl?.addEventListener('click', hideOverlay);
+    }
+    boot();
+  </script>
+</body>
+</html>`;
+}
+
+function build() {
+  const types = loadTypes();
+  const pokemonRaw = loadPokemon();
+  const pokemon = padPokemonList(pokemonRaw);
+  const assetVersion = Date.now().toString();
+
+  fs.rmSync(OUT_DIR, { recursive: true, force: true });
+  ensureDir(path.join(OUT_DIR, 'data'));
+
+  writeJSON(path.join(OUT_DIR, 'data', 'types.json'), types);
+  writeJSON(path.join(OUT_DIR, 'data', 'pokemon.json'), pokemon);
+  copyPublic();
+
+  const html = buildHtml(pokemon, types, assetVersion);
+  fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
+  console.log('Build complete. Open dist/index.html');
+}
+
+build();
