@@ -829,7 +829,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
             }
             return '<div class=\"evo-row\">'+thumb+meta+'</div>';
           })()
-        : '<div class=\"empty\">Keine Vorentwicklung hinterlegt.</div>';
+        : '';
       const evolutions = (p.evolutions || []).map((e) => {
         const targetName = e?.target_name || e?.target || e || '???';
         const targetId = e?.target_id ? e.target_id : null;
@@ -844,7 +844,13 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
           return '<button class=\"evo-row evo-link\" data-slug=\"'+e.target_slug+'\">'+thumb+meta+'</button>';
         }
         return '<div class=\"evo-row\">'+thumb+meta+'</div>';
-      }).join('') || '<div class=\"empty\">Keine Entwicklung hinterlegt.</div>';
+      }).join('');
+      const evolutionHtml = (evolvesFrom || evolutions)
+        ? '<div class=\"evo-list\">' +
+            (evolvesFrom ? '<div class=\"evo-block\"><div class=\"meta\">Vorentwicklung</div>'+evolvesFrom+'</div>' : '') +
+            (evolutions ? '<div class=\"evo-block\"><div class=\"meta\">Entwicklungen</div>'+evolutions+'</div>' : '') +
+          '</div>'
+        : '<div class=\"evo-list\"></div>';
       const move = p.signature_move_data;
       const moveBadge = move?.type ? badgeHtml(move.type) : '<span class=\"badge\">Typ</span>';
       const moveHtml = move
@@ -855,7 +861,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         '<div class=\"detail-body\">' +
           '<div class=\"art clickable\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
           '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges pokemon-types\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
-          '<div class=\"section\"><h4>Entwicklung</h4><div class=\"evo-list\"><div class=\"evo-block\"><div class=\"meta\">Vorentwicklung</div>'+evolvesFrom+'</div><div class=\"evo-block\"><div class=\"meta\">Entwicklungen</div>'+evolutions+'</div></div></div>' +
+          '<div class=\"section\"><h4>Entwicklung</h4>'+evolutionHtml+'</div>' +
           '<div class=\"section\"><h4>Signaturattacke</h4><div class=\"moves\">'+moveHtml+'</div></div>' +
         '</div>';
       const btn = detailEl.querySelector('.close');
