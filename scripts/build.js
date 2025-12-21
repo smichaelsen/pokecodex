@@ -16,6 +16,9 @@ function parseScalar(value) {
   if (!Number.isNaN(Number(value)) && value.trim() !== '') {
     return Number(value);
   }
+  if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+    return value.slice(1, -1);
+  }
   return value;
 }
 
@@ -610,7 +613,11 @@ function build() {
   const pokemon = padPokemonList(pokemonRaw);
   const assetVersion = Date.now().toString();
 
-  fs.rmSync(OUT_DIR, { recursive: true, force: true });
+  ensureDir(OUT_DIR);
+  for (const entry of fs.readdirSync(OUT_DIR, { withFileTypes: true })) {
+    const target = path.join(OUT_DIR, entry.name);
+    fs.rmSync(target, { recursive: true, force: true });
+  }
   ensureDir(path.join(OUT_DIR, 'data'));
 
   writeJSON(path.join(OUT_DIR, 'data', 'types.json'), types);
