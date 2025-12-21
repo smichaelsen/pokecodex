@@ -10,6 +10,7 @@ types:
   - Elektro
 height_m: 0.4
 weight_kg: 6.0
+evolves_from: 172
 moves:
   - name: Donner-Schock
     type: Elektro
@@ -22,5 +23,5 @@ moves:
     description:
       de: Rascher Angriff mit Priorität.
 evolutions:
-  - target: raichu
+  - target: 26
     condition: Donnerstein

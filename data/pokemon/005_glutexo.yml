@@ -10,6 +10,7 @@ types:
   - Feuer
 height_m: 1.1
 weight_kg: 19.0
+evolves_from: 4
 moves:
   - name: Flammenwurf
     type: Feuer
@@ -22,5 +23,5 @@ moves:
     description:
       de: Erhöht den Angriff stark.
 evolutions:
-  - target: glurak
+  - target: 6
     condition: Entwicklung auf Level 36

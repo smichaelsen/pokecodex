@@ -10,6 +10,7 @@ types:
   - Elektro
 height_m: 0.8
 weight_kg: 30.0
+evolves_from: 25
 moves:
   - name: Donnerblitz
     type: Elektro

@@ -11,6 +11,7 @@ types:
   - Gift
 height_m: 2.0
 weight_kg: 100.0
+evolves_from: 2
 moves:
   - name: Solarstrahl
     type: Pflanze

@@ -130,6 +130,49 @@ function padPokemonList(list) {
   return padded;
 }
 
+function toDexNumber(value) {
+  if (value == null) return null;
+  if (typeof value === 'number') return value;
+  const num = Number(value);
+  if (!Number.isNaN(num)) return num;
+  return null;
+}
+
+function resolveEvolutionEntry(entry, nameById) {
+  if (entry == null) return null;
+  let target = entry;
+  let condition = null;
+  if (typeof entry === 'object' && !Array.isArray(entry)) {
+    if ('target' in entry) target = entry.target;
+    condition = entry.condition || null;
+  }
+  const targetId = toDexNumber(target);
+  const targetInfo = targetId && nameById.has(targetId) ? nameById.get(targetId) : null;
+  const targetName = targetInfo ? targetInfo.name : '???';
+  const resolved = { target_id: targetId, target_name: targetName };
+  if (targetInfo?.slug) resolved.target_slug = targetInfo.slug;
+  if (condition) resolved.condition = condition;
+  return resolved;
+}
+
+function resolvePokemonRelations(list, nameById) {
+  return list.map((p) => {
+    if (!p || p.placeholder) return p;
+    const evolvesFromId = toDexNumber(p.evolves_from);
+    const evolvesFromInfo = evolvesFromId && nameById.has(evolvesFromId) ? nameById.get(evolvesFromId) : null;
+    const evolvesFromName = evolvesFromInfo ? evolvesFromInfo.name : '???';
+    const evolutions = (p.evolutions || [])
+      .map((e) => resolveEvolutionEntry(e, nameById))
+      .filter(Boolean);
+    return {
+      ...p,
+      evolves_from_name: evolvesFromId ? evolvesFromName : undefined,
+      evolves_from_slug: evolvesFromInfo?.slug,
+      evolutions,
+    };
+  });
+}
+
 function ensureDir(p) {
   fs.mkdirSync(p, { recursive: true });
 }
@@ -424,6 +467,63 @@ function buildHtml(pokemon, types, assetVersion) {
       color: var(--muted);
       font-size: 12px;
     }
+    .evo-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .evo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fafafa;
+      border: 1px solid #f0f0f0;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }
+    .evo-link {
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      width: 100%;
+    }
+    .evo-link:hover {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+    .evo-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid #ececec;
+      flex: 0 0 auto;
+    }
+    .evo-thumb img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+    }
+    .evo-thumb.missing::after {
+      content: '–';
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .evo-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .evo-meta .name {
+      font-weight: 700;
+    }
+    .evo-meta .cond {
+      color: var(--muted);
+      font-size: 12px;
+    }
     .empty {
       color: var(--muted);
       text-align: center;
@@ -485,11 +585,11 @@ function buildHtml(pokemon, types, assetVersion) {
     const assetVersion = '${assetVersion}';
     const listEl = document.getElementById('list');
     const detailEl = document.getElementById('detail');
-    const searchEl = document.getElementById('search');
+  const searchEl = document.getElementById('search');
 
-    const padId = (id) => id.toString().padStart(3, '0');
-    const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
-    const spritePath = (id) => 'assets/sprites/' + padId(id) + '.png?v=' + assetVersion;
+  const padId = (id) => id.toString().padStart(3, '0');
+  const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
+  const spritePath = (id) => 'assets/sprites/' + padId(id) + '.png?v=' + assetVersion;
     const overlayEl = document.getElementById('overlay');
     const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
     const hideOverlay = () => {
@@ -547,10 +647,35 @@ function buildHtml(pokemon, types, assetVersion) {
       }
       const img = spritePath(p.id);
       const typeBadges = (p.types || []).map((t) => badgeHtml(t)).join('');
+      const evolvesFrom = p.evolves_from
+        ? (() => {
+            const fromName = p.evolves_from_name || '???';
+            const hasFrom = fromName !== '???';
+            const fromId = p.evolves_from;
+            const thumb = hasFrom
+              ? '<div class=\"evo-thumb\"><img src=\"'+spritePath(fromId)+'\" alt=\"'+fromName+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>'
+              : '<div class=\"evo-thumb missing\"></div>';
+            const meta = '<div class=\"evo-meta\"><div class=\"name\">'+fromName+' (#'+padId(fromId)+')</div></div>';
+            if (hasFrom && p.evolves_from_slug) {
+              return '<button class=\"evo-row evo-link\" data-slug=\"'+p.evolves_from_slug+'\">'+thumb+meta+'</button>';
+            }
+            return '<div class=\"evo-row\">'+thumb+meta+'</div>';
+          })()
+        : '<div class=\"empty\">Keine Vorentwicklung hinterlegt.</div>';
       const evolutions = (p.evolutions || []).map((e) => {
-        const target = (e && (e.target || e)) || '';
-        const cond = e && e.condition ? ' · '+e.condition : '';
-        return '<div class=\"stat-row\"><span>'+target+'</span><strong>'+cond.replace(/^ · /,'')+'</strong></div>';
+        const targetName = e?.target_name || e?.target || e || '???';
+        const targetId = e?.target_id ? e.target_id : null;
+        const hasTarget = targetName !== '???' && targetId;
+        const cond = e && e.condition ? e.condition : '';
+        const thumb = hasTarget
+          ? '<div class=\"evo-thumb\"><img src=\"'+spritePath(targetId)+'\" alt=\"'+targetName+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>'
+          : '<div class=\"evo-thumb missing\"></div>';
+        const meta = '<div class=\"evo-meta\"><div class=\"name\">'+targetName+(targetId ? ' (#'+padId(targetId)+')' : '')+'</div>'+
+          (cond ? '<div class=\"cond\">'+cond+'</div>' : '')+'</div>';
+        if (hasTarget && e?.target_slug) {
+          return '<button class=\"evo-row evo-link\" data-slug=\"'+e.target_slug+'\">'+thumb+meta+'</button>';
+        }
+        return '<div class=\"evo-row\">'+thumb+meta+'</div>';
       }).join('') || '<div class=\"empty\">Keine Entwicklung hinterlegt.</div>';
       const moves = (p.moves || []).map((m) => {
         const badge = m.type ? badgeHtml(m.type) : '<span class=\"badge\">Typ</span>';
@@ -562,11 +687,19 @@ function buildHtml(pokemon, types, assetVersion) {
           '<div class=\"art\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
           '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
           '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
-          '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"stats\">'+evolutions+'</div></div>' +
+          '<div class=\"section\"><h4>Vorentwicklung</h4><div class=\"evo-list\">'+evolvesFrom+'</div></div>' +
+          '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"evo-list\">'+evolutions+'</div></div>' +
           '<div class=\"section\"><h4>Attacken</h4><div class=\"moves\">'+moves+'</div></div>' +
         '</div>';
       const btn = detailEl.querySelector('.close');
       if (btn) btn.addEventListener('click', hideOverlay);
+      detailEl.querySelectorAll('.evo-link').forEach((el) => {
+        el.addEventListener('click', () => {
+          const slug = el.getAttribute('data-slug');
+          const found = state.pokemon.find((entry) => entry.slug === slug);
+          if (found) showDetail(found);
+        });
+      });
       if (isMobile()) {
         detailEl.classList.add('active');
         overlayEl?.classList.add('active');
@@ -611,6 +744,12 @@ function build() {
   const types = loadTypes();
   const pokemonRaw = loadPokemon();
   const pokemon = padPokemonList(pokemonRaw);
+  const nameById = new Map(
+    pokemonRaw
+      .filter((p) => p && p.id)
+      .map((p) => [p.id, { name: (p.name && p.name.de) || p.name || '???', slug: p.slug }])
+  );
+  const resolvedPokemon = resolvePokemonRelations(pokemon, nameById);
   const assetVersion = Date.now().toString();
 
   ensureDir(OUT_DIR);
@@ -621,10 +760,10 @@ function build() {
   ensureDir(path.join(OUT_DIR, 'data'));
 
   writeJSON(path.join(OUT_DIR, 'data', 'types.json'), types);
-  writeJSON(path.join(OUT_DIR, 'data', 'pokemon.json'), pokemon);
+  writeJSON(path.join(OUT_DIR, 'data', 'pokemon.json'), resolvedPokemon);
   copyPublic();
 
-  const html = buildHtml(pokemon, types, assetVersion);
+  const html = buildHtml(resolvedPokemon, types, assetVersion);
   fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
   console.log('Build complete. Open dist/index.html');
 }

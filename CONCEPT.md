@@ -7,7 +7,9 @@
 
 ## Dateibasiertes Content-Modell
 - `data/pokemon/{kanto-nummer}_{slug}.yml`: Inhalt pro Pokémon  
-  - `id` (Kanto-Index), `slug`, `name.de`, `description.de`, `types` (Array), `height_m`, `weight_kg`, `abilities` (Array mit `name.de`/`description.de`), `moves` (Array mit `name`/`type`/`power`/`accuracy`/`pp`/`description.de`), `evolutions` (Liste mit Ziel-Slug/ID + Bedingung z. B. Level/Item/Freundschaft).
+  - `id` (Kanto-Index), `slug`, `name.de`, `description.de`, `types` (Array), `height_m`, `weight_kg`, `abilities` (Array mit `name.de`/`description.de`), `moves` (Array mit `name`/`type`/`power`/`accuracy`/`pp`/`description.de`), `evolutions` (Liste mit Ziel-Nummer + Bedingung z. B. Level/Item/Freundschaft).
+  - Evolutionen referenzieren Pokédex-Nummern (nicht Slug/Name). Die Build-Pipeline löst Nummern zu lesbaren Namen auf; fehlt die referenzierte Nummer, wird der Name als "???" angezeigt.
+  - Beispiel: `apps/pokedex/data/pokemon/025_pikachu.yml` würde Evolutionen als Nummern führen (entwickelt sich aus #172, entwickelt sich zu #26).
   - Optional: `region_forms`, `sprites` (Pfad zu Bildern), `audio` (Pfad zu vorgespeicherten Audios).
 - `data/types.yml`: Liste aller Typen mit `name.de`, `description.de`, Effektivität (stark/normal/schwach) gegen andere Typen.
 - `data/moves.yml`: Gemeinsame Attacken-Referenz, falls Moves mehrfach genutzt werden.

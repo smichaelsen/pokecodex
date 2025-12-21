@@ -1,0 +1,27 @@
+id: 95
+slug: onix
+name:
+  de: Onix
+species:
+  de: Steinschlange-Pokémon
+entry:
+  de: Es gräbt sich durch die Erde. Beim Tunnelbau frisst es Felsen und mineralische Erde.
+types:
+  - Gestein
+  - Boden
+height_m: 8.8
+weight_kg: 210.0
+moves:
+  - name: Steinwurf
+    type: Gestein
+    power: 50
+    description:
+      de: Schleudert kleine Felsen auf das Ziel.
+  - name: Schlangenblick
+    type: Normal
+    power: 0
+    description:
+      de: Schüchtert das Ziel ein und senkt Initiative.
+evolutions:
+  - target: 208
+    condition: Tausch mit Metallmantel

@@ -11,6 +11,7 @@ types:
   - Gift
 height_m: 1.0
 weight_kg: 13.0
+evolves_from: 1
 moves:
   - name: Rasierblatt
     type: Pflanze
@@ -23,5 +24,5 @@ moves:
     description:
       de: Streut Pollen, die das Ziel einschläfern.
 evolutions:
-  - target: bisaflor
+  - target: 3
     condition: Entwicklung auf Level 32

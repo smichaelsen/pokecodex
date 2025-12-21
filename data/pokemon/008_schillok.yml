@@ -10,6 +10,7 @@ types:
   - Wasser
 height_m: 1.0
 weight_kg: 22.5
+evolves_from: 7
 moves:
   - name: Blubber
     type: Wasser
@@ -22,5 +23,5 @@ moves:
     description:
       de: Erhöht Initiative und Angriff.
 evolutions:
-  - target: turtok
+  - target: 9
     condition: Entwicklung auf Level 36

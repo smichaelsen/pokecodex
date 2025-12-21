@@ -10,6 +10,7 @@ types:
   - Wasser
 height_m: 1.6
 weight_kg: 85.5
+evolves_from: 8
 moves:
   - name: Hydropumpe
     type: Wasser

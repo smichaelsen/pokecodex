@@ -11,6 +11,7 @@ types:
   - Flug
 height_m: 1.7
 weight_kg: 90.5
+evolves_from: 5
 moves:
   - name: Feuersturm
     type: Feuer
