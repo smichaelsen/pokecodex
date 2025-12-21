@@ -11,7 +11,7 @@
 
 ## File-Based Content Model
 - `data/pokemon/{kanto-number}_{slug}.yml`: Content per Pokemon  
-  - `id` (Kanto index), `slug`, `name.de`, `description.de`, `types` (array), `height_m`, `weight_kg`, `abilities` (array with `name.de`/`description.de`), `moves` (array with `name`/`type`/`power`/`accuracy`/`pp`/`description.de`), `evolutions` (list with target number + condition such as level/item/friendship).
+  - `id` (Kanto index), `slug`, `name.de`, `name_tts.de` (optional pronunciation override), `description.de`, `types` (array), `height_m`, `weight_kg`, `abilities` (array with `name.de`/`description.de`), `moves` (array with `name`/`type`/`power`/`accuracy`/`pp`/`description.de`), `evolutions` (list with target number + condition such as level/item/friendship).
   - Evolutions reference Pokedex numbers (not slug/name). The build pipeline resolves numbers to readable names; if a referenced number is missing, the name is shown as "???".
   - Example: `apps/pokedex/data/pokemon/025_pikachu.yml` would reference evolutions by number (evolves from #172, evolves into #26).
   - Optional: `region_forms`, `sprites` (path to images), `audio` (path to pre-rendered audio).
@@ -36,17 +36,18 @@
 
 ## Audio Generation (German)
 - Goal: script-based TTS generation, reproducible and file-based for name and description audio.
-- Proposal: `scripts/generate_audio.sh` uses `espeak-ng` (or `piper` if available) without network access.
-- Example workflow:
-  ```bash
-  # Name
-  espeak-ng -v de -s 150 -w public/audio/de/pokemon/001.wav "Bisasam"
-  # Description
-  espeak-ng -v de -s 150 -w public/audio/de/descriptions/001.wav "$(yq '.description.de' data/pokemon/001_bisasam.yml)"
-  ffmpeg -i public/audio/de/descriptions/001.wav -ar 44100 -ac 2 public/audio/de/descriptions/001.mp3
-  ```
-  - `yq` reads the German text; `ffmpeg` compresses to MP3. Alternatively play WAV directly if MP3 is not needed.
+- Proposal: `scripts/generate_name_audio.sh` uses Piper with a German voice model and runs offline after the model is downloaded.
+  - Example workflow:
+    ```bash
+    # Name
+    piper --model .cache/piper/models/de_DE-thorsten-high.onnx \
+      --output_file public/audio/de/pokemon/001.wav \
+      --text "Bisasam"
+    ffmpeg -i public/audio/de/pokemon/001.wav -ar 44100 -ac 2 public/audio/de/pokemon/001.mp3
+    ```
+  - `ffmpeg` compresses to MP3. Alternatively play WAV directly if MP3 is not needed.
   - Script iterates over all Pokemon files, generates missing audio, leaves existing files untouched.
+  - If `name_tts.de` is present, it is used as the spoken string instead of `name.de`.
   - Optional hash file (`data/audio_manifest.json`) to only re-render changed texts.
 - Chime/call audio is fetched by a separate download script (source online).
 

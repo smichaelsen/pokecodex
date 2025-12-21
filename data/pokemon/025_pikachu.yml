@@ -2,6 +2,8 @@ id: 25
 slug: pikachu
 name:
   de: Pikachu
+name_tts:
+  de: pikatschu
 species:
   de: Maus-Pokémon
 entry:
