@@ -11,17 +11,7 @@ types:
   - Gift
 height_m: 0.7
 weight_kg: 6.9
-moves:
-  - name: Tackle
-    type: Normal
-    power: 40
-    description:
-      de: Ein einfacher Körperangriff.
-  - name: Egelsamen
-    type: Pflanze
-    power: 0
-    description:
-      de: Pflanzt Samen, die jede Runde KP absorbieren.
+signature_move: leech-seed
 evolutions:
   - target: 2
     condition: Entwicklung auf Level 16

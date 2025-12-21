@@ -12,15 +12,5 @@ types:
 height_m: 1.7
 weight_kg: 90.5
 evolves_from: 5
-moves:
-  - name: Feuersturm
-    type: Feuer
-    power: 110
-    description:
-      de: Ein heftiger Feuerwirbel.
-  - name: Fliegen
-    type: Flug
-    power: 90
-    description:
-      de: Steigt auf und stürzt sich auf das Ziel.
+signature_move: fire-blast
 evolutions: []

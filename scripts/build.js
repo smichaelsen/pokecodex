@@ -106,6 +106,12 @@ function loadTypes() {
   return loadYAMLFile(file) || [];
 }
 
+function loadMoves() {
+  const file = path.join(DATA_DIR, 'moves.yml');
+  if (!fs.existsSync(file)) return [];
+  return loadYAMLFile(file) || [];
+}
+
 function loadPokemon() {
   const dir = path.join(DATA_DIR, 'pokemon');
   const files = fs.readdirSync(dir).filter((f) => f.endsWith('.yml'));
@@ -822,10 +828,11 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
         }
         return '<div class=\"evo-row\">'+thumb+meta+'</div>';
       }).join('') || '<div class=\"empty\">Keine Entwicklung hinterlegt.</div>';
-      const moves = (p.moves || []).map((m) => {
-        const badge = m.type ? badgeHtml(m.type) : '<span class=\"badge\">Typ</span>';
-        return '<div class=\"move\"><div><strong>'+m.name+'</strong><div class=\"meta\">'+(m.description?.de || '')+'</div></div><div class=\"meta\">'+badge+'</div></div>';
-      }).join('') || '<div class=\"empty\">Keine Attacken hinterlegt.</div>';
+      const move = p.signature_move_data;
+      const moveBadge = move?.type ? badgeHtml(move.type) : '<span class=\"badge\">Typ</span>';
+      const moveHtml = move
+        ? '<div class=\"move\"><div><strong>'+(move.name?.de || 'Unbekannt')+'</strong><div class=\"meta\">'+(move.description?.de || '')+'</div></div><div class=\"meta\">'+moveBadge+'</div></div>'
+        : '<div class=\"empty\">Keine Signaturattacke hinterlegt.</div>';
       const closeBtn = isMobile() ? '<button class=\"close\" aria-label=\"Schließen\">✕</button>' : '';
       detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title clickable\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
         '<div class=\"detail-body\">' +
@@ -834,7 +841,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
           '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
           '<div class=\"section\"><h4>Vorentwicklung</h4><div class=\"evo-list\">'+evolvesFrom+'</div></div>' +
           '<div class=\"section\"><h4>Entwicklungen</h4><div class=\"evo-list\">'+evolutions+'</div></div>' +
-          '<div class=\"section\"><h4>Attacken</h4><div class=\"moves\">'+moves+'</div></div>' +
+          '<div class=\"section\"><h4>Signaturattacke</h4><div class=\"moves\">'+moveHtml+'</div></div>' +
         '</div>';
       const btn = detailEl.querySelector('.close');
       if (btn) btn.addEventListener('click', hideOverlay);
@@ -932,6 +939,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
 function build() {
   runFetchScripts();
   const types = loadTypes();
+  const moves = loadMoves();
   const pokemonRaw = loadPokemon();
   const pokemon = padPokemonList(pokemonRaw);
   const nameById = new Map(
@@ -939,7 +947,15 @@ function build() {
       .filter((p) => p && p.id)
       .map((p) => [p.id, { name: (p.name && p.name.de) || p.name || '???', slug: p.slug }])
   );
-  const resolvedPokemon = resolvePokemonRelations(pokemon, nameById);
+  const moveBySlug = new Map(moves.filter((m) => m && m.slug).map((m) => [m.slug, m]));
+  const resolvedPokemon = resolvePokemonRelations(pokemon, nameById).map((p) => {
+    if (!p || p.placeholder) return p;
+    const move = p.signature_move ? moveBySlug.get(p.signature_move) : null;
+    return {
+      ...p,
+      signature_move_data: move || null,
+    };
+  });
   const assetVersion = Date.now().toString();
   const audioVersions = buildAudioVersions();
 

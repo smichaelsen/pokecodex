@@ -10,17 +10,7 @@ types:
   - Feuer
 height_m: 0.6
 weight_kg: 8.5
-moves:
-  - name: Glut
-    type: Feuer
-    power: 40
-    description:
-      de: Eine kleine Flamme, die das Ziel verbrennen kann.
-  - name: Kratzer
-    type: Normal
-    power: 40
-    description:
-      de: Greift mit scharfen Krallen an.
+signature_move: ember
 evolutions:
   - target: 5
     condition: Entwicklung auf Level 16

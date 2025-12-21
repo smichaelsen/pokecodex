@@ -13,17 +13,7 @@ types:
 height_m: 0.4
 weight_kg: 6.0
 evolves_from: 172
-moves:
-  - name: Donner-Schock
-    type: Elektro
-    power: 40
-    description:
-      de: Elektrischer Schlag, kann paralysieren.
-  - name: Ruckzuckhieb
-    type: Normal
-    power: 40
-    description:
-      de: Rascher Angriff mit Priorität.
+signature_move: thunder-shock
 evolutions:
   - target: 26
     condition: Donnerstein

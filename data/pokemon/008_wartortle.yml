@@ -11,17 +11,7 @@ types:
 height_m: 1.0
 weight_kg: 22.5
 evolves_from: 7
-moves:
-  - name: Blubber
-    type: Wasser
-    power: 40
-    description:
-      de: Blasen treffen das Ziel.
-  - name: Panzerpolitur
-    type: Stahl
-    power: 0
-    description:
-      de: Erhöht Initiative und Angriff.
+signature_move: withdraw
 evolutions:
   - target: 9
     condition: Entwicklung auf Level 36

@@ -1,0 +1,144 @@
+- slug: leech-seed
+  name:
+    de: Egelsamen
+    en: Leech Seed
+  type: Pflanze
+  power: 0
+  description:
+    de: Ziel wird bepflanzt und verliert jede Runde KP, die ein Pokémon aus dem Team des Anwenders heilen.
+- slug: sleep-powder
+  name:
+    de: Schlafpuder
+    en: Sleep Powder
+  type: Pflanze
+  power: 0
+  description:
+    de: Verstreut Schlafpuder, der das Ziel eventuell in Schlaf versetzt.
+- slug: solar-beam
+  name:
+    de: Solarstrahl
+    en: Solar Beam
+  type: Pflanze
+  power: 120
+  description:
+    de: Absorbiert Licht in Runde 1. In Runde 2 erfolgt der Angriff.
+- slug: ember
+  name:
+    de: Glut
+    en: Ember
+  type: Feuer
+  power: 40
+  description:
+    de: Schwache Feuer-Attacke, durch die das Ziel eventuell Verbrennungen erleidet.
+- slug: flamethrower
+  name:
+    de: Flammenwurf
+    en: Flamethrower
+  type: Feuer
+  power: 90
+  description:
+    de: Starke Feuer-Attacke, durch die das Ziel eventuell Verbrennungen erleidet.
+- slug: fire-blast
+  name:
+    de: Feuersturm
+    en: Fire Blast
+  type: Feuer
+  power: 110
+  description:
+    de: Feuersbrunst, die das Ziel versengt und ihm eventuell eine Verbrennung zufügt.
+- slug: water-gun
+  name:
+    de: Aquaknarre
+    en: Water Gun
+  type: Wasser
+  power: 40
+  description:
+    de: Das Ziel wird mit Wasser bespritzt.
+- slug: withdraw
+  name:
+    de: Panzerschutz
+    en: Withdraw
+  type: Wasser
+  power: 0
+  description:
+    de: Rückzug in den harten Panzer. Erhöht den Verteidigungs-Wert.
+- slug: hydro-pump
+  name:
+    de: Hydropumpe
+    en: Hydro Pump
+  type: Wasser
+  power: 110
+  description:
+    de: Spritzt eine Menge Wasser mit Hochdruck auf das Ziel.
+- slug: thunder-shock
+  name:
+    de: Donnerschock
+    en: Thunder Shock
+  type: Elektro
+  power: 40
+  description:
+    de: Eine Elektro-Attacke, die das Ziel eventuell paralysiert.
+- slug: thunder
+  name:
+    de: Donner
+    en: Thunder
+  type: Elektro
+  power: 110
+  description:
+    de: Eine verheerende Elektro-Attacke, die das Ziel eventuell paralysiert.
+- slug: poison-sting
+  name:
+    de: Giftstachel
+    en: Poison Sting
+  type: Gift
+  power: 15
+  description:
+    de: Angriff mit Giftstachel. Das Ziel wird eventuell vergiftet.
+- slug: teleport
+  name:
+    de: Teleport
+    en: Teleport
+  type: Psycho
+  power: 0
+  description:
+    de: Ermöglicht die sofortige Flucht vor wilden Pokémon. Kann den Anwender außerdem zum zuletzt besuchten Pokémon-Center teleportieren.
+- slug: psychic
+  name:
+    de: Psychokinese
+    en: Psychic
+  type: Psycho
+  power: 90
+  description:
+    de: Starke Psycho-Attacke, die eventuell die Spezial-Verteidigung des Zieles senkt.
+- slug: icicle-spear
+  name:
+    de: Eisspeer
+    en: Icicle Spear
+  type: Eis
+  power: 25
+  description:
+    de: Feuert zwei bis fünf Eiszapfen auf das Ziel.
+- slug: rock-throw
+  name:
+    de: Steinwurf
+    en: Rock Throw
+  type: Gestein
+  power: 50
+  description:
+    de: Das Ziel wird mit einem kleinen Stein beworfen.
+- slug: stone-edge
+  name:
+    de: Steinkante
+    en: Stone Edge
+  type: Gestein
+  power: 100
+  description:
+    de: Anwender sticht das Ziel mit spitzen Steinen. Hohe Volltrefferquote.
+- slug: thunder-wave
+  name:
+    de: Donnerwelle
+    en: Thunder Wave
+  type: Elektro
+  power: 0
+  description:
+    de: Ein schwacher Stromstoß, der das Ziel paralysiert.

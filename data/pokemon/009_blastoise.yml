@@ -11,15 +11,5 @@ types:
 height_m: 1.6
 weight_kg: 85.5
 evolves_from: 8
-moves:
-  - name: Hydropumpe
-    type: Wasser
-    power: 110
-    description:
-      de: Mächtiger Wasserstrahl.
-  - name: Eisstrahl
-    type: Eis
-    power: 90
-    description:
-      de: Kältestrahl, kann einfrieren.
+signature_move: hydro-pump
 evolutions: []

@@ -12,22 +12,7 @@ types:
   - Elektro
 height_m: 0.3
 weight_kg: 2.0
-moves:
-  - name: Donner-Schock
-    type: Elektro
-    power: 40
-    description:
-      de: Elektrischer Schlag, kann paralysieren.
-  - name: Ruckzuckhieb
-    type: Normal
-    power: 40
-    description:
-      de: Rascher Angriff mit Priorität.
-  - name: Donnerwelle
-    type: Elektro
-    power: 0
-    description:
-      de: Lähmt das Ziel mit einer schwachen Stromwelle.
+signature_move: thunder-wave
 evolutions:
   - target: 25
     condition: Entwicklung durch hohe Freundschaft

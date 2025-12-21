@@ -10,17 +10,7 @@ types:
   - Wasser
 height_m: 0.3
 weight_kg: 4.0
-moves:
-  - name: Tackle
-    type: Normal
-    power: 40
-    description:
-      de: Trifft das Ziel mit vollem Körpereinsatz.
-  - name: Eisspeer
-    type: Eis
-    power: 25
-    description:
-      de: Schießt spitze Eiszapfen auf das Ziel.
+signature_move: icicle-spear
 evolutions:
   - target: 91
     condition: Wasserstein

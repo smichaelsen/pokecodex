@@ -13,15 +13,5 @@ types:
 height_m: 0.8
 weight_kg: 30.0
 evolves_from: 25
-moves:
-  - name: Donnerblitz
-    type: Elektro
-    power: 90
-    description:
-      de: Starker Blitzschlag.
-  - name: Rankenhieb
-    type: Pflanze
-    power: 45
-    description:
-      de: (Beispiel, eigentlich nicht im Moveset) schlägt mit Ranken.
+signature_move: thunder
 evolutions: []

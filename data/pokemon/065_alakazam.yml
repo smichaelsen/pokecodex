@@ -11,20 +11,5 @@ types:
 height_m: 1.5
 weight_kg: 48.0
 evolves_from: 64
-moves:
-  - name: Psychokinese
-    type: Psycho
-    power: 90
-    description:
-      de: Starker Psycho-Angriff, kann Spezial-Verteidigung senken.
-  - name: Spukball
-    type: Geist
-    power: 80
-    description:
-      de: Geisterhafter Angriff, kann Spezial-Verteidigung senken.
-  - name: Genesung
-    type: Normal
-    power: 0
-    description:
-      de: Stellt 50 % der KP wieder her.
+signature_move: psychic
 evolutions: []

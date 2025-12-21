@@ -12,17 +12,7 @@ types:
 height_m: 1.0
 weight_kg: 13.0
 evolves_from: 1
-moves:
-  - name: Rasierblatt
-    type: Pflanze
-    power: 55
-    description:
-      de: Scharfe Blätter treffen das Ziel.
-  - name: Schlafpuder
-    type: Pflanze
-    power: 0
-    description:
-      de: Streut Pollen, die das Ziel einschläfern.
+signature_move: sleep-powder
 evolutions:
   - target: 3
     condition: Entwicklung auf Level 32

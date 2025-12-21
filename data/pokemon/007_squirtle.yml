@@ -10,17 +10,7 @@ types:
   - Wasser
 height_m: 0.5
 weight_kg: 9.0
-moves:
-  - name: Aquaknarre
-    type: Wasser
-    power: 40
-    description:
-      de: Schießt Wasser auf das Ziel.
-  - name: Rutenschlag
-    type: Normal
-    power: 0
-    description:
-      de: Senkt die Verteidigung des Ziels.
+signature_move: water-gun
 evolutions:
   - target: 8
     condition: Entwicklung auf Level 16

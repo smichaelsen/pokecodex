@@ -12,20 +12,5 @@ types:
 height_m: 1.3
 weight_kg: 40.5
 evolves_from: 140
-moves:
-  - name: Steinkante
-    type: Gestein
-    power: 100
-    description:
-      de: Hohe Volltrefferquote.
-  - name: Wasserdüse
-    type: Wasser
-    power: 40
-    description:
-      de: Erstschlagattacke.
-  - name: Schwerttanz
-    type: Normal
-    power: 0
-    description:
-      de: Erhöht den Angriff stark.
+signature_move: stone-edge
 evolutions: []

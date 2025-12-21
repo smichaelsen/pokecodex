@@ -12,22 +12,7 @@ types:
   - Gift
 height_m: 0.5
 weight_kg: 9.0
-moves:
-  - name: Pikser
-    type: Flug
-    power: 35
-    description:
-      de: Stoß mit dem Schnabel.
-  - name: Giftstachel
-    type: Gift
-    power: 15
-    description:
-      de: Giftiger Stich, kann vergiften.
-  - name: Silberblick
-    type: Normal
-    power: 0
-    description:
-      de: Senkt die Verteidigung des Ziels.
+signature_move: poison-sting
 evolutions:
   - target: 33
     condition: Entwicklung auf Level 16

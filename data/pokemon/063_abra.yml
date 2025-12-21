@@ -10,22 +10,7 @@ types:
   - Psycho
 height_m: 0.9
 weight_kg: 19.5
-moves:
-  - name: Psystrahl
-    type: Psycho
-    power: 65
-    description:
-      de: Psycho-Strahl, kann verwirren.
-  - name: Teleport
-    type: Psycho
-    power: 0
-    description:
-      de: Flieht aus einem wilden Kampf.
-  - name: Reflektor
-    type: Psycho
-    power: 0
-    description:
-      de: Errichtet Barriere, die physische Attacken schwächt.
+signature_move: teleport
 evolutions:
   - target: 64
     condition: Entwicklung auf Level 16
