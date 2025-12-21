@@ -5,6 +5,10 @@ node_modules/
 /dist/
 /.cache/
 
+# Generated assets
+/public/assets/sprites/
+/public/audio/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

@@ -19,12 +19,13 @@
 - `data/moves.yml`: Shared move reference if moves are reused.
 - `public/assets/sprites/`: Official illustrations/sprites, file-based (e.g., `001.png`, `025.png`, `other/official-artwork/XXX.png` if desired). Copied by the build to `dist/assets/sprites/`.
 - `public/audio/de/pokemon/{id}.mp3` and `public/audio/de/descriptions/{id}.mp3`: Generated audio files.
+- `public/audio/chimes/{id}.mp3`: Optional Pokemon call/chime audio file (downloaded).
 - Admin is done by directly editing these files (no backoffice). Changes are versioned.
 
 ## Frontend Requirements
 - List sorted by Kanto index (default), optional toggles for other sorting/filtering later (type, search, favorites).
 - Detail view per Pokemon with name (DE), description (DE), type badges, moves, evolutions (with conditions), sprite/illustration.
-- Audio buttons play name/description audio if present.
+- Audio behavior: clicking the illustration plays the call/chime; clicking the name plays the spoken name; clicking the description plays the spoken description.
 - If audio is missing, the UI shows a hint or disables buttons.
 - Client loads data as static bundles (e.g., pre-rendered JSON files) from `data/`/`public/`.
 - Illustration usage:
@@ -34,7 +35,7 @@
 - Type colors: type badges are styled based on `data/types.yml`.
 
 ## Audio Generation (German)
-- Goal: script-based TTS generation, reproducible and file-based.
+- Goal: script-based TTS generation, reproducible and file-based for name and description audio.
 - Proposal: `scripts/generate_audio.sh` uses `espeak-ng` (or `piper` if available) without network access.
 - Example workflow:
   ```bash
@@ -47,6 +48,7 @@
   - `yq` reads the German text; `ffmpeg` compresses to MP3. Alternatively play WAV directly if MP3 is not needed.
   - Script iterates over all Pokemon files, generates missing audio, leaves existing files untouched.
   - Optional hash file (`data/audio_manifest.json`) to only re-render changed texts.
+- Chime/call audio is fetched by a separate download script (source online).
 
 ## Admin Flow (Filesystem)
 - Adjust content: edit YAML files under `data/` (names, descriptions, types, moves).

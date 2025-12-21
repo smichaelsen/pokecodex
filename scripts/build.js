@@ -437,6 +437,9 @@ function buildHtml(pokemon, types, assetVersion) {
       min-height: 260px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     }
+    .art.clickable {
+      cursor: pointer;
+    }
     .art img {
       width: 100%;
       max-width: 320px;
@@ -590,6 +593,7 @@ function buildHtml(pokemon, types, assetVersion) {
   const padId = (id) => id.toString().padStart(3, '0');
   const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
   const spritePath = (id) => 'assets/sprites/' + padId(id) + '.png?v=' + assetVersion;
+  const chimePath = (id) => 'audio/chimes/' + id + '.ogg?v=' + assetVersion;
     const overlayEl = document.getElementById('overlay');
     const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
     const hideOverlay = () => {
@@ -684,7 +688,7 @@ function buildHtml(pokemon, types, assetVersion) {
       const closeBtn = isMobile() ? '<button class=\"close\" aria-label=\"Schließen\">✕</button>' : '';
       detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
         '<div class=\"detail-body\">' +
-          '<div class=\"art\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
+          '<div class=\"art clickable\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
           '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
           '<div class=\"section\"><h4>Art</h4><div>'+(p.species?.de || 'Unbekannt')+'</div></div>' +
           '<div class=\"section\"><h4>Vorentwicklung</h4><div class=\"evo-list\">'+evolvesFrom+'</div></div>' +
@@ -693,6 +697,13 @@ function buildHtml(pokemon, types, assetVersion) {
         '</div>';
       const btn = detailEl.querySelector('.close');
       if (btn) btn.addEventListener('click', hideOverlay);
+      const artEl = detailEl.querySelector('.art');
+      if (artEl) {
+        artEl.addEventListener('click', () => {
+          const audio = new Audio(chimePath(p.id));
+          audio.play().catch(() => {});
+        });
+      }
       detailEl.querySelectorAll('.evo-link').forEach((el) => {
         el.addEventListener('click', () => {
           const slug = el.getAttribute('data-slug');
