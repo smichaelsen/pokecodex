@@ -334,6 +334,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
     .list-panel {
       display: flex;
       flex-direction: column;
+      min-height: 0;
     }
     .controls {
       padding: 12px;
@@ -358,6 +359,36 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 10px;
       flex: 1;
+      min-height: 0;
+    }
+    .pager {
+      padding: 12px;
+      background: var(--panel-dark);
+      border-top: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .pager button {
+      font: inherit;
+      font-weight: 700;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      background: #fff;
+      padding: 10px 16px;
+      min-height: 48px;
+      min-width: 120px;
+      cursor: pointer;
+    }
+    .pager button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .pager .page-info {
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.4px;
     }
     .card {
       background: #fff;
@@ -587,7 +618,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       display: none;
     }
     @media (max-width: 960px) {
-      .content { grid-template-columns: 1fr; height: auto; }
+      .content { grid-template-columns: 1fr; height: calc(100vh - 140px); }
       .detail-body { grid-template-columns: 1fr; }
       .detail {
         position: fixed;
@@ -611,6 +642,10 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
         z-index: 15;
       }
       .overlay.active { display: block; }
+      .pager button {
+        min-width: 140px;
+        font-size: 18px;
+      }
     }
     ${badgeCss}
   </style>
@@ -627,6 +662,11 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
           <input type=\"search\" placeholder=\"Suche nach Name oder Typ...\" id=\"search\">
         </div>
         <div class=\"list\" id=\"list\"></div>
+        <div class=\"pager\">
+          <button type=\"button\" id=\"page-prev\">◀ Zurück</button>
+          <div class=\"page-info\" id=\"page-info\">Seite 1 von 1</div>
+          <button type=\"button\" id=\"page-next\">Weiter ▶</button>
+        </div>
       </div>
       <div class=\"panel detail\" id=\"detail\">
         <div class=\"empty\">Wähle ein Pokémon aus der Liste aus.</div>
@@ -641,6 +681,9 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
     const listEl = document.getElementById('list');
     const detailEl = document.getElementById('detail');
   const searchEl = document.getElementById('search');
+  const pagePrevEl = document.getElementById('page-prev');
+  const pageNextEl = document.getElementById('page-next');
+  const pageInfoEl = document.getElementById('page-info');
 
   const padId = (id) => id.toString().padStart(3, '0');
   const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
@@ -665,33 +708,40 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       return '<span class=\"badge '+typeClass(t)+'\"'+style+'>'+t+'</span>';
     };
 
+  const pageSize = 50;
+
   function renderList(items) {
+    const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+    if (state.page > totalPages) state.page = totalPages;
+    if (state.page < 1) state.page = 1;
+    const start = (state.page - 1) * pageSize;
+    const paged = items.slice(start, start + pageSize);
+
     if (!items.length) {
       listEl.innerHTML = '<div class=\"empty\" style=\"grid-column:1/-1\">Keine Ergebnisse</div>';
-      return;
-    }
-    listEl.innerHTML = items.map((p) => {
-      if (p.placeholder) {
-        return '<div class=\"card placeholder\" data-placeholder=\"1\">' +
-          '<div class=\"thumb missing\"></div>' +
+    } else {
+      listEl.innerHTML = paged.map((p) => {
+        if (p.placeholder) {
+          return '<div class=\"card placeholder\" data-placeholder=\"1\">' +
+            '<div class=\"thumb missing\"></div>' +
+            '<div>' +
+              '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
+              '<div class=\"name muted\">—</div>' +
+              '<div class=\"badges\"></div>' +
+            '</div>' +
+          '</div>';
+        }
+        const img = spritePath(p.id);
+        const types = (p.types || []).map((t) => badgeHtml(t)).join('');
+        return '<div class=\"card\" data-slug=\"'+p.slug+'\">' +
+          '<div class=\"thumb\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Sprite')+'\" loading=\"lazy\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>' +
           '<div>' +
             '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
-            '<div class=\"name muted\">—</div>' +
-            '<div class=\"badges\"></div>' +
+            '<div class=\"name\">'+(p.name?.de || p.name || 'Unbekannt')+'</div>' +
+            '<div class=\"badges\">'+types+'</div>' +
           '</div>' +
         '</div>';
-      }
-      const img = spritePath(p.id);
-      const types = (p.types || []).map((t) => badgeHtml(t)).join('');
-      return '<div class=\"card\" data-slug=\"'+p.slug+'\">' +
-        '<div class=\"thumb\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Sprite')+'\" loading=\"lazy\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>' +
-        '<div>' +
-          '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
-          '<div class=\"name\">'+(p.name?.de || p.name || 'Unbekannt')+'</div>' +
-          '<div class=\"badges\">'+types+'</div>' +
-        '</div>' +
-      '</div>';
-    }).join('');
+      }).join('');
       listEl.querySelectorAll('.card').forEach((el) => {
         if (el.dataset.placeholder) return;
         el.addEventListener('click', () => {
@@ -701,6 +751,15 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
         });
       });
     }
+
+    if (pageInfoEl) {
+      const maxId = Math.max(...state.pokemon.map((p) => p.id || 0));
+      const end = Math.min(items.length, start + paged.length);
+      pageInfoEl.textContent = start + 1 + ' - ' + end + ' / ' + maxId;
+    }
+    if (pagePrevEl) pagePrevEl.disabled = state.page <= 1;
+    if (pageNextEl) pageNextEl.disabled = state.page >= totalPages;
+  }
 
     function showDetail(p) {
       if (p.placeholder) {
@@ -802,6 +861,7 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
           return name.includes(term) || types.includes(term);
         });
       }
+      state.page = 1;
       renderList(state.filtered);
     }
 
@@ -809,8 +869,22 @@ function buildHtml(pokemon, types, assetVersion, audioVersions) {
       const res = await fetch('data/pokemon.json?v=' + assetVersion);
       state.pokemon = await res.json();
       state.filtered = [...state.pokemon];
+      state.page = 1;
       renderList(state.pokemon);
       searchEl.addEventListener('input', applyFilter);
+      pagePrevEl?.addEventListener('click', () => {
+        if (state.page > 1) {
+          state.page -= 1;
+          renderList(state.filtered);
+        }
+      });
+      pageNextEl?.addEventListener('click', () => {
+        const totalPages = Math.max(1, Math.ceil(state.filtered.length / pageSize));
+        if (state.page < totalPages) {
+          state.page += 1;
+          renderList(state.filtered);
+        }
+      });
       if (state.pokemon.length) {
         const firstReal = state.pokemon.find((p) => !p.placeholder);
         showDetail(firstReal || state.pokemon[0]);

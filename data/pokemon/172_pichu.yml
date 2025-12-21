@@ -1,0 +1,33 @@
+id: 172
+slug: pichu
+name:
+  de: Pichu
+name_tts:
+  de: pietschu
+species:
+  de: Babymaus-Pokémon
+entry:
+  de: Sie spielen miteinander, indem sie ihre Schweifspitzen aneinanderhalten und Funken fliegen lassen.
+types:
+  - Elektro
+height_m: 0.3
+weight_kg: 2.0
+moves:
+  - name: Donner-Schock
+    type: Elektro
+    power: 40
+    description:
+      de: Elektrischer Schlag, kann paralysieren.
+  - name: Ruckzuckhieb
+    type: Normal
+    power: 40
+    description:
+      de: Rascher Angriff mit Priorität.
+  - name: Donnerwelle
+    type: Elektro
+    power: 0
+    description:
+      de: Lähmt das Ziel mit einer schwachen Stromwelle.
+evolutions:
+  - target: 25
+    condition: Entwicklung durch hohe Freundschaft

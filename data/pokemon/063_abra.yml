@@ -1,0 +1,31 @@
+id: 63
+slug: abra
+name:
+  de: Abra
+species:
+  de: Psi-Pokémon
+entry:
+  de: Es schläft 18 Stunden am Tag. Währenddessen setzt es eine Vielzahl zusätzlicher sensorischer Kräfte ein.
+types:
+  - Psycho
+height_m: 0.9
+weight_kg: 19.5
+moves:
+  - name: Psystrahl
+    type: Psycho
+    power: 65
+    description:
+      de: Psycho-Strahl, kann verwirren.
+  - name: Teleport
+    type: Psycho
+    power: 0
+    description:
+      de: Flieht aus einem wilden Kampf.
+  - name: Reflektor
+    type: Psycho
+    power: 0
+    description:
+      de: Errichtet Barriere, die physische Attacken schwächt.
+evolutions:
+  - target: 64
+    condition: Entwicklung auf Level 16
