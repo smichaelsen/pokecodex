@@ -29,6 +29,7 @@ export function renderList(items, ctx) {
         const img = ctx.paths.spritePath(p.id);
         const slug = escapeHtml(p.slug || '');
         const name = escapeHtml(p.name?.de || p.name || 'Unbekannt');
+        const isNew = ctx.seenSlugs && p.slug ? !ctx.seenSlugs.has(p.slug) : false;
         return (
           '<pokedex-card pid="' +
           p.id +
@@ -38,7 +39,9 @@ export function renderList(items, ctx) {
           name +
           '" img="' +
           img +
-          '"></pokedex-card>'
+          '"' +
+          (isNew ? ' new="1"' : '') +
+          '></pokedex-card>'
         );
       })
       .join('');

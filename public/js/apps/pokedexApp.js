@@ -25,6 +25,27 @@ export async function createPokedexApp(ctx) {
     page: 1,
     selectedSlug: null,
   };
+  const SEEN_STORAGE_KEY = 'dexos.pokedex.seen';
+  const seenSlugs = (() => {
+    const stored = host.storage?.get ? host.storage.get(SEEN_STORAGE_KEY, []) : [];
+    return new Set(Array.isArray(stored) ? stored.filter(Boolean) : []);
+  })();
+
+  const persistSeen = () => {
+    if (host.storage?.set) {
+      host.storage.set(SEEN_STORAGE_KEY, Array.from(seenSlugs));
+    }
+  };
+
+  const markSeen = (pokemon) => {
+    if (!pokemon || pokemon.placeholder) return;
+    const slug = pokemon.slug;
+    if (!slug || seenSlugs.has(slug)) return;
+    seenSlugs.add(slug);
+    persistSeen();
+    const cardEl = listEl?.querySelector('pokedex-card[slug="' + slug + '"]');
+    if (cardEl) cardEl.removeAttribute('new');
+  };
 
   const [, { createPaths }, renderModule] = await Promise.all([
     import(`../components/pokedex-card.js${moduleVersion}`),
@@ -46,6 +67,7 @@ export async function createPokedexApp(ctx) {
     typeInfo: state.types,
     paths: createPaths(config),
     audio: host.audio || null,
+    seenSlugs,
     isMobile,
     hideOverlay,
     showDetail: null,
@@ -53,7 +75,10 @@ export async function createPokedexApp(ctx) {
   };
 
   pokedexCtx.showDetail = (p, opts) => {
-    if (p && !p.placeholder) state.selectedSlug = p.slug || null;
+    if (p && !p.placeholder) {
+      state.selectedSlug = p.slug || null;
+      markSeen(p);
+    }
     showDetail(p, pokedexCtx, opts);
   };
 

@@ -1,0 +1,14 @@
+id: 19
+slug: rattata
+name:
+  de: Rattfratz
+entry:
+  de: Ein äußerst häufiges Pokémon, das an vielen Orten lebt. Es nagt unablässig, um seine Schneidezähne zu schärfen.
+types:
+  - normal
+height_m: 0.3
+weight_kg: 3.5
+signature_move: quick-attack
+evolutions:
+  - target: 20
+    condition: Level 20

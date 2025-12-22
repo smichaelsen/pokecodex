@@ -43,6 +43,7 @@ Returns
 - `getTypeInfo()`: return cached type info (from config).
 - `getMoveInfo()`: currently returns `null`.
 - `audio`: audio helpers (see below).
+- `storage`: localStorage-backed helpers (see below).
 - `destroy()`: remove handlers and clean up.
 
 ## Menu Ownership
@@ -69,4 +70,14 @@ dexOS provides a small audio helper with caching to centralize audio behavior:
 host.audio.get(url)     // returns cached Audio or creates one
 host.audio.preload(url) // loads and preloads the audio
 host.audio.play(url)    // resets to 0 and plays (safe no-op on errors)
+```
+
+## Storage Helpers
+dexOS provides storage helpers backed by `localStorage` (with an in-memory fallback):
+
+```js
+host.storage.get(key, fallback) // reads JSON or raw string (fallback if missing)
+host.storage.set(key, value)    // writes JSON unless value is a string
+host.storage.remove(key)        // removes a key
+host.storage.clear()            // clears storage backend
 ```

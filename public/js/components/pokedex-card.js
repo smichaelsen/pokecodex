@@ -5,7 +5,7 @@ const attrValue = (value) => escapeHtml(value || '');
 
 class PokedexCard extends HTMLElement {
   static get observedAttributes() {
-    return ['variant', 'slug', 'pid', 'name', 'img', 'placeholder', 'cond'];
+    return ['variant', 'slug', 'pid', 'name', 'img', 'placeholder', 'cond', 'new'];
   }
 
   connectedCallback() {
@@ -16,14 +16,16 @@ class PokedexCard extends HTMLElement {
     this.render();
   }
 
-  renderCard({ slug, pid, name, img, placeholder, cond, variant }) {
+  renderCard({ slug, pid, name, img, placeholder, cond, variant, isNew }) {
     const idLabel = pid ? padId(pid) : '';
     const safeSlug = attrValue(slug);
     const safeName = attrValue(name || (placeholder ? '—' : 'Unbekannt'));
     const wrapperClass = 'card' + (variant === 'evolution' ? ' evo' : '');
     const thumbClass = variant === 'evolution' ? 'thumb evo-thumb' : 'thumb';
+    const newDot = isNew && variant !== 'evolution' && !placeholder ? '<span class="new-dot" aria-hidden="true"></span>' : '';
     const content =
       '<div class="' + wrapperClass + '"' + (safeSlug ? ' data-slug="' + safeSlug + '"' : '') + (placeholder ? ' data-placeholder="1"' : '') + '>' +
+        newDot +
         '<div class="' + thumbClass + (placeholder || !img ? ' missing' : '') + '">' +
           (placeholder || !img
             ? ''
@@ -56,6 +58,7 @@ class PokedexCard extends HTMLElement {
     const name = this.getAttribute('name') || '';
     const img = this.getAttribute('img') || '';
     const cond = this.getAttribute('cond') || '';
+    const isNew = this.hasAttribute('new');
 
     this.innerHTML = this.renderCard({
       slug,
@@ -65,6 +68,7 @@ class PokedexCard extends HTMLElement {
       placeholder,
       cond,
       variant,
+      isNew,
     });
   }
 }
