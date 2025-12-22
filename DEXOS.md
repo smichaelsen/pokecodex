@@ -42,6 +42,7 @@ Returns
 - `getPokemon()`: return last loaded Pokemon list.
 - `getTypeInfo()`: return cached type info (from config).
 - `getMoveInfo()`: currently returns `null`.
+- `audio`: audio helpers (see below).
 - `destroy()`: remove handlers and clean up.
 
 ## Menu Ownership
@@ -59,4 +60,13 @@ Event payload example:
   pokemon: [...],
   source: 'init' | 'load' | 'reload'
 }
+```
+
+## Audio Helpers
+dexOS provides a small audio helper with caching to centralize audio behavior:
+
+```js
+host.audio.get(url)     // returns cached Audio or creates one
+host.audio.preload(url) // loads and preloads the audio
+host.audio.play(url)    // resets to 0 and plays (safe no-op on errors)
 ```

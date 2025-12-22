@@ -14,6 +14,7 @@ export function createDexOS({
     pokemon: [],
     typeInfo: config.typeInfo || {},
   };
+  const audioCache = new Map();
 
   const hideMenu = () => {
     menuOverlayLeftEl?.classList.remove('active');
@@ -65,6 +66,31 @@ export function createDexOS({
   const getPokemon = () => state.pokemon;
   const getTypeInfo = () => state.typeInfo;
   const getMoveInfo = () => null;
+
+  const getAudio = (url) => {
+    if (!url) return null;
+    const existing = audioCache.get(url);
+    if (existing) return existing;
+    const audio = new Audio(url);
+    audioCache.set(url, audio);
+    return audio;
+  };
+
+  const preloadAudio = (url) => {
+    const audio = getAudio(url);
+    if (!audio) return null;
+    audio.preload = 'auto';
+    audio.load();
+    return audio;
+  };
+
+  const playAudio = (url) => {
+    const audio = getAudio(url);
+    if (!audio) return null;
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+    return audio;
+  };
 
   const clearMenu = () => {
     menuListeners.forEach((listener, id) => {
@@ -135,6 +161,11 @@ export function createDexOS({
     getPokemon,
     getTypeInfo,
     getMoveInfo,
+    audio: {
+      get: getAudio,
+      preload: preloadAudio,
+      play: playAudio,
+    },
     destroy,
   };
 }
