@@ -53,12 +53,12 @@ export function createDexOS({
     window.dispatchEvent(new CustomEvent('dexos:data:updated', { detail: payload }));
   };
 
-  const loadPokemon = async ({ cacheBust, source = 'load', keepPage = false } = {}) => {
+  const loadPokemon = async ({ cacheBust, source = 'load' } = {}) => {
     const version = cacheBust ?? config.assetVersion ?? Date.now().toString();
     const res = await fetch(`${dataUrl}?v=${version}`);
     if (!res.ok) throw new Error('Failed to load data');
     state.pokemon = await res.json();
-    dispatchDataUpdated({ pokemon: state.pokemon, source, keepPage });
+    dispatchDataUpdated({ pokemon: state.pokemon, source });
     return state.pokemon;
   };
 
@@ -91,7 +91,7 @@ export function createDexOS({
   if (menuItems.reload) {
     reloadListener = () => {
       hideMenu();
-      loadPokemon({ cacheBust: Date.now().toString(), source: 'reload', keepPage: true }).catch(() => {
+      loadPokemon({ cacheBust: Date.now().toString(), source: 'reload' }).catch(() => {
         window.location.reload();
       });
     };

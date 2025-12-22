@@ -178,7 +178,7 @@ export async function createPokedexApp(ctx) {
     const detail = event?.detail || {};
     const openMobileOverlay = !!detailPanelEl?.classList.contains('active');
     applyPokemon(detail.pokemon || [], {
-      keepPage: !!detail.keepPage,
+      keepPage: true,
       openMobileOverlay,
     });
   };

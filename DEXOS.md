@@ -38,7 +38,7 @@ Returns
 - `registerMenu(handlers)`: register menu handlers for menu items (excluding `reload`).
 - `clearMenu()`: remove registered menu handlers.
 - `showMenu()` / `hideMenu()`: control menu overlays.
-- `loadPokemon({ cacheBust, source, keepPage })`: fetch data and dispatch update event.
+- `loadPokemon({ cacheBust, source })`: fetch data and dispatch update event.
 - `getPokemon()`: return last loaded Pokemon list.
 - `getTypeInfo()`: return cached type info (from config).
 - `getMoveInfo()`: currently returns `null`.
@@ -57,11 +57,6 @@ Event payload example:
 ```js
 {
   pokemon: [...],
-  source: 'init' | 'load' | 'reload',
-  keepPage: true | false
+  source: 'init' | 'load' | 'reload'
 }
 ```
-
-## App Integration (Current Pokédex)
-- The Pokédex app reads data via `host.getPokemon()` and listens for `dexos:data:updated`.
-- On update, it re-renders the list and detail view, preserving page when `keepPage` is true.
