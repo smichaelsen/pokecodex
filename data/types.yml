@@ -25,6 +25,8 @@
 - slug: ground
   name:
     de: Boden
+  tts:
+    de: Bohden
   color: '#b58d4a'
 - slug: flying
   name:

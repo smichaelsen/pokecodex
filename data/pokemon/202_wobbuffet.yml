@@ -1,0 +1,13 @@
+id: 202
+slug: wobbuffet
+name:
+  de: Woingenau
+entry:
+  de: Es erträgt jede Attacke und schlägt mit der gleichen Kraft zurück.
+types:
+  - psychic
+height_m: 1.3
+weight_kg: 28.5
+evolves_from: 360
+signature_move: psychic
+evolutions: []
