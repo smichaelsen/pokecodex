@@ -220,12 +220,14 @@ function buildAudioVersions() {
   const versions = {
     chimes: {},
     names: {},
+    descriptions: {},
     types: {},
     moves: {},
   };
 
   const chimeDir = path.join(PUBLIC_DIR, 'audio', 'chimes');
   const nameDir = path.join(PUBLIC_DIR, 'audio', 'de', 'pokemon');
+  const descDir = path.join(PUBLIC_DIR, 'audio', 'de', 'descriptions');
   const typeDir = path.join(PUBLIC_DIR, 'audio', 'de', 'types');
   const moveDir = path.join(PUBLIC_DIR, 'audio', 'de', 'moves');
 
@@ -246,6 +248,16 @@ function buildAudioVersions() {
         const id = file.replace(/\.mp3$/, '');
         const stat = fs.statSync(path.join(nameDir, file));
         versions.names[id] = Math.floor(stat.mtimeMs);
+      });
+  }
+
+  if (fs.existsSync(descDir)) {
+    fs.readdirSync(descDir)
+      .filter((file) => file.endsWith('.mp3'))
+      .forEach((file) => {
+        const id = file.replace(/\.mp3$/, '');
+        const stat = fs.statSync(path.join(descDir, file));
+        versions.descriptions[id] = Math.floor(stat.mtimeMs);
       });
   }
 
@@ -556,6 +568,9 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     .detail-title.clickable {
       cursor: pointer;
     }
+    .entry.clickable {
+      cursor: pointer;
+    }
     .detail-body {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -765,6 +780,10 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     const version = audioVersions?.names?.[id] || assetVersion;
     return 'audio/de/pokemon/' + id + '.mp3?v=' + version;
   };
+  const descriptionAudioPath = (id) => {
+    const version = audioVersions?.descriptions?.[id] || assetVersion;
+    return 'audio/de/descriptions/' + id + '.mp3?v=' + version;
+  };
   const typeAudioPath = (typeName) => {
     const version = audioVersions?.types?.[typeName] || assetVersion;
     return 'audio/de/types/' + typeName + '.mp3?v=' + version;
@@ -872,6 +891,9 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       const nameAudio = new Audio(nameAudioPath(p.id));
       nameAudio.preload = 'auto';
       nameAudio.load();
+      const descAudio = new Audio(descriptionAudioPath(p.id));
+      descAudio.preload = 'auto';
+      descAudio.load();
       const evolvesFrom = p.evolves_from
         ? (() => {
             const fromName = p.evolves_from_name || '???';
@@ -917,7 +939,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       detailEl.innerHTML = '<div class=\"detail-header\">'+closeBtn+'<h2 class=\"detail-title clickable\">'+(p.name?.de || 'Unbekannt')+'</h2><div class=\"id\">Nr. '+padId(p.id)+'</div></div>' +
         '<div class=\"detail-body\">' +
           '<div class=\"art clickable\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Illustration')+'\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.parentElement.textContent=\\'Kein Bild verfügbar\\';\"></div>' +
-          '<div class=\"section\"><h4>Beschreibung</h4><p>'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges pokemon-types\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
+          '<div class=\"section\"><h4>Beschreibung</h4><p class=\"entry clickable\">'+(p.entry?.de || 'Keine Beschreibung')+'</p><div class=\"badges pokemon-types\" style=\"margin-top:8px\">'+typeBadges+'</div></div>' +
           '<div class=\"section\"><h4>Entwicklung</h4>'+evolutionHtml+'</div>' +
           '<div class=\"section\"><h4>Signaturattacke</h4><div class=\"moves\">'+moveHtml+'</div></div>' +
         '</div>';
@@ -935,6 +957,13 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         artEl.addEventListener('click', () => {
           chimeAudio.currentTime = 0;
           chimeAudio.play().catch(() => {});
+        });
+      }
+      const entryEl = detailEl.querySelector('.entry');
+      if (entryEl) {
+        entryEl.addEventListener('click', () => {
+          descAudio.currentTime = 0;
+          descAudio.play().catch(() => {});
         });
       }
       detailEl.querySelectorAll('.pokemon-types .badge[data-type]').forEach((el) => {
