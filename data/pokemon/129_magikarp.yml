@@ -1,0 +1,14 @@
+id: 129
+slug: magikarp
+name:
+  de: Karpador
+entry:
+  de: Es ist schwach und jämmerlich. Es kann nur platschen.
+types:
+  - water
+height_m: 0.9
+weight_kg: 10.0
+signature_move: splash
+evolutions:
+  - target: 130
+    condition: Entwicklung auf Level 20

@@ -1,0 +1,14 @@
+id: 10
+slug: caterpie
+name:
+  de: Raupy
+entry:
+  de: Seine kurzen Beine erschweren das Laufen. Es saugt Nahrung mit den Saugnäpfen an seinen Füßen ein.
+types:
+  - bug
+height_m: 0.3
+weight_kg: 2.9
+signature_move: string-shot
+evolutions:
+  - target: 11
+    condition: Entwicklung auf Level 7

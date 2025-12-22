@@ -1,0 +1,14 @@
+id: 80
+slug: slowbro
+name:
+  de: Lahmus
+entry:
+  de: Wenn ein Muschas seinen Schweif beißt, wird es zu Lahmus.
+types:
+  - water
+  - psychic
+height_m: 1.6
+weight_kg: 78.5
+evolves_from: 79
+signature_move: psychic
+evolutions: []

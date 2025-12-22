@@ -1,0 +1,16 @@
+id: 17
+slug: pidgeotto
+name:
+  de: Tauboga
+entry:
+  de: Es kreist über seinem Revier und schlägt Eindringlinge mit kräftigen Flügeln.
+types:
+  - normal
+  - flying
+height_m: 1.1
+weight_kg: 30.0
+evolves_from: 16
+signature_move: wing-attack
+evolutions:
+  - target: 18
+    condition: Entwicklung auf Level 36

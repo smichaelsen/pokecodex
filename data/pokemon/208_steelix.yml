@@ -1,0 +1,14 @@
+id: 208
+slug: steelix
+name:
+  de: Stahlos
+entry:
+  de: Es gräbt sich tiefer als Onix. Seine Nahrung besteht aus Gestein und Erde.
+types:
+  - steel
+  - ground
+height_m: 9.2
+weight_kg: 400.0
+evolves_from: 95
+signature_move: iron-tail
+evolutions: []

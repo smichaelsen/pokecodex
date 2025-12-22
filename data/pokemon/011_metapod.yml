@@ -1,0 +1,15 @@
+id: 11
+slug: metapod
+name:
+  de: Safcon
+entry:
+  de: Sein harter Panzer schützt seinen weichen Körper, während es auf seine Entwicklung wartet.
+types:
+  - bug
+height_m: 0.7
+weight_kg: 9.9
+evolves_from: 10
+signature_move: harden
+evolutions:
+  - target: 12
+    condition: Entwicklung auf Level 10

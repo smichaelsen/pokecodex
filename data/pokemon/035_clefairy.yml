@@ -1,0 +1,14 @@
+id: 35
+slug: clefairy
+name:
+  de: Piepi
+entry:
+  de: Es wird selten gesehen. Man sagt, es sammelt sich bei Vollmond, um zu tanzen.
+types:
+  - normal
+height_m: 0.6
+weight_kg: 7.5
+signature_move: double-slap
+evolutions:
+  - target: 36
+    condition: Mondstein

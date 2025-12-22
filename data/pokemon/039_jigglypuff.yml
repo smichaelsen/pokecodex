@@ -1,0 +1,14 @@
+id: 39
+slug: jigglypuff
+name:
+  de: Pummeluff
+entry:
+  de: Wenn seine Augen anfangen zu flackern, singt es ein beruhigendes Lied, das das Ziel einschläfert.
+types:
+  - normal
+height_m: 0.5
+weight_kg: 5.5
+signature_move: sing
+evolutions:
+  - target: 40
+    condition: Mondstein

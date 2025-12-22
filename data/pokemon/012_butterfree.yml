@@ -1,0 +1,14 @@
+id: 12
+slug: butterfree
+name:
+  de: Smettbo
+entry:
+  de: Es sammelt Blütenstaub und verteilt ihn mit seinen Flügeln. Bei Berührung kann er lähmen.
+types:
+  - bug
+  - flying
+height_m: 1.1
+weight_kg: 32.0
+evolves_from: 11
+signature_move: gust
+evolutions: []

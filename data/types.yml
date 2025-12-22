@@ -46,3 +46,7 @@
   name:
     de: Eis
   color: '#81d4fa'
+- slug: steel
+  name:
+    de: Stahl
+  color: '#90a4ae'

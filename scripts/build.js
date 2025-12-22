@@ -418,9 +418,44 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       cursor: not-allowed;
     }
     .pager .page-info {
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.4px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    .pager .progress {
+      position: relative;
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #1b1b1b, #2e2e2e);
+      border: 2px solid #0f0f0f;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.06);
+      overflow: hidden;
+    }
+    .pager .progress::before,
+    .pager .progress::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff5252;
+      box-shadow: 0 0 8px rgba(255,82,82,0.6);
+      transform: translateY(-50%);
+    }
+    .pager .progress::before {
+      left: 6px;
+    }
+    .pager .progress::after {
+      right: 6px;
+    }
+    .pager .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #6ff3ff, #42a5f5 40%, #ffee58 70%, #ff7043);
+      box-shadow: 0 0 10px rgba(102,187,106,0.5);
+      transition: width 0.25s ease;
     }
     .card {
       background: #fff;
@@ -693,7 +728,11 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         <div class=\"list\" id=\"list\"></div>
         <div class=\"pager\">
           <button type=\"button\" id=\"page-prev\" aria-label=\"Vorherige Seite\">◀</button>
-          <div class=\"page-info\" id=\"page-info\">Seite 1 von 1</div>
+          <div class=\"page-info\" id=\"page-info\">
+            <div class=\"progress\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"0\">
+              <div class=\"progress-fill\" id=\"page-progress\"></div>
+            </div>
+          </div>
           <button type=\"button\" id=\"page-next\" aria-label=\"Nächste Seite\">▶</button>
         </div>
       </div>
@@ -714,6 +753,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
   const pagePrevEl = document.getElementById('page-prev');
   const pageNextEl = document.getElementById('page-next');
   const pageInfoEl = document.getElementById('page-info');
+  const pageProgressEl = document.getElementById('page-progress');
 
   const padId = (id) => id.toString().padStart(3, '0');
   const typeClass = (t) => 'type-' + (t || '').toLowerCase().replace(/\\s+/g, '-');
@@ -747,7 +787,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       return '<span class=\"badge '+typeClass(t)+'\" data-type=\"'+t+'\"'+style+'>'+label+'</span>';
     };
 
-  const pageSize = 32;
+  const pageSize = 12;
 
   const resetListScroll = () => {
     listEl.scrollTop = 0;
@@ -778,13 +818,11 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
           '</div>';
         }
         const img = spritePath(p.id);
-        const types = (p.types || []).map((t) => badgeHtml(t)).join('');
         return '<div class=\"card\" data-slug=\"'+p.slug+'\">' +
           '<div class=\"thumb\"><img src=\"'+img+'\" alt=\"'+(p.name?.de || 'Sprite')+'\" loading=\"lazy\" onerror=\"this.parentElement.classList.add(\\'missing\\'); this.remove();\"></div>' +
           '<div>' +
             '<div class=\"id\">Nr. '+padId(p.id)+'</div>' +
             '<div class=\"name\">'+(p.name?.de || p.name || 'Unbekannt')+'</div>' +
-            '<div class=\"badges\">'+types+'</div>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -798,20 +836,34 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       });
     }
 
-    if (pageInfoEl) {
-      const maxId = Math.max(...state.pokemon.map((p) => p.id || 0));
-      const end = Math.min(items.length, start + paged.length);
-      pageInfoEl.textContent = start + 1 + ' - ' + end + ' / ' + maxId;
+    if (pageInfoEl && pageProgressEl) {
+      const progress = totalPages <= 1 ? 100 : Math.round(((state.page - 1) / (totalPages - 1)) * 100);
+      pageProgressEl.style.width = progress + '%';
+      pageInfoEl.querySelector('.progress')?.setAttribute('aria-valuenow', String(progress));
     }
     if (pagePrevEl) pagePrevEl.disabled = state.page <= 1;
     if (pageNextEl) pageNextEl.disabled = state.page >= totalPages;
   }
 
-    function showDetail(p) {
+    function showDetail(p, opts = {}) {
       if (p.placeholder) {
         detailEl.innerHTML = '<div class=\"detail-header\"><h2 class=\"detail-title\">Nr. '+padId(p.id)+'</h2><div class=\"id\">Leer</div></div><div class=\"empty\">Keine Daten für diesen Eintrag.</div>';
         hideOverlay();
         return;
+      }
+      if (!opts.skipListSync) {
+        const index = state.pokemon.findIndex((entry) => entry && entry.slug === p.slug);
+        if (index >= 0) {
+          const nextPage = Math.floor(index / pageSize) + 1;
+          if (state.page !== nextPage) {
+            state.page = nextPage;
+            renderList(state.pokemon);
+          }
+          const card = listEl.querySelector('.card[data-slug=\"' + p.slug + '\"]');
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
       }
       const img = spritePath(p.id);
       const typeBadges = (p.types || []).map((t) => badgeHtml(t)).join('');
@@ -920,8 +972,8 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
         el.addEventListener('click', () => {
           const slug = el.getAttribute('data-slug');
           const found = state.pokemon.find((entry) => entry.slug === slug);
-          if (found) showDetail(found);
-        });
+        if (found) showDetail(found);
+      });
       });
       if (isMobile()) {
         detailEl.classList.add('active');

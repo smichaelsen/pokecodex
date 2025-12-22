@@ -1,0 +1,15 @@
+id: 16
+slug: pidgey
+name:
+  de: Taubsi
+entry:
+  de: Es flattert in Bodennähe und wirbelt dabei Staub auf.
+types:
+  - normal
+  - flying
+height_m: 0.3
+weight_kg: 1.8
+signature_move: gust
+evolutions:
+  - target: 17
+    condition: Entwicklung auf Level 18

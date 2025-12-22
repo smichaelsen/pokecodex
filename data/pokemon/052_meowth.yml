@@ -1,0 +1,14 @@
+id: 52
+slug: meowth
+name:
+  de: Mauzi
+entry:
+  de: Es liebt runde Dinge. Es sammelt glänzende Gegenstände und trägt sie in sein Versteck.
+types:
+  - normal
+height_m: 0.4
+weight_kg: 4.2
+signature_move: pay-day
+evolutions:
+  - target: 53
+    condition: Entwicklung auf Level 28

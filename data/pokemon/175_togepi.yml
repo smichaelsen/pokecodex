@@ -1,0 +1,14 @@
+id: 175
+slug: togepi
+name:
+  de: Togepi
+entry:
+  de: Es gilt als Glücksbringer. Wer ein Togepi sieht, soll Glück haben.
+types:
+  - normal
+height_m: 0.3
+weight_kg: 1.5
+signature_move: metronome
+evolutions:
+  - target: 176
+    condition: Entwicklung durch hohe Freundschaft

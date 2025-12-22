@@ -1,0 +1,14 @@
+id: 195
+slug: quagsire
+name:
+  de: Morlord
+entry:
+  de: Es lebt träge in Sümpfen. Wenn es schwimmt, hält es seine Augen geschlossen.
+types:
+  - water
+  - ground
+height_m: 1.4
+weight_kg: 75.0
+evolves_from: 194
+signature_move: water-gun
+evolutions: []

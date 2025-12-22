@@ -1,0 +1,15 @@
+id: 64
+slug: kadabra
+name:
+  de: Kadabra
+entry:
+  de: Es nutzt seine starken Psycho-Kräfte, um Gegenstände zu schweben und Löffel zu verbiegen.
+types:
+  - psychic
+height_m: 1.3
+weight_kg: 56.5
+evolves_from: 63
+signature_move: psybeam
+evolutions:
+  - target: 65
+    condition: Tausch

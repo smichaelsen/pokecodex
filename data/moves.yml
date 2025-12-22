@@ -71,6 +71,14 @@
   power: 110
   description:
     de: Spritzt eine Menge Wasser mit Hochdruck auf das Ziel.
+- slug: string-shot
+  name:
+    de: Fadenschuss
+    en: String Shot
+  type: bug
+  power: 0
+  description:
+    de: Ein Fadenschuss, der die Initiative des Zieles senkt.
 - slug: thunder-shock
   name:
     de: Donnerschock
@@ -87,6 +95,22 @@
   power: 110
   description:
     de: Eine verheerende Elektro-Attacke, die das Ziel eventuell paralysiert.
+- slug: pay-day
+  name:
+    de: Zahltag
+    en: Pay Day
+  type: normal
+  power: 40
+  description:
+    de: Wirft Münzen auf das Ziel. Nach dem Kampf gibt es extra Geld.
+- slug: harden
+  name:
+    de: Härtner
+    en: Harden
+  type: normal
+  power: 0
+  description:
+    de: Der Anwender härtet seinen Körper, um die Verteidigung zu erhöhen.
 - slug: poison-sting
   name:
     de: Giftstachel
@@ -97,6 +121,14 @@
   power: 15
   description:
     de: Angriff mit Giftstachel. Das Ziel wird eventuell vergiftet.
+- slug: poison-gas
+  name:
+    de: Giftwolke
+    en: Poison Gas
+  type: poison
+  power: 0
+  description:
+    de: Eine Giftwolke, die das Ziel eventuell vergiftet.
 - slug: teleport
   name:
     de: Teleport
@@ -106,6 +138,16 @@
   description:
     de: Ermöglicht die sofortige Flucht vor wilden Pokémon. Kann den Anwender außerdem
       zum zuletzt besuchten Pokémon-Center teleportieren.
+- slug: psybeam
+  name:
+    de: Psystrahl
+    en: Psybeam
+  tts:
+    de: Psyschtrahl
+  type: psychic
+  power: 65
+  description:
+    de: Ein sonderbarer Strahl, der das Ziel eventuell verwirrt.
 - slug: psychic
   name:
     de: Psychokinese
@@ -140,6 +182,14 @@
   power: 100
   description:
     de: Anwender sticht das Ziel mit spitzen Steinen. Hohe Volltrefferquote.
+- slug: iron-tail
+  name:
+    de: Eisenschweif
+    en: Iron Tail
+  type: steel
+  power: 100
+  description:
+    de: Der Anwender greift mit seinem harten Schweif an. Kann die Verteidigung des Zieles senken.
 - slug: thunder-wave
   name:
     de: Donnerwelle
@@ -180,3 +230,61 @@
   power: 65
   description:
     de: Spießt das Ziel mit einem spitzen Horn auf.
+- slug: metronome
+  name:
+    de: Metronom
+    en: Metronome
+  type: normal
+  power: 0
+  description:
+    de: Lässt den Anwender eine zufällige Attacke einsetzen.
+- slug: splash
+  name:
+    de: Platscher
+    en: Splash
+  type: normal
+  power: 0
+  description:
+    de: Es passiert nichts.
+- slug: double-slap
+  name:
+    de: Doppelschlag
+    en: Double Slap
+  type: normal
+  power: 15
+  description:
+    de: Trifft das Ziel zwei bis fünfmal hintereinander.
+- slug: sing
+  name:
+    de: Gesang
+    en: Sing
+  type: normal
+  power: 0
+  description:
+    de: Ein Lied, das das Ziel eventuell einschläfert.
+- slug: gust
+  name:
+    de: Windstoß
+    en: Gust
+  tts:
+    de: Windschtoß
+  type: flying
+  power: 40
+  description:
+    de: Lässt einen starken Wind auf das Ziel los.
+- slug: wing-attack
+  name:
+    de: Flügelschlag
+    en: Wing Attack
+  type: flying
+  power: 60
+  description:
+    de: Trifft das Ziel mit Flügeln und sorgt für eine heftige Böe.
+- slug: sky-attack
+  name:
+    de: Himmelsfeger
+    en: Sky Attack
+  type: flying
+  power: 140
+  description:
+    de: Runde 1: Der Anwender sucht das Ziel. Runde 2: Angriff mit voller Kraft.

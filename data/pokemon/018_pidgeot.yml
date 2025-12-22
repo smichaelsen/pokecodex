@@ -1,0 +1,14 @@
+id: 18
+slug: pidgeot
+name:
+  de: Tauboss
+entry:
+  de: Es greift seine Beute mit einer Geschwindigkeit von Mach 2 an.
+types:
+  - normal
+  - flying
+height_m: 1.5
+weight_kg: 39.5
+evolves_from: 17
+signature_move: sky-attack
+evolutions: []
