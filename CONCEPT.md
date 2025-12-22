@@ -63,3 +63,10 @@
 - Localization: additional language folders analogous to `public/audio/de` and `name.de`/`description.de`.
 - Performance: precompiled JSON per region for faster load times.
 - Accessibility: subtitles for audio, keyboard navigation, high contrast.
+
+## TODO (Maintainability Roadmap)
+1. (Done) Extract CSS into `public/css/app.css` and reference it from the generated HTML.
+2. Extract JS into ES modules under `public/js/` (e.g., `app.js`, `render.js`, `audio.js`, `state.js`, `utils/escapeHtml.js`).
+3. Move `index.html` into `public/` as a template; inject `assetVersion`/`audioVersions` via a small config file or placeholder replacement in `build.js`.
+4. Add HTML escaping for all user-provided strings before inserting into the DOM.
+5. Replace per-element listeners with event delegation on the detail/list containers.
