@@ -87,7 +87,7 @@
 4. Centralize audio handling in dexOS (preload, play helpers, missing-audio behavior).
 5. Introduce dexOS storage helpers backed by `localStorage` for app state.
 6. Add the LED API (no-op in web for now) so apps can signal state consistently.
-7. Document the dexOS API contract and example app skeleton for new features (quiz, etc.).
+7. (Done) Document the dexOS API contract and example app skeleton for new features (quiz, etc.).
 
 ## TODO (Maintainability Roadmap)
 1. (Done) Extract CSS into `public/css/app.css` and reference it from the generated HTML.

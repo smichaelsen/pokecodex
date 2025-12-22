@@ -170,13 +170,7 @@ export async function createPokedexApp(ctx) {
       const typeName = typeBadge.getAttribute('data-type');
       if (!typeName) return;
       const url = pokedexCtx.paths.typeAudioPath(typeName);
-      if (host.audio?.play) {
-        host.audio.play(url);
-      } else {
-        const audio = new Audio(url);
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      }
+      host.audio?.play?.(url);
       return;
     }
 
@@ -186,13 +180,7 @@ export async function createPokedexApp(ctx) {
       const slug = moveName.getAttribute('data-move');
       if (!slug) return;
       const url = pokedexCtx.paths.moveAudioPath(slug);
-      if (host.audio?.play) {
-        host.audio.play(url);
-      } else {
-        const audio = new Audio(url);
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-      }
+      host.audio?.play?.(url);
       return;
     }
 

@@ -84,12 +84,8 @@ export function showDetail(p, ctx, opts = {}) {
   }
   const img = ctx.paths.spritePath(p.id);
   const preloadAudio = (url) => {
-    if (ctx.audio?.preload) return ctx.audio.preload(url);
-    if (!url) return null;
-    const audio = new Audio(url);
-    audio.preload = 'auto';
-    audio.load();
-    return audio;
+    if (!ctx.audio?.preload || !url) return null;
+    return ctx.audio.preload(url);
   };
   const typeBadges = (p.types || []).map((t) => badgeHtml(t, ctx.typeInfo)).join('');
   (p.types || []).forEach((typeSlug) => {

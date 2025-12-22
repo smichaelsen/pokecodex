@@ -11,6 +11,68 @@ This document describes the current, implemented behavior of dexOS. It does not 
 - Owns Pokemon data loading and refresh.
 - Provides a small app host for mounting apps.
 
+## App Contract
+dexOS apps are factory functions registered via `host.registerApp(id, factory)`.
+
+Factory signature:
+```js
+export async function createApp(ctx) {
+  // mount / render
+  return {
+    destroy() {
+      // remove listeners, cleanup
+    },
+  };
+}
+```
+
+Context (`ctx`) fields:
+- `config`: config object from `window.__POKEDEX_CONFIG__`.
+- `moduleVersion`: query string for cache-busting module imports (e.g. `?v=...`).
+- `elements`: DOM references (`listEl`, `detailPanelEl`, `detailContentEl`, `pagePrevEl`, `pageNextEl`, `pageInfoEl`, `pageProgressEl`, `overlayEl`).
+- `isMobile()`: returns `true` when mobile layout is active.
+- `hideOverlay()`: hides the mobile detail overlay.
+- `host`: dexOS host API (menu, data, audio, storage).
+
+Lifecycle:
+- `host.start(id, ctx)` mounts an app and expects a `{ destroy() }` handler.
+- `host.switchTo(id, ctx)` destroys the current app (if any) and mounts the new one.
+
+Apps should:
+- Only use data via `host.getPokemon()` and `dexos:data:updated` events.
+- Use `host.audio` and `host.storage` helpers for media/state.
+- Register any menu actions through `host.registerMenu()`.
+
+## Example App Skeleton
+```js
+export async function createExampleApp(ctx) {
+  const { elements, host } = ctx;
+  const { listEl, detailContentEl } = elements;
+
+  const onDataUpdated = (event) => {
+    const { pokemon = [] } = event.detail || {};
+    listEl.innerHTML = pokemon.map((p) => `<div>${p.name?.de || p.slug}</div>`).join('');
+    detailContentEl.innerHTML = '<div>Bereit.</div>';
+  };
+
+  host.registerMenu({
+    example() {
+      detailContentEl.innerHTML = '<div>Menu action.</div>';
+    },
+  });
+
+  window.addEventListener('dexos:data:updated', onDataUpdated);
+  onDataUpdated({ detail: { pokemon: host.getPokemon() || [] } });
+
+  return {
+    destroy() {
+      window.removeEventListener('dexos:data:updated', onDataUpdated);
+      host.clearMenu();
+    },
+  };
+}
+```
+
 ## API: createDexOS
 ```js
 createDexOS({
