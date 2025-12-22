@@ -1,0 +1,16 @@
+id: 29
+slug: nidoran-f
+name:
+  de: Nidoran♀
+name_tts:
+  de: Nidoran Weibchen
+entry:
+  de: Es stößt mit seinen großen Ohren die Umgebung ab und erschnuppert Gefahren.
+types:
+  - poison
+height_m: 0.4
+weight_kg: 7.0
+signature_move: poison-sting
+evolutions:
+  - target: 30
+    condition: Entwicklung auf Level 16

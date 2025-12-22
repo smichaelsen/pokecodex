@@ -31,6 +31,7 @@ if (!Array.isArray(moves)) {
     const type = entry.type;
     const power = entry.power;
     const descDe = entry.description && entry.description.de;
+    const tts = entry.tts;
 
     if (!slug || typeof slug !== 'string') err(`moves.yml entry ${idx + 1} missing slug`);
     if (slug && !/^[a-z0-9-]+$/.test(slug)) err(`moves.yml entry ${idx + 1} invalid slug: ${slug}`);
@@ -40,6 +41,10 @@ if (!Array.isArray(moves)) {
     if (type && !typeSlugs.has(type)) err(`moves.yml entry ${idx + 1} unknown type: ${type}`);
     if (typeof power !== 'number' || Number.isNaN(power) || power < 0) err(`moves.yml entry ${idx + 1} invalid power`);
     if (!descDe || typeof descDe !== 'string') err(`moves.yml entry ${idx + 1} missing description.de`);
+    if (tts != null) {
+      if (typeof tts !== 'object' || Array.isArray(tts)) err(`moves.yml entry ${idx + 1} tts must be an object`);
+      if (!tts?.de || typeof tts.de !== 'string') err(`moves.yml entry ${idx + 1} missing tts.de`);
+    }
 
     if (slug) {
       if (seen.has(slug)) err(`moves.yml duplicate slug: ${slug}`);

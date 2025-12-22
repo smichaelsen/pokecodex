@@ -31,6 +31,7 @@ files.forEach((file) => {
   const id = data.id;
   const slug = data.slug;
   const nameDe = data.name && data.name.de;
+  const nameTts = data.name_tts;
   const entryDe = data.entry && data.entry.de;
   const typesArr = data.types;
   const height = data.height_m;
@@ -44,6 +45,10 @@ files.forEach((file) => {
   if (!slug || typeof slug !== 'string') err(`${base} missing slug`);
   if (!nameDe || typeof nameDe !== 'string') err(`${base} missing name.de`);
   if (!entryDe || typeof entryDe !== 'string') err(`${base} missing entry.de`);
+  if (nameTts != null) {
+    if (typeof nameTts !== 'object' || Array.isArray(nameTts)) err(`${base} name_tts must be an object`);
+    if (!nameTts?.de || typeof nameTts.de !== 'string') err(`${base} missing name_tts.de`);
+  }
   if (!Array.isArray(typesArr) || typesArr.length === 0) err(`${base} missing types`);
   if (typeof height !== 'number' || Number.isNaN(height)) err(`${base} invalid height_m`);
   if (typeof weight !== 'number' || Number.isNaN(weight)) err(`${base} invalid weight_kg`);

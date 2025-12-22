@@ -99,6 +99,7 @@ current_slug=""
 current_name=""
 current_tts=""
 in_name=0
+in_tts=0
 
 flush_type() {
   local slug="$1"
@@ -145,10 +146,11 @@ while IFS= read -r line; do
     current_tts=""
     current_name=""
     in_name=0
+    in_tts=0
     continue
   fi
-  if [[ "$line" =~ ^[[:space:]]*tts:[[:space:]]*(.*)$ ]]; then
-    current_tts="$(strip_quotes "${BASH_REMATCH[1]}")"
+  if [[ "$line" == "  tts:"* ]]; then
+    in_tts=1
     continue
   fi
   if [[ "$line" =~ ^[[:space:]]*name:[[:space:]]*$ ]]; then
@@ -162,6 +164,15 @@ while IFS= read -r line; do
     fi
     if [[ "$line" != "    "* ]]; then
       in_name=0
+    fi
+  fi
+  if [[ $in_tts -eq 1 ]]; then
+    if [[ "$line" == "    de:"* ]]; then
+      current_tts="$(strip_quotes "${line#    de: }")"
+      continue
+    fi
+    if [[ "$line" != "    "* ]]; then
+      in_tts=0
     fi
   fi
 done < "$DATA_FILE"

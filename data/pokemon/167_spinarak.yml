@@ -1,0 +1,15 @@
+id: 167
+slug: spinarak
+name:
+  de: Webarak
+entry:
+  de: Es spinnt ein Netz aus feinem, aber reißfestem Faden. Dann wartet es auf Beute, die im Netz zappelt.
+types:
+  - bug
+  - poison
+height_m: 0.5
+weight_kg: 8.5
+signature_move: poison-sting
+evolutions:
+  - target: 168
+    condition: Entwicklung auf Level 22

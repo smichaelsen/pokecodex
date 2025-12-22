@@ -690,9 +690,6 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     </header>
     <div class=\"content\">
       <div class=\"panel list-panel\">
-        <div class=\"controls\">
-          <input type=\"search\" placeholder=\"Suche nach Name oder Typ...\" id=\"search\">
-        </div>
         <div class=\"list\" id=\"list\"></div>
         <div class=\"pager\">
           <button type=\"button\" id=\"page-prev\" aria-label=\"Vorherige Seite\">◀</button>
@@ -707,14 +704,13 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     <div class=\"overlay\" id=\"overlay\"></div>
   </div>
   <script>
-    const state = { pokemon: [], filtered: [], types: ${JSON.stringify(typeInfo)} };
+    const state = { pokemon: [], types: ${JSON.stringify(typeInfo)} };
     const typeNames = ${JSON.stringify(types.map((t) => t?.slug).filter(Boolean))};
     const moveSlugs = ${JSON.stringify(moves.map((m) => m?.slug).filter(Boolean))};
     const audioVersions = ${JSON.stringify(audioVersions)};
     const assetVersion = '${assetVersion}';
     const listEl = document.getElementById('list');
     const detailEl = document.getElementById('detail');
-  const searchEl = document.getElementById('search');
   const pagePrevEl = document.getElementById('page-prev');
   const pageNextEl = document.getElementById('page-next');
   const pageInfoEl = document.getElementById('page-info');
@@ -935,28 +931,11 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       }
     }
 
-    function applyFilter() {
-      const term = searchEl.value.toLowerCase().trim();
-      if (!term) {
-        state.filtered = [...state.pokemon];
-      } else {
-        state.filtered = state.pokemon.filter((p) => {
-          const name = (p.name?.de || '').toLowerCase();
-          const types = (p.types || []).map((t) => state.types?.[t]?.name || t).join(' ').toLowerCase();
-          return name.includes(term) || types.includes(term);
-        });
-      }
-      state.page = 1;
-      renderList(state.filtered);
-    }
-
     async function boot() {
       const res = await fetch('data/pokemon.json?v=' + assetVersion);
       state.pokemon = await res.json();
-      state.filtered = [...state.pokemon];
       state.page = 1;
       renderList(state.pokemon);
-      searchEl.addEventListener('input', applyFilter);
       typeNames.forEach((typeName) => {
         const audio = new Audio(typeAudioPath(typeName));
         audio.preload = 'auto';
@@ -970,15 +949,15 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
       pagePrevEl?.addEventListener('click', () => {
         if (state.page > 1) {
           state.page -= 1;
-          renderList(state.filtered);
+          renderList(state.pokemon);
           resetListScroll();
         }
       });
       pageNextEl?.addEventListener('click', () => {
-        const totalPages = Math.max(1, Math.ceil(state.filtered.length / pageSize));
+        const totalPages = Math.max(1, Math.ceil(state.pokemon.length / pageSize));
         if (state.page < totalPages) {
           state.page += 1;
-          renderList(state.filtered);
+          renderList(state.pokemon);
           resetListScroll();
         }
       });
