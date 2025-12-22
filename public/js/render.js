@@ -24,27 +24,21 @@ export function renderList(items, ctx) {
     ctx.listEl.innerHTML = paged
       .map((p) => {
         if (p.placeholder) {
-          return (
-            '<div class="card placeholder" data-placeholder="1">' +
-              '<div class="thumb missing"></div>' +
-              '<div>' +
-                '<div class="id">Nr. ' + padId(p.id) + '</div>' +
-                '<div class="name muted">—</div>' +
-                '<div class="badges"></div>' +
-              '</div>' +
-            '</div>'
-          );
+          return '<pokedex-card placeholder pid="' + p.id + '"></pokedex-card>';
         }
         const img = ctx.paths.spritePath(p.id);
         const slug = escapeHtml(p.slug || '');
+        const name = escapeHtml(p.name?.de || p.name || 'Unbekannt');
         return (
-          '<div class="card" data-slug="' + slug + '">' +
-            '<div class="thumb"><img src="' + img + '" alt="' + escapeHtml(p.name?.de || 'Sprite') + '" loading="lazy" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>' +
-            '<div>' +
-              '<div class="id">Nr. ' + padId(p.id) + '</div>' +
-              '<div class="name">' + escapeHtml(p.name?.de || p.name || 'Unbekannt') + '</div>' +
-            '</div>' +
-          '</div>'
+          '<pokedex-card pid="' +
+          p.id +
+          '" slug="' +
+          slug +
+          '" name="' +
+          name +
+          '" img="' +
+          img +
+          '"></pokedex-card>'
         );
       })
       .join('');
@@ -104,41 +98,50 @@ export function showDetail(p, ctx, opts = {}) {
   const evolvesFrom = p.evolves_from
     ? (() => {
         const fromNameRaw = p.evolves_from_name || '???';
-        const fromName = escapeHtml(fromNameRaw);
         const hasFrom = fromNameRaw !== '???';
         const fromId = p.evolves_from;
-        const thumb = hasFrom
-          ? '<div class="evo-thumb"><img src="' + ctx.paths.spritePath(fromId) + '" alt="' + fromName + '" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>'
-          : '<div class="evo-thumb missing"></div>';
-        const meta = '<div class="evo-meta"><div class="name">' + fromName + ' (#' + padId(fromId) + ')</div></div>';
-        if (hasFrom && p.evolves_from_slug) {
-          return '<button class="evo-row evo-link" data-slug="' + escapeHtml(p.evolves_from_slug) + '">' + thumb + meta + '</button>';
+        const attrs = [
+          'variant="evolution"',
+          'pid="' + fromId + '"',
+          'name="' + escapeHtml(fromNameRaw) + '"',
+        ];
+        if (!hasFrom) {
+          attrs.push('placeholder');
+        } else if (p.evolves_from_slug) {
+          attrs.push('slug="' + escapeHtml(p.evolves_from_slug) + '"');
         }
-        return '<div class="evo-row">' + thumb + meta + '</div>';
+        if (hasFrom) {
+          attrs.push('img="' + ctx.paths.spritePath(fromId) + '"');
+        }
+        return '<pokedex-card ' + attrs.join(' ') + '></pokedex-card>';
       })()
     : '';
 
   const evolutions = (p.evolutions || [])
     .map((e) => {
       const targetNameRaw = e?.target_name || e?.target || e || '???';
-      const targetName = escapeHtml(targetNameRaw);
       const targetId = e?.target_id ? e.target_id : null;
       const hasTarget = targetNameRaw !== '???' && targetId;
-      const cond = hasTarget && e && e.condition ? escapeHtml(e.condition) : '';
-      const thumb = hasTarget
-        ? '<div class="evo-thumb"><img src="' + ctx.paths.spritePath(targetId) + '" alt="' + targetName + '" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>'
-        : '<div class="evo-thumb missing"></div>';
-      const meta =
-        '<div class="evo-meta"><div class="name">' +
-        targetName +
-        (targetId ? ' (#' + padId(targetId) + ')' : '') +
-        '</div>' +
-        (cond ? '<div class="cond">' + cond + '</div>' : '') +
-        '</div>';
-      if (hasTarget && e?.target_slug) {
-        return '<button class="evo-row evo-link" data-slug="' + escapeHtml(e.target_slug) + '">' + thumb + meta + '</button>';
+      const cond = hasTarget && e && e.condition ? e.condition : '';
+      const attrs = [
+        'variant="evolution"',
+        'name="' + escapeHtml(targetNameRaw) + '"',
+      ];
+      if (targetId) {
+        attrs.push('pid="' + targetId + '"');
       }
-      return '<div class="evo-row">' + thumb + meta + '</div>';
+      if (!hasTarget) {
+        attrs.push('placeholder');
+      } else if (e?.target_slug) {
+        attrs.push('slug="' + escapeHtml(e.target_slug) + '"');
+      }
+      if (hasTarget) {
+        attrs.push('img="' + ctx.paths.spritePath(targetId) + '"');
+      }
+      if (cond) {
+        attrs.push('cond="' + escapeHtml(cond) + '"');
+      }
+      return '<pokedex-card ' + attrs.join(' ') + '></pokedex-card>';
     })
     .join('');
 

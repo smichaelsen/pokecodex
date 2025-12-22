@@ -53,7 +53,8 @@ const preloadAudio = (url) => {
 
 async function boot() {
   const moduleVersion = config.assetVersion ? `?v=${config.assetVersion}` : '';
-  const [{ createPaths }, renderModule] = await Promise.all([
+  const [, { createPaths }, renderModule] = await Promise.all([
+    import(`./components/pokedex-card.js${moduleVersion}`),
     import(`./paths.js${moduleVersion}`),
     import(`./render.js${moduleVersion}`),
   ]);
