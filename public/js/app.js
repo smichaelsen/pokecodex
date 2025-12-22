@@ -13,6 +13,7 @@ const menuButtonEl = document.getElementById('menu-button');
 const menuOverlayLeftEl = document.getElementById('menu-overlay-left');
 const menuOverlayRightEl = document.getElementById('menu-overlay-right');
 const menuReloadEl = document.getElementById('menu-reload');
+const ledEls = Array.from(document.querySelectorAll('header .light'));
 
 const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
 const hideOverlay = () => {
@@ -32,6 +33,7 @@ async function boot() {
     menuItems: {
       reload: menuReloadEl,
     },
+    ledEls,
     config,
   });
 

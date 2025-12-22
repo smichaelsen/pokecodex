@@ -78,6 +78,13 @@
       background: #42a5f5;
       border: 2px solid #1565c0;
       box-shadow: 0 0 12px rgba(66,165,245,0.7);
+      opacity: 0.35;
+      transition: opacity 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+    }
+    .light.active {
+      opacity: 1;
+      transform: scale(1.05);
+      box-shadow: 0 0 16px rgba(66,165,245,0.9);
     }
     .content {
       display: grid;

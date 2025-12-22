@@ -3,6 +3,7 @@ export function createDexOS({
   menuOverlayLeftEl,
   menuOverlayRightEl,
   menuItems = {},
+  ledEls = [],
   config = {},
   dataUrl = 'data/pokemon.json',
 }) {
@@ -15,6 +16,9 @@ export function createDexOS({
     typeInfo: config.typeInfo || {},
   };
   const audioCache = new Map();
+  const ledTimers = new Map();
+  const audioActive = new Set();
+  let audioLedTimer = null;
   const storage = (() => {
     const memory = new Map();
     const hasLocalStorage = (() => {
@@ -140,8 +144,51 @@ export function createDexOS({
     const existing = audioCache.get(url);
     if (existing) return existing;
     const audio = new Audio(url);
+    audio.addEventListener('ended', () => {
+      audioActive.delete(url);
+      updateAudioLed();
+    });
+    audio.addEventListener('pause', () => {
+      if (audio.currentTime >= audio.duration) return;
+      audioActive.delete(url);
+      updateAudioLed();
+    });
+    audio.addEventListener('error', () => {
+      audioActive.delete(url);
+      updateAudioLed();
+    });
     audioCache.set(url, audio);
     return audio;
+  };
+
+  const setLed = (index, state) => {
+    const el = ledEls?.[index];
+    if (!el) return;
+    el.classList.toggle('active', !!state);
+  };
+
+  const pulseLed = (index, pattern = {}) => {
+    const { interval = 400 } = pattern;
+    const el = ledEls?.[index];
+    if (!el) return () => {};
+    const existing = ledTimers.get(index);
+    if (existing) clearInterval(existing);
+    let on = false;
+    const timer = setInterval(() => {
+      on = !on;
+      setLed(index, on);
+    }, interval);
+    ledTimers.set(index, timer);
+    return () => {
+      clearInterval(timer);
+      ledTimers.delete(index);
+      setLed(index, false);
+    };
+  };
+
+  const updateAudioLed = () => {
+    const hasAudio = audioActive.size > 0;
+    setLed(0, hasAudio);
   };
 
   const preloadAudio = (url) => {
@@ -155,6 +202,8 @@ export function createDexOS({
   const playAudio = (url) => {
     const audio = getAudio(url);
     if (!audio) return null;
+    audioActive.add(url);
+    updateAudioLed();
     audio.currentTime = 0;
     audio.play().catch(() => {});
     return audio;
@@ -233,6 +282,10 @@ export function createDexOS({
       get: getAudio,
       preload: preloadAudio,
       play: playAudio,
+    },
+    leds: {
+      set: setLed,
+      pulse: pulseLed,
     },
     storage,
     destroy,

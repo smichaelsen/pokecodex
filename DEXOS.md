@@ -105,6 +105,7 @@ Returns
 - `getTypeInfo()`: return cached type info (from config).
 - `getMoveInfo()`: currently returns `null`.
 - `audio`: audio helpers (see below).
+- `leds`: LED helpers (see below).
 - `storage`: localStorage-backed helpers (see below).
 - `destroy()`: remove handlers and clean up.
 
@@ -132,6 +133,17 @@ dexOS provides a small audio helper with caching to centralize audio behavior:
 host.audio.get(url)     // returns cached Audio or creates one
 host.audio.preload(url) // loads and preloads the audio
 host.audio.play(url)    // resets to 0 and plays (safe no-op on errors)
+```
+
+Audio LED behavior:
+- LED 0 lights while any audio is playing (host-managed).
+
+## LED Helpers
+dexOS exposes LED helpers to let apps signal device state:
+
+```js
+host.leds.set(index, state)          // set LED on/off
+host.leds.pulse(index, { interval }) // pulse LED, returns stop() function
 ```
 
 ## Storage Helpers

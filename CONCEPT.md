@@ -86,7 +86,7 @@
 3. Move data loading into dexOS (`loadPokemon`, `getTypeInfo`, `getMoveInfo`), own the “Reload data” menu action, and dispatch a `dexos:data:updated` event that apps listen to.
 4. Centralize audio handling in dexOS (preload, play helpers, missing-audio behavior).
 5. Introduce dexOS storage helpers backed by `localStorage` for app state.
-6. Add the LED API (no-op in web for now) so apps can signal state consistently.
+6. (Done) Add the LED API (no-op in web for now) so apps can signal state consistently.
 7. (Done) Document the dexOS API contract and example app skeleton for new features (quiz, etc.).
 
 ## TODO (Maintainability Roadmap)
