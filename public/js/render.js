@@ -1,4 +1,5 @@
 import { padId, typeClass } from './dom.js';
+import { escapeHtml } from './utils/escapeHtml.js';
 
 const pageSize = 12;
 
@@ -11,9 +12,10 @@ const resetListScroll = (listEl) => {
 
 const badgeHtml = (t, typeInfo) => {
   const info = typeInfo?.[t];
-  const label = info?.name || t || 'Typ';
+  const label = escapeHtml(info?.name || t || 'Typ');
   const style = info?.color ? ` style="background:${info.color};color:#111;"` : '';
-  return `<span class="badge ${typeClass(t)}" data-type="${t}"${style}>${label}</span>`;
+  const safeType = escapeHtml(t || '');
+  return `<span class="badge ${typeClass(t)}" data-type="${safeType}"${style}>${label}</span>`;
 };
 
 export function renderList(items, ctx) {
@@ -41,12 +43,13 @@ export function renderList(items, ctx) {
           );
         }
         const img = ctx.paths.spritePath(p.id);
+        const slug = escapeHtml(p.slug || '');
         return (
-          '<div class="card" data-slug="' + p.slug + '">' +
-            '<div class="thumb"><img src="' + img + '" alt="' + (p.name?.de || 'Sprite') + '" loading="lazy" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>' +
+          '<div class="card" data-slug="' + slug + '">' +
+            '<div class="thumb"><img src="' + img + '" alt="' + escapeHtml(p.name?.de || 'Sprite') + '" loading="lazy" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>' +
             '<div>' +
               '<div class="id">Nr. ' + padId(p.id) + '</div>' +
-              '<div class="name">' + (p.name?.de || p.name || 'Unbekannt') + '</div>' +
+              '<div class="name">' + escapeHtml(p.name?.de || p.name || 'Unbekannt') + '</div>' +
             '</div>' +
           '</div>'
         );
@@ -109,15 +112,16 @@ export function showDetail(p, ctx, opts = {}) {
 
   const evolvesFrom = p.evolves_from
     ? (() => {
-        const fromName = p.evolves_from_name || '???';
-        const hasFrom = fromName !== '???';
+        const fromNameRaw = p.evolves_from_name || '???';
+        const fromName = escapeHtml(fromNameRaw);
+        const hasFrom = fromNameRaw !== '???';
         const fromId = p.evolves_from;
         const thumb = hasFrom
           ? '<div class="evo-thumb"><img src="' + ctx.paths.spritePath(fromId) + '" alt="' + fromName + '" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>'
           : '<div class="evo-thumb missing"></div>';
         const meta = '<div class="evo-meta"><div class="name">' + fromName + ' (#' + padId(fromId) + ')</div></div>';
         if (hasFrom && p.evolves_from_slug) {
-          return '<button class="evo-row evo-link" data-slug="' + p.evolves_from_slug + '">' + thumb + meta + '</button>';
+          return '<button class="evo-row evo-link" data-slug="' + escapeHtml(p.evolves_from_slug) + '">' + thumb + meta + '</button>';
         }
         return '<div class="evo-row">' + thumb + meta + '</div>';
       })()
@@ -125,10 +129,11 @@ export function showDetail(p, ctx, opts = {}) {
 
   const evolutions = (p.evolutions || [])
     .map((e) => {
-      const targetName = e?.target_name || e?.target || e || '???';
+      const targetNameRaw = e?.target_name || e?.target || e || '???';
+      const targetName = escapeHtml(targetNameRaw);
       const targetId = e?.target_id ? e.target_id : null;
-      const hasTarget = targetName !== '???' && targetId;
-      const cond = hasTarget && e && e.condition ? e.condition : '';
+      const hasTarget = targetNameRaw !== '???' && targetId;
+      const cond = hasTarget && e && e.condition ? escapeHtml(e.condition) : '';
       const thumb = hasTarget
         ? '<div class="evo-thumb"><img src="' + ctx.paths.spritePath(targetId) + '" alt="' + targetName + '" onerror="this.parentElement.classList.add(\'missing\'); this.remove();"></div>'
         : '<div class="evo-thumb missing"></div>';
@@ -140,7 +145,7 @@ export function showDetail(p, ctx, opts = {}) {
         (cond ? '<div class="cond">' + cond + '</div>' : '') +
         '</div>';
       if (hasTarget && e?.target_slug) {
-        return '<button class="evo-row evo-link" data-slug="' + e.target_slug + '">' + thumb + meta + '</button>';
+        return '<button class="evo-row evo-link" data-slug="' + escapeHtml(e.target_slug) + '">' + thumb + meta + '</button>';
       }
       return '<div class="evo-row">' + thumb + meta + '</div>';
     })
@@ -155,8 +160,9 @@ export function showDetail(p, ctx, opts = {}) {
 
   const move = p.signature_move_data;
   const moveBadge = move?.type ? badgeHtml(move.type, ctx.typeInfo) : '<span class="badge">Typ</span>';
+  const moveSlug = escapeHtml(move?.slug || '');
   const moveHtml = move
-    ? '<div class="move"><div><strong class="move-name" data-move="' + (move.slug || '') + '">' + (move.name?.de || 'Unbekannt') + '</strong><div class="meta">' + (move.description?.de || '') + '</div></div><div class="meta">' + moveBadge + '</div></div>'
+    ? '<div class="move"><div><strong class="move-name" data-move="' + moveSlug + '">' + escapeHtml(move.name?.de || 'Unbekannt') + '</strong><div class="meta">' + escapeHtml(move.description?.de || '') + '</div></div><div class="meta">' + moveBadge + '</div></div>'
     : '<div class="empty">Keine Signaturattacke hinterlegt.</div>';
 
   const closeBtn = ctx.isMobile() ? '<button class="close" aria-label="Schließen">✕</button>' : '';
@@ -164,14 +170,14 @@ export function showDetail(p, ctx, opts = {}) {
     '<div class="detail-header">' +
     closeBtn +
     '<h2 class="detail-title clickable">' +
-    (p.name?.de || 'Unbekannt') +
+    escapeHtml(p.name?.de || 'Unbekannt') +
     '</h2><div class="id">Nr. ' +
     padId(p.id) +
     '</div></div>' +
     '<div class="detail-body">' +
-      '<div class="art clickable"><img src="' + img + '" alt="' + (p.name?.de || 'Illustration') + '" onerror="this.parentElement.classList.add(\'missing\'); this.parentElement.textContent=\'Kein Bild verfügbar\';"></div>' +
+      '<div class="art clickable"><img src="' + img + '" alt="' + escapeHtml(p.name?.de || 'Illustration') + '" onerror="this.parentElement.classList.add(\'missing\'); this.parentElement.textContent=\'Kein Bild verfügbar\';"></div>' +
       '<div class="section"><h4>Beschreibung</h4><p class="entry clickable">' +
-      (p.entry?.de || 'Keine Beschreibung') +
+      escapeHtml(p.entry?.de || 'Keine Beschreibung') +
       '</p><div class="badges pokemon-types" style="margin-top:8px">' +
       typeBadges +
       '</div></div>' +
