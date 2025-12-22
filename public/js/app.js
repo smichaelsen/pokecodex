@@ -21,11 +21,11 @@ const hideOverlay = () => {
 };
 
 async function boot() {
-  const [{ createAppHost }, { createPokedexApp }] = await Promise.all([
-    import(`./apps/appHost.js${moduleVersion}`),
+  const [{ createDexOS }, { createPokedexApp }] = await Promise.all([
+    import(`./dexOS/dexOS.js${moduleVersion}`),
     import(`./apps/pokedexApp.js${moduleVersion}`),
   ]);
-  const host = createAppHost({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightEl });
+  const host = createDexOS({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightEl });
 
   const ctx = {
     config,

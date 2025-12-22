@@ -66,6 +66,28 @@
 - Performance: precompiled JSON per region for faster load times.
 - Accessibility: subtitles for audio, keyboard navigation, high contrast.
 
+## Pokédex OS (dexOS) Concept
+- Name: dexOS.
+- Purpose: a thin OS layer that owns device-level behavior and provides stable APIs for apps.
+- Documentation: apps should rely on a well-defined, versioned API contract (documented alongside dexOS).
+- Apps: each app renders into the two panes (left list, right detail) using a shared contract (mount, update, destroy).
+- Menu control: OS owns the hardware menu button and shows the overlay UI in the right pane; apps register menu actions.
+- Data API: OS provides `loadPokemon()` (with cache-busting) and a `getTypeInfo()`/`getMoveInfo()` lookup so apps do not access files directly.
+- Audio API: OS exposes `playName(id)`, `playDescription(id)`, `playChime(id)`, and `playType(slug)`; preloading and missing-audio handling are centralized.
+- LED API: OS exposes `setLed(index, state)` and `pulseLed(index, pattern)` for the three top LEDs; apps can signal activity or mode.
+- Navigation: OS manages current app, back/close behavior on mobile, and keeps per-app UI state (e.g., page index, selection).
+- Storage: OS provides a small key-value cache for app preferences (sorting, last selection) backed by browser `localStorage`.
+- Diagnostics: OS can expose a lightweight debug overlay or console logging toggle.
+
+## dexOS Implementation Plan
+1. Create a new `public/js/dexOS/` module with a minimal app contract and host registry; keep behavior identical to the current app host.
+2. Move menu ownership into dexOS (hardware button, overlay handling, menu actions) and expose a `registerMenu()` API for apps.
+3. Move data loading into dexOS (`loadPokemon`, `getTypeInfo`, `getMoveInfo`) and have apps consume that API only.
+4. Centralize audio handling in dexOS (preload, play helpers, missing-audio behavior).
+5. Introduce dexOS storage helpers backed by `localStorage` for app state.
+6. Add the LED API (no-op in web for now) so apps can signal state consistently.
+7. Document the dexOS API contract and example app skeleton for new features (quiz, etc.).
+
 ## TODO (Maintainability Roadmap)
 1. (Done) Extract CSS into `public/css/app.css` and reference it from the generated HTML.
 2. (Done) Extract JS into ES modules under `public/js/` (e.g., `app.js`, `render.js`, `audio.js`, `state.js`, `utils/escapeHtml.js`).
