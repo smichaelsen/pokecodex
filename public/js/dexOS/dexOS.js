@@ -3,10 +3,17 @@ export function createDexOS({
   menuOverlayLeftEl,
   menuOverlayRightEl,
   menuItems = {},
+  config = {},
+  dataUrl = 'data/pokemon.json',
 }) {
   const apps = new Map();
   let currentApp = null;
   const menuListeners = new Map();
+  let reloadListener = null;
+  const state = {
+    pokemon: [],
+    typeInfo: config.typeInfo || {},
+  };
 
   const hideMenu = () => {
     menuOverlayLeftEl?.classList.remove('active');
@@ -42,6 +49,23 @@ export function createDexOS({
   menuOverlayLeftEl?.addEventListener('click', onOverlayClick);
   menuOverlayRightEl?.addEventListener('click', onOverlayClick);
 
+  const dispatchDataUpdated = (payload) => {
+    window.dispatchEvent(new CustomEvent('dexos:data:updated', { detail: payload }));
+  };
+
+  const loadPokemon = async ({ cacheBust, source = 'load', keepPage = false } = {}) => {
+    const version = cacheBust ?? config.assetVersion ?? Date.now().toString();
+    const res = await fetch(`${dataUrl}?v=${version}`);
+    if (!res.ok) throw new Error('Failed to load data');
+    state.pokemon = await res.json();
+    dispatchDataUpdated({ pokemon: state.pokemon, source, keepPage });
+    return state.pokemon;
+  };
+
+  const getPokemon = () => state.pokemon;
+  const getTypeInfo = () => state.typeInfo;
+  const getMoveInfo = () => null;
+
   const clearMenu = () => {
     menuListeners.forEach((listener, id) => {
       menuItems[id]?.removeEventListener('click', listener);
@@ -52,6 +76,7 @@ export function createDexOS({
   const registerMenu = (handlers = {}) => {
     clearMenu();
     Object.entries(handlers).forEach(([id, handler]) => {
+      if (id === 'reload') return;
       const el = menuItems[id];
       if (!el || typeof handler !== 'function') return;
       const listener = () => {
@@ -62,6 +87,16 @@ export function createDexOS({
       el.addEventListener('click', listener);
     });
   };
+
+  if (menuItems.reload) {
+    reloadListener = () => {
+      hideMenu();
+      loadPokemon({ cacheBust: Date.now().toString(), source: 'reload', keepPage: true }).catch(() => {
+        window.location.reload();
+      });
+    };
+    menuItems.reload.addEventListener('click', reloadListener);
+  }
 
   const registerApp = (id, factory) => {
     apps.set(id, factory);
@@ -82,6 +117,10 @@ export function createDexOS({
     menuOverlayLeftEl?.removeEventListener('click', onOverlayClick);
     menuOverlayRightEl?.removeEventListener('click', onOverlayClick);
     clearMenu();
+    if (reloadListener) {
+      menuItems.reload?.removeEventListener('click', reloadListener);
+      reloadListener = null;
+    }
   };
 
   return {
@@ -92,6 +131,10 @@ export function createDexOS({
     hideMenu,
     showMenu,
     clearMenu,
+    loadPokemon,
+    getPokemon,
+    getTypeInfo,
+    getMoveInfo,
     destroy,
   };
 }

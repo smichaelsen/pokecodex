@@ -19,7 +19,12 @@ export async function createPokedexApp(ctx) {
     overlayEl,
   } = elements;
 
-  const state = { pokemon: [], types: config.typeInfo || {}, page: 1, selectedSlug: null };
+  const state = {
+    pokemon: host.getPokemon ? host.getPokemon() : [],
+    types: host.getTypeInfo ? host.getTypeInfo() : (config.typeInfo || {}),
+    page: 1,
+    selectedSlug: null,
+  };
 
   const [, { createPaths }, renderModule] = await Promise.all([
     import(`../components/pokedex-card.js${moduleVersion}`),
@@ -51,10 +56,8 @@ export async function createPokedexApp(ctx) {
     showDetail(p, pokedexCtx, opts);
   };
 
-  const loadPokemon = async (cacheBust = '', opts = {}) => {
-    const res = await fetch(`data/pokemon.json?v=${cacheBust}`);
-    if (!res.ok) throw new Error('Failed to load data');
-    state.pokemon = await res.json();
+  const applyPokemon = (pokemon, opts = {}) => {
+    state.pokemon = pokemon || [];
     if (!opts.keepPage) state.page = 1;
     renderList(state.pokemon, pokedexCtx);
     const hasList = state.pokemon.length > 0;
@@ -72,8 +75,7 @@ export async function createPokedexApp(ctx) {
     }
   };
 
-  const initialVersion = config.assetVersion || Date.now().toString();
-  await loadPokemon(initialVersion, { openMobileOverlay: true });
+  applyPokemon(state.pokemon, { openMobileOverlay: true });
 
 
   const onPrev = () => {
@@ -172,16 +174,13 @@ export async function createPokedexApp(ctx) {
 
   const onOverlayClick = () => hideOverlay();
 
-  const onReload = async () => {
-    try {
-      const openMobileOverlay = !!detailPanelEl?.classList.contains('active');
-      await loadPokemon(Date.now().toString(), {
-        keepPage: true,
-        openMobileOverlay,
-      });
-    } catch (err) {
-      window.location.reload();
-    }
+  const onDataUpdated = (event) => {
+    const detail = event?.detail || {};
+    const openMobileOverlay = !!detailPanelEl?.classList.contains('active');
+    applyPokemon(detail.pokemon || [], {
+      keepPage: !!detail.keepPage,
+      openMobileOverlay,
+    });
   };
 
   pagePrevEl?.addEventListener('click', onPrev);
@@ -189,12 +188,7 @@ export async function createPokedexApp(ctx) {
   listEl?.addEventListener('click', onListClick);
   detailContentEl?.addEventListener('click', onDetailClick);
   overlayEl?.addEventListener('click', onOverlayClick);
-  host.registerMenu({ reload: onReload });
-
-  if (state.pokemon.length) {
-    const firstReal = state.pokemon.find((p) => !p.placeholder);
-    pokedexCtx.showDetail(firstReal || state.pokemon[0], { openMobileOverlay: true });
-  }
+  window.addEventListener('dexos:data:updated', onDataUpdated);
 
   return {
     destroy() {
@@ -203,6 +197,7 @@ export async function createPokedexApp(ctx) {
       listEl?.removeEventListener('click', onListClick);
       detailContentEl?.removeEventListener('click', onDetailClick);
       overlayEl?.removeEventListener('click', onOverlayClick);
+      window.removeEventListener('dexos:data:updated', onDataUpdated);
       host.clearMenu();
     },
   };

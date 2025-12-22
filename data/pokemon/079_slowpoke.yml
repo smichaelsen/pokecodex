@@ -1,0 +1,15 @@
+id: 79
+slug: slowpoke
+name:
+  de: Flegmon
+entry:
+  de: Es ist sehr langsam und oft gedankenverloren. Selbst wenn es am Schweif gebissen wird, bemerkt es das erst nach einer Weile.
+types:
+  - water
+  - psychic
+height_m: 1.2
+weight_kg: 36.0
+signature_move: water-gun
+evolutions:
+  - target: 80
+    condition: Level 37

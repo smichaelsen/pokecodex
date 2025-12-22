@@ -82,7 +82,7 @@
 ## dexOS Implementation Plan
 1. Create a new `public/js/dexOS/` module with a minimal app contract and host registry; keep behavior identical to the current app host.
 2. Move menu ownership into dexOS (hardware button, overlay handling, menu actions) and expose a `registerMenu()` API for apps.
-3. Move data loading into dexOS (`loadPokemon`, `getTypeInfo`, `getMoveInfo`) and have apps consume that API only.
+3. Move data loading into dexOS (`loadPokemon`, `getTypeInfo`, `getMoveInfo`), own the “Reload data” menu action, and dispatch a `dexos:data:updated` event that apps listen to.
 4. Centralize audio handling in dexOS (preload, play helpers, missing-audio behavior).
 5. Introduce dexOS storage helpers backed by `localStorage` for app state.
 6. Add the LED API (no-op in web for now) so apps can signal state consistently.

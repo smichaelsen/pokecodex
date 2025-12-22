@@ -32,6 +32,7 @@ async function boot() {
     menuItems: {
       reload: menuReloadEl,
     },
+    config,
   });
 
   const ctx = {
@@ -53,6 +54,12 @@ async function boot() {
   };
 
   host.registerApp('pokedex', createPokedexApp);
+  try {
+    await host.loadPokemon({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
+  } catch (err) {
+    window.location.reload();
+    return;
+  }
   await host.start('pokedex', ctx);
 }
 
