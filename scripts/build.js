@@ -289,7 +289,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Pokedex MVP</title>
+  <title>Pokedex</title>
   <style>
     :root {
       --bg: linear-gradient(135deg, #e53935 0%, #b71c1c 70%);
@@ -721,7 +721,6 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
   <div class=\"shell\">
     <header>
       <div class=\"lights\"><div class=\"light\"></div><div class=\"light\" style=\"background:#66bb6a;border-color:#2e7d32;box-shadow:0 0 12px rgba(102,187,106,0.7)\"></div><div class=\"light\" style=\"background:#ffee58;border-color:#fbc02d;box-shadow:0 0 12px rgba(255,238,88,0.7)\"></div></div>
-      <div>Pokédex – Kanto</div>
     </header>
     <div class=\"content\">
       <div class=\"panel list-panel\">
