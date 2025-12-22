@@ -291,7 +291,22 @@ function buildTypeCss(types) {
     .join('\\n');
 }
 
-function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
+function loadHtmlTemplate() {
+  const templatePath = path.join(PUBLIC_DIR, 'index.html');
+  if (!fs.existsSync(templatePath)) {
+    throw new Error('Missing HTML template at public/index.html');
+  }
+  return fs.readFileSync(templatePath, 'utf8');
+}
+
+function renderHtmlTemplate(template, clientConfig, assetVersion) {
+  const configJson = JSON.stringify(clientConfig);
+  return template
+    .replace(/__ASSET_VERSION__/g, assetVersion)
+    .replace(/__POKEDEX_CONFIG__/g, configJson);
+}
+
+function buildHtml(template, pokemon, types, moves, assetVersion, audioVersions) {
   const typeInfo = {};
   types.forEach((t) => {
     if (!t || !t.slug) return;
@@ -307,45 +322,7 @@ function buildHtml(pokemon, types, moves, assetVersion, audioVersions) {
     assetVersion,
   };
 
-  return `<!DOCTYPE html>
-<html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Pokedex</title>
-  <link rel="stylesheet" href="css/app.css?v=${assetVersion}">
-  <link rel="stylesheet" href="css/types.css?v=${assetVersion}">
-</head>
-<body>
-  <div class=\"shell\">
-    <header>
-      <div class=\"lights\"><div class=\"light\"></div><div class=\"light\" style=\"background:#66bb6a;border-color:#2e7d32;box-shadow:0 0 12px rgba(102,187,106,0.7)\"></div><div class=\"light\" style=\"background:#ffee58;border-color:#fbc02d;box-shadow:0 0 12px rgba(255,238,88,0.7)\"></div></div>
-    </header>
-    <div class=\"content\">
-      <div class=\"panel list-panel\">
-        <div class=\"list\" id=\"list\"></div>
-        <div class=\"pager\">
-          <button type=\"button\" id=\"page-prev\" aria-label=\"Vorherige Seite\">◀</button>
-          <div class=\"page-info\" id=\"page-info\">
-            <div class=\"progress\" role=\"progressbar\" aria-valuemin=\"0\" aria-valuemax=\"100\" aria-valuenow=\"0\">
-              <div class=\"progress-fill\" id=\"page-progress\"></div>
-            </div>
-          </div>
-          <button type=\"button\" id=\"page-next\" aria-label=\"Nächste Seite\">▶</button>
-        </div>
-      </div>
-      <div class=\"panel detail\" id=\"detail\">
-        <div class=\"empty\">Wähle ein Pokémon aus der Liste aus.</div>
-      </div>
-    </div>
-    <div class=\"overlay\" id=\"overlay\"></div>
-  </div>
-  <script>
-    window.__POKEDEX_CONFIG__ = ${JSON.stringify(clientConfig)};
-  </script>
-  <script type="module" src="js/app.js"></script>
-</body>
-</html>`;
+  return renderHtmlTemplate(template, clientConfig, assetVersion);
 }
 
 function build() {
@@ -370,6 +347,7 @@ function build() {
   });
   const assetVersion = Date.now().toString();
   const audioVersions = buildAudioVersions();
+  const htmlTemplate = loadHtmlTemplate();
 
   ensureDir(OUT_DIR);
   for (const entry of fs.readdirSync(OUT_DIR, { withFileTypes: true })) {
@@ -387,7 +365,7 @@ function build() {
     fs.writeFileSync(path.join(OUT_DIR, 'css', 'types.css'), typeCss + '\n', 'utf8');
   }
 
-  const html = buildHtml(resolvedPokemon, types, moves, assetVersion, audioVersions);
+  const html = buildHtml(htmlTemplate, resolvedPokemon, types, moves, assetVersion, audioVersions);
   fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf8');
   console.log('Build complete. Open dist/index.html');
 }

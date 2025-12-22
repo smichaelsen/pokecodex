@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pokedex</title>
+  <link rel="stylesheet" href="css/app.css?v=__ASSET_VERSION__">
+  <link rel="stylesheet" href="css/types.css?v=__ASSET_VERSION__">
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="lights"><div class="light"></div><div class="light" style="background:#66bb6a;border-color:#2e7d32;box-shadow:0 0 12px rgba(102,187,106,0.7)"></div><div class="light" style="background:#ffee58;border-color:#fbc02d;box-shadow:0 0 12px rgba(255,238,88,0.7)"></div></div>
+    </header>
+    <div class="content">
+      <div class="panel list-panel">
+        <div class="list" id="list"></div>
+        <div class="pager">
+          <button type="button" id="page-prev" aria-label="Vorherige Seite">◀</button>
+          <div class="page-info" id="page-info">
+            <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div class="progress-fill" id="page-progress"></div>
+            </div>
+          </div>
+          <button type="button" id="page-next" aria-label="Nächste Seite">▶</button>
+        </div>
+      </div>
+      <div class="panel detail" id="detail">
+        <div class="empty">Wähle ein Pokémon aus der Liste aus.</div>
+      </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
+  </div>
+  <script>
+    window.__POKEDEX_CONFIG__ = __POKEDEX_CONFIG__;
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
