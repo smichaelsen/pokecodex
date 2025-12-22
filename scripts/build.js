@@ -303,7 +303,7 @@ function renderHtmlTemplate(template, clientConfig, assetVersion) {
   const configJson = JSON.stringify(clientConfig);
   return template
     .replace(/__ASSET_VERSION__/g, assetVersion)
-    .replace(/__POKEDEX_CONFIG__/g, configJson);
+    .replace(/__POKEDEX_CONFIG_JSON__/g, configJson);
 }
 
 function buildHtml(template, pokemon, types, moves, assetVersion, audioVersions) {

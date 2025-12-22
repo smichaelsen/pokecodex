@@ -1,6 +1,3 @@
-import { createPaths } from './paths.js';
-import { PAGE_SIZE, renderList, showDetail } from './render.js';
-
 const config = window.__POKEDEX_CONFIG__ || {};
 const state = { pokemon: [], types: config.typeInfo || {}, page: 1 };
 
@@ -11,14 +8,25 @@ const pageNextEl = document.getElementById('page-next');
 const pageInfoEl = document.getElementById('page-info');
 const pageProgressEl = document.getElementById('page-progress');
 const overlayEl = document.getElementById('overlay');
+const menuButtonEl = document.getElementById('menu-button');
+const menuOverlayEl = document.getElementById('menu-overlay');
+const menuReloadEl = document.getElementById('menu-reload');
 
 const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
 const hideOverlay = () => {
   detailEl.classList.remove('active');
   overlayEl?.classList.remove('active');
 };
-
-const paths = createPaths(config);
+const hideMenu = () => {
+  menuOverlayEl?.classList.remove('active');
+  menuOverlayEl?.setAttribute('aria-hidden', 'true');
+  menuButtonEl?.setAttribute('aria-label', 'Menü öffnen');
+};
+const showMenu = () => {
+  menuOverlayEl?.classList.add('active');
+  menuOverlayEl?.setAttribute('aria-hidden', 'false');
+  menuButtonEl?.setAttribute('aria-label', 'Menü schließen');
+};
 
 const ctx = {
   state,
@@ -30,14 +38,12 @@ const ctx = {
   pageInfoEl,
   pageProgressEl,
   typeInfo: state.types,
-  paths,
+  paths: null,
   isMobile,
   hideOverlay,
   showDetail: null,
   detailAudio: null,
 };
-
-ctx.showDetail = (p, opts) => showDetail(p, ctx, opts);
 
 const preloadAudio = (url) => {
   const audio = new Audio(url);
@@ -46,16 +52,36 @@ const preloadAudio = (url) => {
 };
 
 async function boot() {
-  const res = await fetch(`data/pokemon.json?v=${config.assetVersion || ''}`);
-  state.pokemon = await res.json();
-  state.page = 1;
-  renderList(state.pokemon, ctx);
+  const moduleVersion = config.assetVersion ? `?v=${config.assetVersion}` : '';
+  const [{ createPaths }, renderModule] = await Promise.all([
+    import(`./paths.js${moduleVersion}`),
+    import(`./render.js${moduleVersion}`),
+  ]);
+  const { PAGE_SIZE, renderList, showDetail } = renderModule;
+
+  ctx.paths = createPaths(config);
+  ctx.showDetail = (p, opts) => showDetail(p, ctx, opts);
+
+  const loadPokemon = async (cacheBust = '') => {
+    const res = await fetch(`data/pokemon.json?v=${cacheBust}`);
+    if (!res.ok) throw new Error('Failed to load data');
+    state.pokemon = await res.json();
+    state.page = 1;
+    renderList(state.pokemon, ctx);
+    if (state.pokemon.length) {
+      const firstReal = state.pokemon.find((p) => !p.placeholder);
+      ctx.showDetail(firstReal || state.pokemon[0], { skipListSync: true });
+    }
+  };
+
+  const initialVersion = config.assetVersion || Date.now().toString();
+  await loadPokemon(initialVersion);
 
   (config.typeNames || []).forEach((typeName) => {
-    preloadAudio(paths.typeAudioPath(typeName));
+    preloadAudio(ctx.paths.typeAudioPath(typeName));
   });
   (config.moveSlugs || []).forEach((slug) => {
-    preloadAudio(paths.moveAudioPath(slug));
+    preloadAudio(ctx.paths.moveAudioPath(slug));
   });
 
   pagePrevEl?.addEventListener('click', () => {
@@ -119,7 +145,7 @@ async function boot() {
       event.stopPropagation();
       const typeName = typeBadge.getAttribute('data-type');
       if (!typeName) return;
-      const audio = new Audio(paths.typeAudioPath(typeName));
+      const audio = new Audio(ctx.paths.typeAudioPath(typeName));
       audio.currentTime = 0;
       audio.play().catch(() => {});
       return;
@@ -130,7 +156,7 @@ async function boot() {
       event.stopPropagation();
       const slug = moveName.getAttribute('data-move');
       if (!slug) return;
-      const audio = new Audio(paths.moveAudioPath(slug));
+      const audio = new Audio(ctx.paths.moveAudioPath(slug));
       audio.currentTime = 0;
       audio.play().catch(() => {});
       return;
@@ -150,6 +176,27 @@ async function boot() {
     ctx.showDetail(firstReal || state.pokemon[0]);
   }
   overlayEl?.addEventListener('click', hideOverlay);
+
+  menuButtonEl?.addEventListener('click', () => {
+    if (menuOverlayEl?.classList.contains('active')) {
+      hideMenu();
+    } else {
+      showMenu();
+    }
+  });
+
+  menuOverlayEl?.addEventListener('click', (event) => {
+    if (event.target === menuOverlayEl) hideMenu();
+  });
+
+  menuReloadEl?.addEventListener('click', async () => {
+    hideMenu();
+    try {
+      await loadPokemon(Date.now().toString());
+    } catch (err) {
+      window.location.reload();
+    }
+  });
 }
 
 boot();

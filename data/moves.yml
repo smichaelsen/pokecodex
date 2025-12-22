@@ -176,6 +176,14 @@
   power: 50
   description:
     de: Das Ziel wird mit einem kleinen Stein beworfen.
+- slug: sand-attack
+  name:
+    de: Sandwirbel
+    en: Sand Attack
+  type: ground
+  power: 0
+  description:
+    de: Wirbelt Sand auf, um die Genauigkeit des Ziels zu senken.
 - slug: stone-edge
   name:
     de: Steinkante

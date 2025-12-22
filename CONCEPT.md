@@ -29,6 +29,8 @@
 - Audio behavior: clicking the illustration plays the call/chime; clicking the name plays the spoken name; clicking the description plays the spoken description (preloaded on detail view open).
 - If audio is missing, the UI shows a hint or disables buttons.
 - Client loads data as static bundles (e.g., pre-rendered JSON files) from `data/`/`public/`.
+- Menu interaction: a physical-style button on the Pokedex rim opens an overlay menu on the screen. Menu items include emoji for kid-friendly recognition.
+- Menu item: “🔄 Reload data” triggers a fresh data pull from the server; if that’s not practical, fall back to a full page refresh.
 - Illustration usage:
   - List: small image next to name/types (CSS scaling, path e.g. `assets/sprites/{id}.png`).
   - Detail: large image (max-width 100%), falls back to a placeholder if missing.

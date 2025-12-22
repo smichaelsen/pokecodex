@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="shell">
+    <button type="button" class="menu-button" id="menu-button" aria-label="Menü öffnen"></button>
     <header>
       <div class="lights"><div class="light"></div><div class="light" style="background:#66bb6a;border-color:#2e7d32;box-shadow:0 0 12px rgba(102,187,106,0.7)"></div><div class="light" style="background:#ffee58;border-color:#fbc02d;box-shadow:0 0 12px rgba(255,238,88,0.7)"></div></div>
     </header>
@@ -28,12 +29,18 @@
       <div class="panel detail" id="detail">
         <div class="empty">Wähle ein Pokémon aus der Liste aus.</div>
       </div>
+      <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
+        <div class="menu-panel" role="dialog" aria-label="Pokedex Menü">
+          <div class="menu-title">Menü</div>
+          <button type="button" class="menu-item" id="menu-reload">🔄 Reload data</button>
+        </div>
+      </div>
     </div>
     <div class="overlay" id="overlay"></div>
   </div>
   <script>
-    window.__POKEDEX_CONFIG__ = __POKEDEX_CONFIG__;
+    window.__POKEDEX_CONFIG__ = __POKEDEX_CONFIG_JSON__;
   </script>
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js?v=__ASSET_VERSION__"></script>
 </body>
 </html>

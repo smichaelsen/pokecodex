@@ -1,0 +1,14 @@
+id: 27
+slug: sandshrew
+name:
+  de: Sandan
+entry:
+  de: Es gräbt sich in trockene, sandige Böden ein. Seine harte Haut schützt es vor Feinden.
+types:
+  - ground
+height_m: 0.6
+weight_kg: 12.0
+signature_move: sand-attack
+evolutions:
+  - target: 28
+    condition: Level 22
