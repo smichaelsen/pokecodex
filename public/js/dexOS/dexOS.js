@@ -1,6 +1,12 @@
-export function createDexOS({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightEl }) {
+export function createDexOS({
+  menuButtonEl,
+  menuOverlayLeftEl,
+  menuOverlayRightEl,
+  menuItems = {},
+}) {
   const apps = new Map();
   let currentApp = null;
+  const menuListeners = new Map();
 
   const hideMenu = () => {
     menuOverlayLeftEl?.classList.remove('active');
@@ -36,6 +42,27 @@ export function createDexOS({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightE
   menuOverlayLeftEl?.addEventListener('click', onOverlayClick);
   menuOverlayRightEl?.addEventListener('click', onOverlayClick);
 
+  const clearMenu = () => {
+    menuListeners.forEach((listener, id) => {
+      menuItems[id]?.removeEventListener('click', listener);
+    });
+    menuListeners.clear();
+  };
+
+  const registerMenu = (handlers = {}) => {
+    clearMenu();
+    Object.entries(handlers).forEach(([id, handler]) => {
+      const el = menuItems[id];
+      if (!el || typeof handler !== 'function') return;
+      const listener = () => {
+        hideMenu();
+        handler();
+      };
+      menuListeners.set(id, listener);
+      el.addEventListener('click', listener);
+    });
+  };
+
   const registerApp = (id, factory) => {
     apps.set(id, factory);
   };
@@ -54,14 +81,17 @@ export function createDexOS({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightE
     menuButtonEl?.removeEventListener('click', toggleMenu);
     menuOverlayLeftEl?.removeEventListener('click', onOverlayClick);
     menuOverlayRightEl?.removeEventListener('click', onOverlayClick);
+    clearMenu();
   };
 
   return {
     registerApp,
     start,
     switchTo,
+    registerMenu,
     hideMenu,
     showMenu,
+    clearMenu,
     destroy,
   };
 }

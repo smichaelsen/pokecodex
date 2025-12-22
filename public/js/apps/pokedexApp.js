@@ -1,9 +1,3 @@
-const preloadAudio = (url) => {
-  const audio = new Audio(url);
-  audio.preload = 'auto';
-  audio.load();
-};
-
 export async function createPokedexApp(ctx) {
   const {
     config,
@@ -23,7 +17,6 @@ export async function createPokedexApp(ctx) {
     pageInfoEl,
     pageProgressEl,
     overlayEl,
-    menuReloadEl,
   } = elements;
 
   const state = { pokemon: [], types: config.typeInfo || {}, page: 1, selectedSlug: null };
@@ -180,7 +173,6 @@ export async function createPokedexApp(ctx) {
   const onOverlayClick = () => hideOverlay();
 
   const onReload = async () => {
-    host.hideMenu();
     try {
       const openMobileOverlay = !!detailPanelEl?.classList.contains('active');
       await loadPokemon(Date.now().toString(), {
@@ -197,7 +189,7 @@ export async function createPokedexApp(ctx) {
   listEl?.addEventListener('click', onListClick);
   detailContentEl?.addEventListener('click', onDetailClick);
   overlayEl?.addEventListener('click', onOverlayClick);
-  menuReloadEl?.addEventListener('click', onReload);
+  host.registerMenu({ reload: onReload });
 
   if (state.pokemon.length) {
     const firstReal = state.pokemon.find((p) => !p.placeholder);
@@ -211,7 +203,7 @@ export async function createPokedexApp(ctx) {
       listEl?.removeEventListener('click', onListClick);
       detailContentEl?.removeEventListener('click', onDetailClick);
       overlayEl?.removeEventListener('click', onOverlayClick);
-      menuReloadEl?.removeEventListener('click', onReload);
+      host.clearMenu();
     },
   };
 }

@@ -25,7 +25,14 @@ async function boot() {
     import(`./dexOS/dexOS.js${moduleVersion}`),
     import(`./apps/pokedexApp.js${moduleVersion}`),
   ]);
-  const host = createDexOS({ menuButtonEl, menuOverlayLeftEl, menuOverlayRightEl });
+  const host = createDexOS({
+    menuButtonEl,
+    menuOverlayLeftEl,
+    menuOverlayRightEl,
+    menuItems: {
+      reload: menuReloadEl,
+    },
+  });
 
   const ctx = {
     config,
@@ -39,7 +46,6 @@ async function boot() {
       pageInfoEl,
       pageProgressEl,
       overlayEl,
-      menuReloadEl,
     },
     isMobile,
     hideOverlay,
