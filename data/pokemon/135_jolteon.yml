@@ -1,0 +1,13 @@
+id: 135
+slug: jolteon
+name:
+  de: Blitza
+entry:
+  de: Es konzentriert seine schwachen elektrischen Ladungen, um starke Blitze zu entfesseln.
+types:
+  - electric
+height_m: 0.8
+weight_kg: 24.5
+evolves_from: 133
+signature_move: thunder
+evolutions: []

@@ -19,6 +19,8 @@
   name:
     de: Solarstrahl
     en: Solar Beam
+  tts:
+    de: Solarschtrahl
   type: grass
   power: 120
   description:

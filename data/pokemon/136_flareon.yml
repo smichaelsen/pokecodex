@@ -1,0 +1,13 @@
+id: 136
+slug: flareon
+name:
+  de: Flamara
+entry:
+  de: Wenn es genügend Wärme gespeichert hat, kann seine Körpertemperatur 900°C erreichen.
+types:
+  - fire
+height_m: 0.9
+weight_kg: 25.0
+evolves_from: 133
+signature_move: flamethrower
+evolutions: []
