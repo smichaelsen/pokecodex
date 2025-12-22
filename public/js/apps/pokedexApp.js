@@ -87,6 +87,12 @@ export async function createPokedexApp(ctx) {
     if (!opts.keepPage) state.page = 1;
     renderList(state.pokemon, pokedexCtx);
     const hasList = state.pokemon.length > 0;
+    if (!hasList) {
+      if (detailContentEl) {
+        detailContentEl.innerHTML = '<div class="empty">Wähle ein Pokémon aus der Liste aus.</div>';
+      }
+      return;
+    }
     if (!hasList) return;
     const fallback = state.pokemon.find((p) => !p.placeholder) || state.pokemon[0];
     const selected = state.selectedSlug

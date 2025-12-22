@@ -107,6 +107,8 @@ Returns
 - `audio`: audio helpers (see below).
 - `leds`: LED helpers (see below).
 - `storage`: localStorage-backed helpers (see below).
+- `power`: power helpers (see below).
+- `intro`: boot animation helpers (see below).
 - `destroy()`: remove handlers and clean up.
 
 ## Menu Ownership
@@ -144,6 +146,35 @@ dexOS exposes LED helpers to let apps signal device state:
 ```js
 host.leds.set(index, state)          // set LED on/off
 host.leds.pulse(index, { interval }) // pulse LED, returns stop() function
+```
+
+## Power Helpers
+dexOS supports a power-off state controlled by the hardware button:
+
+Behavior:
+- Hold the hardware button for 5 seconds to power off (unmount app, black screens).
+- Click the button to power on and load the default app.
+
+API:
+```js
+host.setDefaultApp(id, ctx) // sets the default app on power-on
+host.startDefault()         // starts the default app
+host.power.on()             // power on
+host.power.off()            // power off
+host.power.isOn()           // returns boolean
+```
+
+## Intro Animation
+dexOS shows a boot animation on initial start and when powering on:
+- Both panes are covered with white layers.
+- The right pane shows the “dexOS” label.
+- LED sequence: wait 1s, blue on 1s, green on 1s, yellow on 1s, all off.
+- 1s after the sequence, the covers are removed.
+- Menu button clicks are ignored during the intro (power-off hold still works).
+
+API:
+```js
+host.startIntro() // runs the boot animation
 ```
 
 ## Storage Helpers

@@ -14,6 +14,9 @@ const menuOverlayLeftEl = document.getElementById('menu-overlay-left');
 const menuOverlayRightEl = document.getElementById('menu-overlay-right');
 const menuReloadEl = document.getElementById('menu-reload');
 const ledEls = Array.from(document.querySelectorAll('header .light'));
+const contentEl = document.querySelector('.content');
+const coverLeftEl = document.getElementById('screen-cover-left');
+const coverRightEl = document.getElementById('screen-cover-right');
 
 const isMobile = () => window.matchMedia('(max-width: 960px)').matches;
 const hideOverlay = () => {
@@ -34,6 +37,9 @@ async function boot() {
       reload: menuReloadEl,
     },
     ledEls,
+    contentEl,
+    coverLeftEl,
+    coverRightEl,
     config,
   });
 
@@ -56,13 +62,16 @@ async function boot() {
   };
 
   host.registerApp('pokedex', createPokedexApp);
+  host.setDefaultApp?.('pokedex', ctx);
+  await host.startIntro?.({ reveal: false });
   try {
     await host.loadPokemon({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
   } catch (err) {
     window.location.reload();
     return;
   }
-  await host.start('pokedex', ctx);
+  await host.startDefault?.();
+  host.finishIntro?.();
 }
 
 boot();

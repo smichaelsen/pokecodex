@@ -4,13 +4,22 @@ export function createDexOS({
   menuOverlayRightEl,
   menuItems = {},
   ledEls = [],
+  contentEl = null,
+  coverLeftEl = null,
+  coverRightEl = null,
   config = {},
   dataUrl = 'data/pokemon.json',
 }) {
   const apps = new Map();
   let currentApp = null;
+  let defaultApp = null;
   const menuListeners = new Map();
   let reloadListener = null;
+  let isPoweredOn = true;
+  let powerTimer = null;
+  let suppressClick = false;
+  let introActive = false;
+  let audioLedTimer = null;
   const state = {
     pokemon: [],
     typeInfo: config.typeInfo || {},
@@ -18,7 +27,7 @@ export function createDexOS({
   const audioCache = new Map();
   const ledTimers = new Map();
   const audioActive = new Set();
-  let audioLedTimer = null;
+  let defaultCtx = null;
   const storage = (() => {
     const memory = new Map();
     const hasLocalStorage = (() => {
@@ -105,6 +114,7 @@ export function createDexOS({
   };
 
   const toggleMenu = () => {
+    if (!isPoweredOn || introActive) return;
     if (menuOverlayRightEl?.classList.contains('active')) {
       hideMenu();
     } else {
@@ -118,7 +128,87 @@ export function createDexOS({
     }
   };
 
-  menuButtonEl?.addEventListener('click', toggleMenu);
+  const setCoverState = (active) => {
+    coverLeftEl?.classList.toggle('active', !!active);
+    coverRightEl?.classList.toggle('active', !!active);
+    coverLeftEl?.setAttribute('aria-hidden', active ? 'false' : 'true');
+    coverRightEl?.setAttribute('aria-hidden', active ? 'false' : 'true');
+  };
+
+  const setPowerState = async (nextState) => {
+    if (isPoweredOn === nextState) return;
+    isPoweredOn = nextState;
+    if (!isPoweredOn) {
+      introActive = false;
+      hideMenu();
+      menuOverlayLeftEl?.classList.remove('active');
+      menuOverlayRightEl?.classList.remove('active');
+      menuOverlayLeftEl?.setAttribute('aria-hidden', 'true');
+      menuOverlayRightEl?.setAttribute('aria-hidden', 'true');
+      setCoverState(false);
+      contentEl?.classList.add('screen-off');
+      audioCache.forEach((audio) => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+      audioActive.clear();
+      updateAudioLed();
+      if (audioLedTimer) {
+        clearInterval(audioLedTimer);
+        audioLedTimer = null;
+      }
+      ledTimers.forEach((timer) => clearInterval(timer));
+      ledTimers.clear();
+      ledEls.forEach((_, index) => setLed(index, false));
+      if (currentApp?.destroy) currentApp.destroy();
+      currentApp = null;
+      return;
+    }
+
+    contentEl?.classList.remove('screen-off');
+    await startIntro({ reveal: false });
+    if (defaultApp) {
+      await switchTo(defaultApp.id, defaultApp.ctx);
+    }
+    finishIntro();
+  };
+
+  const onPowerPress = () => {
+    if (!menuButtonEl) return;
+    if (powerTimer) clearTimeout(powerTimer);
+    suppressClick = false;
+    powerTimer = setTimeout(() => {
+      suppressClick = true;
+      setPowerState(!isPoweredOn);
+    }, 5000);
+  };
+
+  const onPowerRelease = () => {
+    if (powerTimer) {
+      clearTimeout(powerTimer);
+      powerTimer = null;
+    }
+  };
+
+  menuButtonEl?.addEventListener('click', (event) => {
+    if (suppressClick) {
+      suppressClick = false;
+      event.preventDefault();
+      return;
+    }
+    if (introActive) return;
+    if (!isPoweredOn) {
+      setPowerState(true);
+      return;
+    }
+    toggleMenu();
+  });
+  menuButtonEl?.addEventListener('mousedown', onPowerPress);
+  menuButtonEl?.addEventListener('touchstart', onPowerPress);
+  menuButtonEl?.addEventListener('mouseup', onPowerRelease);
+  menuButtonEl?.addEventListener('mouseleave', onPowerRelease);
+  menuButtonEl?.addEventListener('touchend', onPowerRelease);
+  menuButtonEl?.addEventListener('touchcancel', onPowerRelease);
   menuOverlayLeftEl?.addEventListener('click', onOverlayClick);
   menuOverlayRightEl?.addEventListener('click', onOverlayClick);
 
@@ -245,6 +335,11 @@ export function createDexOS({
     apps.set(id, factory);
   };
 
+  const setDefaultApp = (id, ctx) => {
+    defaultApp = { id, ctx };
+    defaultCtx = ctx;
+  };
+
   const switchTo = async (id, ctx) => {
     if (currentApp?.destroy) currentApp.destroy();
     const factory = apps.get(id);
@@ -253,10 +348,54 @@ export function createDexOS({
   };
 
   const start = (id, ctx) => switchTo(id, ctx);
+  const startDefault = () => {
+    if (!defaultApp) return Promise.resolve();
+    return switchTo(defaultApp.id, defaultApp.ctx);
+  };
+
+  const startIntro = async ({ reveal = true } = {}) => {
+    if (!isPoweredOn) return;
+    introActive = true;
+    setCoverState(true);
+    setLed(0, false);
+    setLed(1, false);
+    setLed(2, false);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!isPoweredOn) return;
+    setLed(0, true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setLed(0, false);
+    setLed(1, true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setLed(1, false);
+    setLed(2, true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setLed(2, false);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    if (!isPoweredOn) return;
+    if (reveal) {
+      setCoverState(false);
+      introActive = false;
+    }
+  };
+
+  const finishIntro = () => {
+    if (!isPoweredOn) return;
+    setCoverState(false);
+    introActive = false;
+  };
 
   const destroy = () => {
     if (currentApp?.destroy) currentApp.destroy();
     menuButtonEl?.removeEventListener('click', toggleMenu);
+    menuButtonEl?.removeEventListener('mousedown', onPowerPress);
+    menuButtonEl?.removeEventListener('touchstart', onPowerPress);
+    menuButtonEl?.removeEventListener('mouseup', onPowerRelease);
+    menuButtonEl?.removeEventListener('mouseleave', onPowerRelease);
+    menuButtonEl?.removeEventListener('touchend', onPowerRelease);
+    menuButtonEl?.removeEventListener('touchcancel', onPowerRelease);
     menuOverlayLeftEl?.removeEventListener('click', onOverlayClick);
     menuOverlayRightEl?.removeEventListener('click', onOverlayClick);
     clearMenu();
@@ -270,6 +409,10 @@ export function createDexOS({
     registerApp,
     start,
     switchTo,
+    setDefaultApp,
+    startDefault,
+    startIntro,
+    finishIntro,
     registerMenu,
     hideMenu,
     showMenu,
@@ -288,6 +431,11 @@ export function createDexOS({
       pulse: pulseLed,
     },
     storage,
+    power: {
+      on: () => setPowerState(true),
+      off: () => setPowerState(false),
+      isOn: () => isPoweredOn,
+    },
     destroy,
   };
 }

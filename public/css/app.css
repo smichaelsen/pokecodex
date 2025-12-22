@@ -96,6 +96,15 @@
       height: calc(100vh - 140px);
       position: relative;
     }
+    .content.screen-off .panel {
+      background: #0b0b0b;
+      border-color: #0b0b0b;
+      box-shadow: none;
+    }
+    .content.screen-off .panel > * {
+      opacity: 0;
+      pointer-events: none;
+    }
     .panel {
       background: var(--panel);
       border-radius: 14px;
@@ -105,6 +114,28 @@
       display: flex;
       flex-direction: column;
       position: relative;
+    }
+    .screen-cover {
+      position: absolute;
+      inset: 0;
+      background: #f8f8f8;
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease;
+      z-index: 6;
+    }
+    .screen-cover.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .screen-cover .boot-logo {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #0b0b0b;
+      text-transform: lowercase;
     }
     .list-panel {
       display: flex;

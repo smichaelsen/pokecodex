@@ -15,6 +15,7 @@
     </header>
     <div class="content">
       <div class="panel list-panel">
+        <div class="screen-cover" id="screen-cover-left" aria-hidden="true"></div>
         <div class="list" id="list"></div>
         <div class="pager">
           <button type="button" id="page-prev" aria-label="Vorherige Seite">◀</button>
@@ -28,8 +29,10 @@
         <div class="menu-overlay menu-overlay-left" id="menu-overlay-left" aria-hidden="true"></div>
       </div>
       <div class="panel detail" id="detail">
+        <div class="screen-cover" id="screen-cover-right" aria-hidden="true">
+          <div class="boot-logo">dexOS</div>
+        </div>
         <div class="detail-content" id="detail-content">
-          <div class="empty">Wähle ein Pokémon aus der Liste aus.</div>
         </div>
         <div class="menu-overlay menu-overlay-right" id="menu-overlay-right" aria-hidden="true">
           <div class="menu-panel" role="dialog" aria-label="Pokedex Menü">
