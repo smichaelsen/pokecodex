@@ -56,14 +56,6 @@ export function renderList(items, ctx) {
       })
       .join('');
 
-    ctx.listEl.querySelectorAll('.card').forEach((el) => {
-      if (el.dataset.placeholder) return;
-      el.addEventListener('click', () => {
-        const slug = el.getAttribute('data-slug');
-        const found = ctx.state.pokemon.find((p) => p.slug === slug);
-        if (found) ctx.showDetail(found);
-      });
-    });
   }
 
   if (ctx.pageInfoEl && ctx.pageProgressEl) {
@@ -109,6 +101,12 @@ export function showDetail(p, ctx, opts = {}) {
   const descAudio = new Audio(ctx.paths.descriptionAudioPath(p.id));
   descAudio.preload = 'auto';
   descAudio.load();
+
+  ctx.detailAudio = {
+    chimeAudio,
+    nameAudio,
+    descAudio,
+  };
 
   const evolvesFrom = p.evolves_from
     ? (() => {
@@ -188,74 +186,6 @@ export function showDetail(p, ctx, opts = {}) {
       moveHtml +
       '</div></div>' +
     '</div>';
-
-  const btn = ctx.detailEl.querySelector('.close');
-  if (btn) btn.addEventListener('click', ctx.hideOverlay);
-
-  const titleEl = ctx.detailEl.querySelector('.detail-title');
-  if (titleEl) {
-    titleEl.addEventListener('click', () => {
-      nameAudio.currentTime = 0;
-      nameAudio.play().catch(() => {});
-    });
-  }
-
-  const artEl = ctx.detailEl.querySelector('.art');
-  if (artEl) {
-    artEl.addEventListener('click', () => {
-      chimeAudio.currentTime = 0;
-      chimeAudio.play().catch(() => {});
-    });
-  }
-
-  const entryEl = ctx.detailEl.querySelector('.entry');
-  if (entryEl) {
-    entryEl.addEventListener('click', () => {
-      descAudio.currentTime = 0;
-      descAudio.play().catch(() => {});
-    });
-  }
-
-  ctx.detailEl.querySelectorAll('.pokemon-types .badge[data-type]').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const typeName = el.getAttribute('data-type');
-      if (!typeName) return;
-      const audio = new Audio(ctx.paths.typeAudioPath(typeName));
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    });
-  });
-
-  ctx.detailEl.querySelectorAll('.moves .badge[data-type]').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const typeName = el.getAttribute('data-type');
-      if (!typeName) return;
-      const audio = new Audio(ctx.paths.typeAudioPath(typeName));
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    });
-  });
-
-  ctx.detailEl.querySelectorAll('.move-name[data-move]').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      event.stopPropagation();
-      const slug = el.getAttribute('data-move');
-      if (!slug) return;
-      const audio = new Audio(ctx.paths.moveAudioPath(slug));
-      audio.currentTime = 0;
-      audio.play().catch(() => {});
-    });
-  });
-
-  ctx.detailEl.querySelectorAll('.evo-link').forEach((el) => {
-    el.addEventListener('click', () => {
-      const slug = el.getAttribute('data-slug');
-      const found = ctx.state.pokemon.find((entry) => entry.slug === slug);
-      if (found) ctx.showDetail(found);
-    });
-  });
 
   if (ctx.isMobile()) {
     ctx.detailEl.classList.add('active');

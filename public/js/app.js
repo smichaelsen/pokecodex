@@ -34,6 +34,7 @@ const ctx = {
   isMobile,
   hideOverlay,
   showDetail: null,
+  detailAudio: null,
 };
 
 ctx.showDetail = (p, opts) => showDetail(p, ctx, opts);
@@ -68,6 +69,79 @@ async function boot() {
     if (state.page < totalPages) {
       state.page += 1;
       renderList(state.pokemon, ctx);
+    }
+  });
+
+  listEl?.addEventListener('click', (event) => {
+    const card = event.target.closest('.card');
+    if (!card || card.dataset.placeholder) return;
+    const slug = card.getAttribute('data-slug');
+    if (!slug) return;
+    const found = state.pokemon.find((p) => p.slug === slug);
+    if (found) ctx.showDetail(found);
+  });
+
+  detailEl?.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    if (target.closest('.close')) {
+      ctx.hideOverlay();
+      return;
+    }
+
+    if (target.closest('.detail-title')) {
+      const audio = ctx.detailAudio?.nameAudio;
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
+    if (target.closest('.art')) {
+      const audio = ctx.detailAudio?.chimeAudio;
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
+    if (target.closest('.entry')) {
+      const audio = ctx.detailAudio?.descAudio;
+      if (!audio) return;
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
+    const typeBadge = target.closest('.badge[data-type]');
+    if (typeBadge) {
+      event.stopPropagation();
+      const typeName = typeBadge.getAttribute('data-type');
+      if (!typeName) return;
+      const audio = new Audio(paths.typeAudioPath(typeName));
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
+    const moveName = target.closest('.move-name[data-move]');
+    if (moveName) {
+      event.stopPropagation();
+      const slug = moveName.getAttribute('data-move');
+      if (!slug) return;
+      const audio = new Audio(paths.moveAudioPath(slug));
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
+    const evoLink = target.closest('.evo-link');
+    if (evoLink) {
+      const slug = evoLink.getAttribute('data-slug');
+      if (!slug) return;
+      const found = state.pokemon.find((entry) => entry.slug === slug);
+      if (found) ctx.showDetail(found);
     }
   });
 
