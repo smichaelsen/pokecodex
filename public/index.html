@@ -25,14 +25,17 @@
           </div>
           <button type="button" id="page-next" aria-label="Nächste Seite">▶</button>
         </div>
+        <div class="menu-overlay menu-overlay-left" id="menu-overlay-left" aria-hidden="true"></div>
       </div>
       <div class="panel detail" id="detail">
-        <div class="empty">Wähle ein Pokémon aus der Liste aus.</div>
-      </div>
-      <div class="menu-overlay" id="menu-overlay" aria-hidden="true">
-        <div class="menu-panel" role="dialog" aria-label="Pokedex Menü">
-          <div class="menu-title">Menü</div>
-          <button type="button" class="menu-item" id="menu-reload">🔄 Daten neu laden</button>
+        <div class="detail-content" id="detail-content">
+          <div class="empty">Wähle ein Pokémon aus der Liste aus.</div>
+        </div>
+        <div class="menu-overlay menu-overlay-right" id="menu-overlay-right" aria-hidden="true">
+          <div class="menu-panel" role="dialog" aria-label="Pokedex Menü">
+            <div class="menu-title">Menü</div>
+            <button type="button" class="menu-item" id="menu-reload">🔄 Daten neu laden</button>
+          </div>
         </div>
       </div>
     </div>

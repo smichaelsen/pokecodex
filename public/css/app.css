@@ -97,6 +97,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .list-panel {
       display: flex;
@@ -274,13 +275,17 @@
       border: 1px solid rgba(0,0,0,0.06);
     }
     .detail {
+      position: relative;
+      overflow: hidden;
+    }
+    .detail-content {
       padding: 16px;
       display: grid;
       grid-template-rows: auto 1fr;
       gap: 12px;
       background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.7), transparent 35%), var(--panel);
       overflow: auto;
-      position: relative;
+      height: 100%;
     }
     .detail-header {
       display: flex;
@@ -408,18 +413,24 @@
     }
     .menu-overlay {
       position: absolute;
-      inset: 12px;
+      inset: 0;
       background: rgba(0,0,0,0.45);
       backdrop-filter: blur(2px);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 18;
-      border-radius: 14px;
+      border-radius: inherit;
       overflow: hidden;
     }
     .menu-overlay.active {
       display: flex;
+    }
+    .menu-overlay-left {
+      justify-content: center;
+    }
+    .menu-overlay-right {
+      padding: 16px;
     }
     .menu-panel {
       background: var(--panel);
@@ -485,8 +496,8 @@
         z-index: 15;
       }
       .overlay.active { display: block; }
-      .menu-overlay {
-        inset: 8px;
+      .menu-overlay-right {
+        padding: 12px;
       }
       .pager button {
         min-width: 56px;

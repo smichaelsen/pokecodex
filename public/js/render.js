@@ -56,7 +56,9 @@ export function renderList(items, ctx) {
 
 export function showDetail(p, ctx, opts = {}) {
   if (p.placeholder) {
-    ctx.detailEl.innerHTML =
+    const detailTarget = ctx.detailContentEl || ctx.detailPanelEl;
+    if (!detailTarget) return;
+    detailTarget.innerHTML =
       '<div class="detail-header"><h2 class="detail-title">Nr. ' +
       padId(p.id) +
       '</h2><div class="id">Leer</div></div><div class="empty">Keine Daten für diesen Eintrag.</div>';
@@ -160,7 +162,9 @@ export function showDetail(p, ctx, opts = {}) {
     : '<div class="empty">Keine Signaturattacke hinterlegt.</div>';
 
   const closeBtn = ctx.isMobile() ? '<button class="close" aria-label="Schließen">✕</button>' : '';
-  ctx.detailEl.innerHTML =
+  const detailTarget = ctx.detailContentEl || ctx.detailPanelEl;
+  if (!detailTarget) return;
+  detailTarget.innerHTML =
     '<div class="detail-header">' +
     closeBtn +
     '<h2 class="detail-title clickable">' +
@@ -185,7 +189,7 @@ export function showDetail(p, ctx, opts = {}) {
 
   const openOverlay = opts.openMobileOverlay !== false;
   if (ctx.isMobile() && openOverlay) {
-    ctx.detailEl.classList.add('active');
+    ctx.detailPanelEl.classList.add('active');
     ctx.overlayEl?.classList.add('active');
   } else if (!ctx.isMobile()) {
     ctx.hideOverlay();
