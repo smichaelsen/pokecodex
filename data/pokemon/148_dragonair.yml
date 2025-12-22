@@ -1,0 +1,15 @@
+id: 148
+slug: dragonair
+name:
+  de: Dragonir
+entry:
+  de: Seine Aura soll das Wetter beeinflussen koennen, und es lebt nahe grosser Gewaesser.
+types:
+  - dragon
+height_m: 4.0
+weight_kg: 16.5
+evolves_from: 147
+signature_move: dragon-rage
+evolutions:
+  - target: 149
+    condition: Level 55

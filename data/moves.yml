@@ -184,6 +184,22 @@
   power: 0
   description:
     de: Wirbelt Sand auf, um die Genauigkeit des Ziels zu senken.
+- slug: dragon-rage
+  name:
+    de: Drachenwut
+    en: Dragon Rage
+  type: dragon
+  power: 0
+  description:
+    de: Eine Drachen-Attacke, die dem Ziel stets gleich viel Schaden zufügt.
+- slug: dig
+  name:
+    de: Schaufler
+    en: Dig
+  type: ground
+  power: 80
+  description:
+    de: Gräbt sich in Runde 1 ein und greift in Runde 2 an.
 - slug: stone-edge
   name:
     de: Steinkante
@@ -200,6 +216,14 @@
   power: 100
   description:
     de: Der Anwender greift mit seinem harten Schweif an. Kann die Verteidigung des Zieles senken.
+- slug: hyper-beam
+  name:
+    de: Hyperstrahl
+    en: Hyper Beam
+  type: normal
+  power: 150
+  description:
+    de: Eine starke Attacke, die den Anwender in der nächsten Runde aussetzen lässt.
 - slug: thunder-wave
   name:
     de: Donnerwelle

@@ -1,5 +1,5 @@
 const config = window.__POKEDEX_CONFIG__ || {};
-const state = { pokemon: [], types: config.typeInfo || {}, page: 1 };
+const state = { pokemon: [], types: config.typeInfo || {}, page: 1, selectedSlug: null };
 
 const listEl = document.getElementById('list');
 const detailEl = document.getElementById('detail');
@@ -60,22 +60,34 @@ async function boot() {
   const { PAGE_SIZE, renderList, showDetail } = renderModule;
 
   ctx.paths = createPaths(config);
-  ctx.showDetail = (p, opts) => showDetail(p, ctx, opts);
+  ctx.showDetail = (p, opts) => {
+    if (p && !p.placeholder) state.selectedSlug = p.slug || null;
+    showDetail(p, ctx, opts);
+  };
 
-  const loadPokemon = async (cacheBust = '') => {
+  const loadPokemon = async (cacheBust = '', opts = {}) => {
     const res = await fetch(`data/pokemon.json?v=${cacheBust}`);
     if (!res.ok) throw new Error('Failed to load data');
     state.pokemon = await res.json();
-    state.page = 1;
+    if (!opts.keepPage) state.page = 1;
     renderList(state.pokemon, ctx);
-    if (state.pokemon.length) {
-      const firstReal = state.pokemon.find((p) => !p.placeholder);
-      ctx.showDetail(firstReal || state.pokemon[0], { skipListSync: true });
+    const hasList = state.pokemon.length > 0;
+    if (!hasList) return;
+    const fallback = state.pokemon.find((p) => !p.placeholder) || state.pokemon[0];
+    const selected = state.selectedSlug
+      ? state.pokemon.find((p) => p.slug === state.selectedSlug)
+      : null;
+    const target = selected || fallback;
+    if (target) {
+      ctx.showDetail(target, {
+        skipListSync: true,
+        openMobileOverlay: opts.openMobileOverlay,
+      });
     }
   };
 
   const initialVersion = config.assetVersion || Date.now().toString();
-  await loadPokemon(initialVersion);
+  await loadPokemon(initialVersion, { openMobileOverlay: true });
 
   (config.typeNames || []).forEach((typeName) => {
     preloadAudio(ctx.paths.typeAudioPath(typeName));
@@ -104,7 +116,10 @@ async function boot() {
     const slug = card.getAttribute('data-slug');
     if (!slug) return;
     const found = state.pokemon.find((p) => p.slug === slug);
-    if (found) ctx.showDetail(found);
+    if (found) {
+      state.selectedSlug = slug;
+      ctx.showDetail(found);
+    }
   });
 
   detailEl?.addEventListener('click', (event) => {
@@ -167,13 +182,16 @@ async function boot() {
       const slug = evoLink.getAttribute('data-slug');
       if (!slug) return;
       const found = state.pokemon.find((entry) => entry.slug === slug);
-      if (found) ctx.showDetail(found);
+      if (found) {
+        state.selectedSlug = slug;
+        ctx.showDetail(found);
+      }
     }
   });
 
   if (state.pokemon.length) {
     const firstReal = state.pokemon.find((p) => !p.placeholder);
-    ctx.showDetail(firstReal || state.pokemon[0]);
+    ctx.showDetail(firstReal || state.pokemon[0], { openMobileOverlay: true });
   }
   overlayEl?.addEventListener('click', hideOverlay);
 
@@ -192,7 +210,11 @@ async function boot() {
   menuReloadEl?.addEventListener('click', async () => {
     hideMenu();
     try {
-      await loadPokemon(Date.now().toString());
+      const openMobileOverlay = !!detailEl?.classList.contains('active');
+      await loadPokemon(Date.now().toString(), {
+        keepPage: true,
+        openMobileOverlay,
+      });
     } catch (err) {
       window.location.reload();
     }

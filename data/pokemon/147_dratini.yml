@@ -1,0 +1,14 @@
+id: 147
+slug: dratini
+name:
+  de: Dratini
+entry:
+  de: Es lebt in tiefen Gewaessern und haeutet sich, um zu wachsen.
+types:
+  - dragon
+height_m: 1.8
+weight_kg: 3.3
+signature_move: thunder-wave
+evolutions:
+  - target: 148
+    condition: Level 30

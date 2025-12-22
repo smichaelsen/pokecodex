@@ -94,6 +94,7 @@ mkdir -p "$OUT_DIR"
 downloaded=0
 skipped=0
 failed=0
+warnings=0
 
 current_slug=""
 current_name=""
@@ -126,12 +127,22 @@ flush_move() {
     if ffmpeg -y -i "$tmp_wav" -ar 44100 -ac 2 "$dest" >/dev/null 2>&1; then
       ((downloaded++)) || true
     else
-      echo "Failed to convert $tmp_wav to $dest"
-      ((failed++)) || true
+      if [[ -s "$dest" ]]; then
+        echo "Warn: ffmpeg failed but output exists for $slug"
+        ((warnings++)) || true
+      else
+        echo "Failed to convert $tmp_wav to $dest"
+        ((failed++)) || true
+      fi
     fi
   else
-    echo "Failed to generate audio for move $slug"
-    ((failed++)) || true
+    if [[ -s "$dest" ]]; then
+      echo "Warn: piper failed but output exists for $slug"
+      ((warnings++)) || true
+    else
+      echo "Failed to generate audio for move $slug"
+      ((failed++)) || true
+    fi
   fi
   rm -f "$tmp_wav"
 }
@@ -177,4 +188,4 @@ done < "$DATA_FILE"
 
 flush_move "$current_slug" "$current_name" "$current_tts"
 
-echo "Done. generated=$downloaded skipped=$skipped failed=$failed"
+echo "Done. generated=$downloaded skipped=$skipped warnings=$warnings failed=$failed"

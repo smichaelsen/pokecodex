@@ -180,10 +180,11 @@ export function showDetail(p, ctx, opts = {}) {
       '</div></div>' +
     '</div>';
 
-  if (ctx.isMobile()) {
+  const openOverlay = opts.openMobileOverlay !== false;
+  if (ctx.isMobile() && openOverlay) {
     ctx.detailEl.classList.add('active');
     ctx.overlayEl?.classList.add('active');
-  } else {
+  } else if (!ctx.isMobile()) {
     ctx.hideOverlay();
   }
 }

@@ -1,0 +1,13 @@
+id: 28
+slug: sandslash
+name:
+  de: Sandamer
+entry:
+  de: Wenn es in Gefahr gerät, rollt es sich zusammen und schützt sich mit seinen Stacheln.
+types:
+  - ground
+height_m: 1.0
+weight_kg: 29.5
+evolves_from: 27
+signature_move: rock-throw
+evolutions: []

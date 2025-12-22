@@ -52,3 +52,7 @@
   name:
     de: Stahl
   color: '#90a4ae'
+- slug: dragon
+  name:
+    de: Drache
+  color: '#5c6bc0'

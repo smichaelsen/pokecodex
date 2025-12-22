@@ -1,0 +1,14 @@
+id: 50
+slug: diglett
+name:
+  de: Digda
+entry:
+  de: Lebt in unterirdischen Höhlen. Es gräbt, indem es sich mit seinem Körper durch die Erde bewegt.
+types:
+  - ground
+height_m: 0.2
+weight_kg: 0.8
+signature_move: dig
+evolutions:
+  - target: 51
+    condition: Level 26
