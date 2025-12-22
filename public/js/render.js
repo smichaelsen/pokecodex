@@ -81,6 +81,12 @@ export function showDetail(p, ctx, opts = {}) {
   }
   const img = ctx.paths.spritePath(p.id);
   const typeBadges = (p.types || []).map((t) => badgeHtml(t, ctx.typeInfo)).join('');
+  (p.types || []).forEach((typeSlug) => {
+    if (!typeSlug) return;
+    const typeAudio = new Audio(ctx.paths.typeAudioPath(typeSlug));
+    typeAudio.preload = 'auto';
+    typeAudio.load();
+  });
   const chimeAudio = new Audio(ctx.paths.chimePath(p.id));
   chimeAudio.preload = 'auto';
   chimeAudio.load();
@@ -90,6 +96,12 @@ export function showDetail(p, ctx, opts = {}) {
   const descAudio = new Audio(ctx.paths.descriptionAudioPath(p.id));
   descAudio.preload = 'auto';
   descAudio.load();
+  const moveSlugRaw = p.signature_move_data?.slug || p.signature_move;
+  if (moveSlugRaw) {
+    const moveAudio = new Audio(ctx.paths.moveAudioPath(moveSlugRaw));
+    moveAudio.preload = 'auto';
+    moveAudio.load();
+  }
 
   ctx.detailAudio = {
     chimeAudio,

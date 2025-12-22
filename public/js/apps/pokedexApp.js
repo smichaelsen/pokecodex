@@ -82,12 +82,6 @@ export async function createPokedexApp(ctx) {
   const initialVersion = config.assetVersion || Date.now().toString();
   await loadPokemon(initialVersion, { openMobileOverlay: true });
 
-  (config.typeNames || []).forEach((typeName) => {
-    preloadAudio(pokedexCtx.paths.typeAudioPath(typeName));
-  });
-  (config.moveSlugs || []).forEach((slug) => {
-    preloadAudio(pokedexCtx.paths.moveAudioPath(slug));
-  });
 
   const onPrev = () => {
     if (state.page > 1) {
