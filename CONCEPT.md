@@ -70,6 +70,7 @@
 - Name: dexOS.
 - Purpose: a thin OS layer that owns device-level behavior and provides stable APIs for apps.
 - Documentation: apps should rely on a well-defined, versioned API contract (documented alongside dexOS).
+- Status-quo doc: `DEXOS.md` documents the current, implemented dexOS features and must be kept up to date with every dexOS change.
 - Apps: each app renders into the two panes (left list, right detail) using a shared contract (mount, update, destroy).
 - Menu control: OS owns the hardware menu button and shows the overlay UI in the right pane; apps register menu actions.
 - Data API: OS provides `loadPokemon()` (with cache-busting) and a `getTypeInfo()`/`getMoveInfo()` lookup so apps do not access files directly.
