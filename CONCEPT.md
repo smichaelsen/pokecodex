@@ -71,5 +71,5 @@
 4. (Done) Add HTML escaping for all user-provided strings before inserting into the DOM.
 5. (Done) Replace per-element listeners with event delegation on the detail/list containers.
 6. (Done) Normalize pagination page size (single shared constant between list render and paging logic).
-7. Remove unused `resetListScroll` helper.
+7. (Done) Remove unused `resetListScroll` helper.
 8. Remove unused `${badgeCss}` placeholder from `public/css/app.css`.

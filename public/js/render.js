@@ -3,13 +3,6 @@ import { escapeHtml } from './utils/escapeHtml.js';
 
 export const PAGE_SIZE = 12;
 
-const resetListScroll = (listEl) => {
-  listEl.scrollTop = 0;
-  if (listEl.parentElement) {
-    listEl.parentElement.scrollTop = 0;
-  }
-};
-
 const badgeHtml = (t, typeInfo) => {
   const info = typeInfo?.[t];
   const label = escapeHtml(info?.name || t || 'Typ');
