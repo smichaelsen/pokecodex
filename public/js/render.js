@@ -1,7 +1,7 @@
 import { padId, typeClass } from './dom.js';
 import { escapeHtml } from './utils/escapeHtml.js';
 
-const pageSize = 12;
+export const PAGE_SIZE = 12;
 
 const resetListScroll = (listEl) => {
   listEl.scrollTop = 0;
@@ -19,11 +19,11 @@ const badgeHtml = (t, typeInfo) => {
 };
 
 export function renderList(items, ctx) {
-  const totalPages = Math.max(1, Math.ceil(items.length / pageSize));
+  const totalPages = Math.max(1, Math.ceil(items.length / PAGE_SIZE));
   if (ctx.state.page > totalPages) ctx.state.page = totalPages;
   if (ctx.state.page < 1) ctx.state.page = 1;
-  const start = (ctx.state.page - 1) * pageSize;
-  const paged = items.slice(start, start + pageSize);
+  const start = (ctx.state.page - 1) * PAGE_SIZE;
+  const paged = items.slice(start, start + PAGE_SIZE);
 
   if (!items.length) {
     ctx.listEl.innerHTML = '<div class="empty" style="grid-column:1/-1">Keine Ergebnisse</div>';
@@ -79,7 +79,7 @@ export function showDetail(p, ctx, opts = {}) {
   if (!opts.skipListSync) {
     const index = ctx.state.pokemon.findIndex((entry) => entry && entry.slug === p.slug);
     if (index >= 0) {
-      const nextPage = Math.floor(index / pageSize) + 1;
+      const nextPage = Math.floor(index / PAGE_SIZE) + 1;
       if (ctx.state.page !== nextPage) {
         ctx.state.page = nextPage;
         renderList(ctx.state.pokemon, ctx);

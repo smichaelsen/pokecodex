@@ -1,5 +1,5 @@
 import { createPaths } from './paths.js';
-import { renderList, showDetail } from './render.js';
+import { PAGE_SIZE, renderList, showDetail } from './render.js';
 
 const config = window.__POKEDEX_CONFIG__ || {};
 const state = { pokemon: [], types: config.typeInfo || {}, page: 1 };
@@ -65,7 +65,7 @@ async function boot() {
     }
   });
   pageNextEl?.addEventListener('click', () => {
-    const totalPages = Math.max(1, Math.ceil(state.pokemon.length / 12));
+    const totalPages = Math.max(1, Math.ceil(state.pokemon.length / PAGE_SIZE));
     if (state.page < totalPages) {
       state.page += 1;
       renderList(state.pokemon, ctx);
