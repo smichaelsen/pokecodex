@@ -284,6 +284,20 @@ function buildAudioVersions() {
   return versions;
 }
 
+function buildSpriteVersions() {
+  const versions = {};
+  const spriteDir = path.join(PUBLIC_DIR, 'assets', 'sprites');
+  if (!fs.existsSync(spriteDir)) return versions;
+  fs.readdirSync(spriteDir)
+    .filter((file) => file.endsWith('.png'))
+    .forEach((file) => {
+      const key = file.replace(/\.png$/, '');
+      const stat = fs.statSync(path.join(spriteDir, file));
+      versions[key] = Math.floor(stat.mtimeMs);
+    });
+  return versions;
+}
+
 function buildTypeCss(types) {
   return (types || [])
     .filter((t) => t && t.slug && t.color)
@@ -319,6 +333,7 @@ function buildHtml(template, pokemon, types, moves, assetVersion, audioVersions)
     typeNames: types.map((t) => t?.slug).filter(Boolean),
     moveSlugs: moves.map((m) => m?.slug).filter(Boolean),
     audioVersions,
+    spriteVersions: buildSpriteVersions(),
     assetVersion,
   };
 

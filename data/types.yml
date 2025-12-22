@@ -56,3 +56,7 @@
   name:
     de: Drache
   color: '#5c6bc0'
+- slug: fairy
+  name:
+    de: Fee
+  color: '#f48fb1'

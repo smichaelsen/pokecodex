@@ -1,0 +1,14 @@
+id: 130
+slug: gyarados
+name:
+  de: Garados
+entry:
+  de: Es ist äußerst brutal. Wenn es wütet, verwüstet es ganze Landstriche.
+types:
+  - water
+  - flying
+height_m: 6.5
+weight_kg: 235.0
+evolves_from: 129
+signature_move: hyper-beam
+evolutions: []

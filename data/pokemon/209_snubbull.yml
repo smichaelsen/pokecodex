@@ -1,0 +1,14 @@
+id: 209
+slug: snubbull
+name:
+  de: Snubbull
+entry:
+  de: Es wirkt grimmig, ist aber freundlich. Wenn es erschreckt wird, bellt es laut.
+types:
+  - fairy
+height_m: 0.6
+weight_kg: 7.8
+signature_move: play-rough
+evolutions:
+  - target: 210
+    condition: Entwicklung auf Level 23

@@ -5,7 +5,7 @@ name:
 entry:
   de: Es wird selten gesehen. Man sagt, es sammelt sich bei Vollmond, um zu tanzen.
 types:
-  - normal
+  - fairy
 height_m: 0.6
 weight_kg: 7.5
 signature_move: double-slap

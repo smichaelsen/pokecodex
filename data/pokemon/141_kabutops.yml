@@ -5,8 +5,8 @@ name:
 entry:
   de: Im Wasser zieht es seine Beine an und bewegt seinen Panzer, um so schneller schwimmen zu können.
 types:
-  - water
   - rock
+  - water
 height_m: 1.3
 weight_kg: 40.5
 evolves_from: 140

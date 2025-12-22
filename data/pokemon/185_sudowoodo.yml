@@ -1,0 +1,13 @@
+id: 185
+slug: sudowoodo
+name:
+  de: Mogelbaum
+entry:
+  de: Es tarnt sich als Baum und bleibt reglos stehen. Wird es gestört, greift es an.
+types:
+  - rock
+height_m: 1.2
+weight_kg: 38.0
+evolves_from: 438
+signature_move: stone-edge
+evolutions: []

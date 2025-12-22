@@ -322,3 +322,11 @@
   power: 140
   description:
     de: Runde 1: Der Anwender sucht das Ziel. Runde 2: Angriff mit voller Kraft.
+- slug: play-rough
+  name:
+    de: Knuddler
+    en: Play Rough
+  type: fairy
+  power: 90
+  description:
+    de: Der Anwender drückt das Ziel. Kann den Angriff senken.

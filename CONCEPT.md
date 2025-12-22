@@ -89,6 +89,15 @@
 6. (Done) Add the LED API (no-op in web for now) so apps can signal state consistently.
 7. (Done) Document the dexOS API contract and example app skeleton for new features (quiz, etc.).
 
+## Device Web Component Plan
+1. Create a `<dex-device>` custom element that owns the chrome (red shell, LEDs, hardware button, covers, panes).
+2. Move the device markup from `public/index.html` into the component’s template; keep light DOM so existing CSS remains compatible.
+3. Expose a minimal imperative API on the element (e.g., `setLed(index, state)`, `pulseLed(index, pattern)`, `setScreenOff(state)`, `setCover(state)`, `setMenuEnabled(state)`).
+4. Emit a `dex-device:button` event on hardware button click and `dex-device:button-hold` for long-press detection (or let dexOS own the timer but listen to pointer events from the component).
+5. Update dexOS to interact with the component API instead of direct DOM nodes (covers, LEDs, button).
+6. Update `app.js` to locate the `<dex-device>` element and pass it into dexOS.
+7. Add a minimal note in `DEXOS.md` that hardware APIs are private and apps must only use dexOS APIs (no detailed hardware docs).
+
 ## TODO (Maintainability Roadmap)
 1. (Done) Extract CSS into `public/css/app.css` and reference it from the generated HTML.
 2. (Done) Extract JS into ES modules under `public/js/` (e.g., `app.js`, `render.js`, `audio.js`, `state.js`, `utils/escapeHtml.js`).

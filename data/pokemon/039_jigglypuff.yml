@@ -6,6 +6,7 @@ entry:
   de: Wenn seine Augen anfangen zu flackern, singt es ein beruhigendes Lied, das das Ziel einschläfert.
 types:
   - normal
+  - fairy
 height_m: 0.5
 weight_kg: 5.5
 signature_move: sing
