@@ -186,3 +186,32 @@ host.storage.set(key, value)    // writes JSON unless value is a string
 host.storage.remove(key)        // removes a key
 host.storage.clear()            // clears storage backend
 ```
+
+## Concept
+- Purpose: a thin OS layer that owns device-level behavior and provides stable APIs for apps.
+- Apps render into two panes (left list, right detail) using a shared contract (mount, update, destroy).
+- Menu control: OS owns the hardware menu button and overlay UI; apps register menu actions.
+- Data API: OS provides `loadPokemon()` and `getTypeInfo()`/`getMoveInfo()` so apps avoid file access.
+- Audio API: OS exposes `playName(id)`, `playDescription(id)`, `playChime(id)`, and `playType(slug)`.
+- LED API: OS exposes `setLed(index, state)` and `pulseLed(index, pattern)`.
+- Navigation: OS manages current app, back/close behavior on mobile, and per-app UI state.
+- Storage: OS provides a small key-value cache backed by `localStorage`.
+- Diagnostics: OS can expose a lightweight debug overlay or console logging toggle.
+
+## Implementation Plan
+1. Create a `public/js/dexOS/` module with a minimal app contract and host registry.
+2. Move menu ownership into dexOS (hardware button, overlay handling, menu actions).
+3. Move data loading into dexOS (`loadPokemon`, `getTypeInfo`, `getMoveInfo`) and dispatch `dexos:data:updated`.
+4. Centralize audio handling in dexOS (preload, play helpers, missing-audio behavior).
+5. Introduce dexOS storage helpers backed by `localStorage` for app state.
+6. (Done) Add the LED API (no-op in web for now) so apps can signal state consistently.
+7. (Done) Document the dexOS API contract and example app skeleton for new features.
+
+## Device Web Component Plan
+1. Create a `<dex-device>` custom element that owns the chrome (shell, LEDs, button, covers, panes).
+2. Move device markup from `public/index.html` into the component template.
+3. Expose a minimal imperative API on the element (LEDs, covers, screen off, menu enabled).
+4. Emit `dex-device:button` and `dex-device:button-hold` events for input handling.
+5. Update dexOS to use the component API instead of direct DOM nodes.
+6. Update `app.js` to locate the `<dex-device>` element and pass it into dexOS.
+7. Add a note that hardware APIs are private and apps must only use dexOS APIs.

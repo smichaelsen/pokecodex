@@ -27,7 +27,7 @@ const hideOverlay = () => {
 async function boot() {
   const [{ createDexOS }, { createPokedexApp }] = await Promise.all([
     import(`./dexOS/dexOS.js${moduleVersion}`),
-    import(`./apps/pokedexApp.js${moduleVersion}`),
+    import(`./apps/pokedexApp/pokedexApp.js${moduleVersion}`),
   ]);
   const host = createDexOS({
     menuButtonEl,

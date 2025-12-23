@@ -113,6 +113,14 @@
   power: 0
   description:
     de: Der Anwender härtet seinen Körper, um die Verteidigung zu erhöhen.
+- slug: soft-boiled
+  name:
+    de: Weichei
+    en: Soft-Boiled
+  type: normal
+  power: 0
+  description:
+    de: Stellt KP des Anwenders wieder her.
 - slug: poison-sting
   name:
     de: Giftstachel
