@@ -42,7 +42,6 @@ async function boot() {
     coverRightEl,
     config,
   });
-
   const ctx = {
     config,
     moduleVersion,
@@ -63,15 +62,19 @@ async function boot() {
 
   host.registerApp('pokedex', createPokedexApp);
   host.setDefaultApp?.('pokedex', ctx);
-  await host.startIntro?.({ reveal: false });
   try {
-    await host.loadPokemon({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
+    if (typeof host.boot === 'function') {
+      await host.boot({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
+    } else {
+      await host.startIntro?.({ reveal: false });
+      await host.loadPokemon({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
+      await host.startDefault?.();
+      host.finishIntro?.();
+    }
   } catch (err) {
     window.location.reload();
     return;
   }
-  await host.startDefault?.();
-  host.finishIntro?.();
 }
 
 boot();

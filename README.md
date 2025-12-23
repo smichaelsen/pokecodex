@@ -14,3 +14,6 @@
 - Public assets: `public/`
 - Build output: `dist/`
 - Scripts: `scripts/`
+
+## Build
+- Full pipeline (lint, fetch assets, generate audio, build): `bash apps/pokedex/scripts/build_pipeline.sh`

@@ -48,9 +48,9 @@ export async function createPokedexApp(ctx) {
   };
 
   const [, { createPaths }, renderModule] = await Promise.all([
-    import(`../components/pokedex-card.js${moduleVersion}`),
-    import(`../paths.js${moduleVersion}`),
-    import(`../render.js${moduleVersion}`),
+    import(`../../components/pokedex-card.js${moduleVersion}`),
+    import(`../../paths.js${moduleVersion}`),
+    import(`../../render.js${moduleVersion}`),
   ]);
   const { PAGE_SIZE, renderList, showDetail } = renderModule;
 

@@ -166,7 +166,7 @@ export function createDexOS({
     }
 
     contentEl?.classList.remove('screen-off');
-    await startIntro({ reveal: false });
+    await runIntro({ reveal: false });
     if (defaultApp) {
       await switchTo(defaultApp.id, defaultApp.ctx);
     }
@@ -353,7 +353,7 @@ export function createDexOS({
     return switchTo(defaultApp.id, defaultApp.ctx);
   };
 
-  const startIntro = async ({ reveal = true } = {}) => {
+  const runIntro = async ({ reveal = true } = {}) => {
     if (!isPoweredOn) return;
     introActive = true;
     setCoverState(true);
@@ -411,8 +411,12 @@ export function createDexOS({
     switchTo,
     setDefaultApp,
     startDefault,
-    startIntro,
-    finishIntro,
+    boot: async ({ cacheBust, source = 'init' } = {}) => {
+      await runIntro({ reveal: false });
+      await loadPokemon({ cacheBust, source });
+      await startDefault();
+      finishIntro();
+    },
     registerMenu,
     hideMenu,
     showMenu,
