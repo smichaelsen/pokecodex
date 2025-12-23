@@ -115,7 +115,6 @@ flush_type() {
   fi
   local dest="$OUT_DIR/${slug}.mp3"
   if [[ -f "$dest" && "$FORCE" -ne 1 ]]; then
-    echo "Skip type $slug (audio exists: $dest)"
     ((skipped++)) || true
     return
   fi
@@ -179,4 +178,4 @@ done < "$DATA_FILE"
 
 flush_type "$current_slug" "$current_name" "$current_tts"
 
-echo "Done. generated=$downloaded skipped=$skipped failed=$failed"
+echo "Generate type audio done. generated=$downloaded skipped=$skipped failed=$failed"

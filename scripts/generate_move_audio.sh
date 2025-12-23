@@ -116,7 +116,6 @@ flush_move() {
   fi
   local dest="$OUT_DIR/${slug}.mp3"
   if [[ -f "$dest" && "$FORCE" -ne 1 ]]; then
-    echo "Skip move $slug (audio exists: $dest)"
     ((skipped++)) || true
     return
   fi
@@ -188,4 +187,4 @@ done < "$DATA_FILE"
 
 flush_move "$current_slug" "$current_name" "$current_tts"
 
-echo "Done. generated=$downloaded skipped=$skipped warnings=$warnings failed=$failed"
+echo "Generate move audio done. generated=$downloaded skipped=$skipped warnings=$warnings failed=$failed"

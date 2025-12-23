@@ -361,19 +361,19 @@ export function createDexOS({
     setLed(1, false);
     setLed(2, false);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     if (!isPoweredOn) return;
     setLed(0, true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     setLed(0, false);
     setLed(1, true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     setLed(1, false);
     setLed(2, true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     setLed(2, false);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     if (!isPoweredOn) return;
     if (reveal) {
       setCoverState(false);

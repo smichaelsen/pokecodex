@@ -29,7 +29,6 @@ for file in "$DATA_DIR"/*.yml; do
   dest="$OUT_DIR/$id_padded.png"
 
   if [[ -f "$dest" ]]; then
-    echo "Skip $file (sprite exists: $dest)"
     ((skipped++)) || true
     continue
   fi
@@ -45,4 +44,4 @@ for file in "$DATA_DIR"/*.yml; do
   fi
 done
 
-echo "Done. downloaded=$downloaded skipped=$skipped failed=$failed"
+echo "Fetch sprites done. downloaded=$downloaded skipped=$skipped failed=$failed"

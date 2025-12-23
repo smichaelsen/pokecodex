@@ -338,3 +338,11 @@
   power: 90
   description:
     de: Der Anwender drückt das Ziel. Kann den Angriff senken.
+- slug: tri-attack
+  name:
+    de: Triplette
+    en: Tri Attack
+  type: normal
+  power: 80
+  description:
+    de: Feuert drei Strahlen ab. Verursacht eventuell Paralyse, Verbrennung oder Einfrieren.

@@ -128,7 +128,6 @@ for file in "$DATA_DIR"/*.yml; do
 
   dest="$OUT_DIR/${id_line}.mp3"
   if [[ -f "$dest" && "$FORCE" -ne 1 ]]; then
-    echo "Skip $file (audio exists: $dest)"
     ((skipped++)) || true
     continue
   fi
@@ -149,4 +148,4 @@ for file in "$DATA_DIR"/*.yml; do
   rm -f "$tmp_wav"
 done
 
-echo "Done. generated=$generated skipped=$skipped failed=$failed"
+echo "Generate description audio done. generated=$generated skipped=$skipped failed=$failed"

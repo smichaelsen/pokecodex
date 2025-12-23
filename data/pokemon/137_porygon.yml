@@ -1,0 +1,14 @@
+id: 137
+slug: porygon
+name:
+  de: Porygon
+entry:
+  de: Ein künstlich produziertes Pokémon, welches das Ergebnis von Forschungen ist. Es ist simpel aufgebaut.
+types:
+  - normal
+height_m: 0.8
+weight_kg: 36.5
+signature_move: tri-attack
+evolutions:
+  - target: 233
+    condition: Tausch mit Upgrade
