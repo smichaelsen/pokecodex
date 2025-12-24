@@ -1,0 +1,14 @@
+id: 91
+slug: cloyster
+name:
+  de: Austos
+entry:
+  de: Austos, die im Meer mit starker Strömung leben, werden groß und entwickeln scharfe Stacheln.
+types:
+  - water
+  - ice
+height_m: 1.5
+weight_kg: 132.5
+evolves_from: 90
+signature_move: hydro-pump
+evolutions: []
