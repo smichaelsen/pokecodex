@@ -1,0 +1,15 @@
+id: 13
+slug: weedle
+name:
+  de: Hornliu
+entry:
+  de: Es lebt bevorzugt in Wäldern und in hohem Gras. Auf dem Kopf trägt es einen circa 5 cm langen, spitzen, giftigen Stachel.
+types:
+  - bug
+  - poison
+height_m: 0.3
+weight_kg: 3.2
+signature_move: string-shot
+evolutions:
+  - target: 14
+    condition: Entwicklung auf Level 7

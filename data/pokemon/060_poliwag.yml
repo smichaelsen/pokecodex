@@ -1,0 +1,14 @@
+id: 60
+slug: poliwag
+name:
+  de: Quapsel
+entry:
+  de: Seine glatte, schwarze Haut ist dünn und feucht. Teilweise sind seine Innereien als spiralförmige Muster sichtbar.
+types:
+  - water
+height_m: 0.6
+weight_kg: 12.4
+signature_move: water-gun
+evolutions:
+  - target: 61
+    condition: Entwicklung auf Level 25

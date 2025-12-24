@@ -1,0 +1,16 @@
+id: 145
+slug: zapdos
+name:
+  de: Zapdos
+name_tts:
+  de: zapdos
+entry:
+  de: Ein Legendäres Vogel-Pokémon, das im Sturzflug aus den Wolken bricht und Blitze schleudert.
+types:
+  - electric
+  - flying
+height_m: 1.6
+weight_kg: 52.6
+signature_move: thunder
+evolutions: []
+

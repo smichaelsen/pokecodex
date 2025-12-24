@@ -1,3 +1,33 @@
+- slug: giga-impact
+  name:
+    de: Gigastoß
+    en: Giga Impact
+  tts:
+    de: gigaschtoß
+  type: normal
+  power: 150
+  description:
+    de: Der Anwender greift mit voller Kraft an. In der nächsten Runde muss er sich erholen.
+- slug: blizzard
+  name:
+    de: Blizzard
+    en: Blizzard
+  tts:
+    de: blisard
+  type: ice
+  power: 110
+  description:
+    de: Erzeugt einen heftigen Schneesturm und greift das Ziel an.
+- slug: leaf-lullaby
+  name:
+    de: Blattwiegenlied
+    en: Leaf Lullaby
+  tts:
+    de: blattwiegenliet
+  type: grass
+  power: 60
+  description:
+    de: Ein sanfter Blätterhauch mit beruhigendem Aroma, der Schaden verursacht und das Ziel einschläfern kann.
 - slug: leech-seed
   name:
     de: Egelsamen
@@ -57,6 +87,14 @@
   power: 40
   description:
     de: Das Ziel wird mit Wasser bespritzt.
+- slug: bubble
+  name:
+    de: Blubber
+    en: Bubble
+  type: water
+  power: 40
+  description:
+    de: Das Ziel wird mit Blubberblasen getroffen. Kann die Initiative des Zieles senken.
 - slug: withdraw
   name:
     de: Panzerschutz
@@ -73,6 +111,14 @@
   power: 110
   description:
     de: Spritzt eine Menge Wasser mit Hochdruck auf das Ziel.
+- slug: acid
+  name:
+    de: Säure
+    en: Acid
+  type: poison
+  power: 40
+  description:
+    de: Sprüht Säure, die das Ziel eventuell seine Verteidigung senken lässt.
 - slug: string-shot
   name:
     de: Fadenschuss
@@ -97,6 +143,22 @@
   power: 110
   description:
     de: Eine verheerende Elektro-Attacke, die das Ziel eventuell paralysiert.
+- slug: spark
+  name:
+    de: Funken
+    en: Spark
+  type: electric
+  power: 65
+  description:
+    de: Ein schneller elektrischer Schlag, der das Ziel eventuell paralysiert.
+- slug: thunderbolt
+  name:
+    de: Donnerblitz
+    en: Thunderbolt
+  type: electric
+  power: 90
+  description:
+    de: Ein starker Blitzangriff, der das Ziel eventuell paralysiert.
 - slug: pay-day
   name:
     de: Zahltag
@@ -121,6 +183,14 @@
   power: 0
   description:
     de: Stellt KP des Anwenders wieder her.
+- slug: slash
+  name:
+    de: Schlitzer
+    en: Slash
+  type: normal
+  power: 70
+  description:
+    de: Der Anwender schlitzt mit einer scharfen Klinge. Hohe Volltrefferquote.
 - slug: poison-sting
   name:
     de: Giftstachel
@@ -139,6 +209,14 @@
   power: 0
   description:
     de: Eine Giftwolke, die das Ziel eventuell vergiftet.
+- slug: glare
+  name:
+    de: Schlangenblick
+    en: Glare
+  type: poison
+  power: 0
+  description:
+    de: Schüchtert das Ziel mit dem Muster auf seinem Bauch ein, sodass dieses paralysiert wird.
 - slug: teleport
   name:
     de: Teleport
@@ -248,6 +326,22 @@
   power: 40
   description:
     de: Sehr schneller Angriff mit Erstschlaggarantie.
+- slug: hyper-fang
+  name:
+    de: Hyperzahn
+    en: Hyper Fang
+  type: normal
+  power: 80
+  description:
+    de: Angriff mit scharfen Reißzähnen. Ziel schreckt eventuell zurück.
+- slug: bite
+  name:
+    de: Biss
+    en: Bite
+  type: dark
+  power: 60
+  description:
+    de: Beißt zu und lässt das Ziel eventuell zurückschrecken.
 - slug: crabhammer
   name:
     de: Krabbhammer
@@ -322,6 +416,14 @@
   power: 60
   description:
     de: Trifft das Ziel mit Flügeln und sorgt für eine heftige Böe.
+- slug: drill-peck
+  name:
+    de: Bohrschnabel
+    en: Drill Peck
+  type: flying
+  power: 80
+  description:
+    de: Korkenzieherangriff, bei dem der Schnabel als Bohrer dient.
 - slug: sky-attack
   name:
     de: Himmelsfeger

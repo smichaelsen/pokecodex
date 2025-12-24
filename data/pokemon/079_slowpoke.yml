@@ -13,3 +13,5 @@ signature_move: water-gun
 evolutions:
   - target: 80
     condition: Level 37
+  - target: 199
+    condition: Tausch mit Königsstein

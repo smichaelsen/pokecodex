@@ -1,10 +1,14 @@
 - slug: grass
   name:
     de: Pflanze
+  tts:
+    de: Pflanzeh
   color: '#4caf50'
 - slug: poison
   name:
     de: Gift
+  tts:
+    de: giftig
   color: '#9c27b0'
 - slug: fire
   name:
@@ -22,6 +26,10 @@
   name:
     de: Normal
   color: '#bdbdbd'
+- slug: fighting
+  name:
+    de: Kampf
+  color: '#f44336'
 - slug: ground
   name:
     de: Boden
@@ -32,6 +40,10 @@
   name:
     de: Flug
   color: '#90caf9'
+- slug: dark
+  name:
+    de: Unlicht
+  color: '#212121'
 - slug: rock
   name:
     de: Gestein

@@ -1,0 +1,15 @@
+id: 72
+slug: tentacool
+name:
+  de: Tentacha
+entry:
+  de: Sein Körper besteht aus Wasser. Aus seinen kristallartigen Augen verschießt es eigenartige Strahlen.
+types:
+  - water
+  - poison
+height_m: 0.9
+weight_kg: 45.5
+signature_move: acid
+evolutions:
+  - target: 73
+    condition: Entwicklung auf Level 30

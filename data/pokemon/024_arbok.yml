@@ -1,0 +1,13 @@
+id: 24
+slug: arbok
+name:
+  de: Arbok
+entry:
+  de: Das Muster auf seinem Bauch ähnelt einer Fratze. Schwache Gegner nehmen bereits beim Anblick Reißaus.
+types:
+  - poison
+height_m: 3.5
+weight_kg: 65.0
+evolves_from: 23
+signature_move: glare
+evolutions: []

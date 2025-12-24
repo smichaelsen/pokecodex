@@ -1,0 +1,14 @@
+id: 15
+slug: beedrill
+name:
+  de: Bibor
+entry:
+  de: Dieses Pokémon verfügt über drei Giftstachel. Es kann seine Gegner damit wiederholt stechen.
+types:
+  - bug
+  - poison
+height_m: 1.0
+weight_kg: 29.5
+evolves_from: 14
+signature_move: megahorn
+evolutions: []

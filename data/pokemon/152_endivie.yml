@@ -1,0 +1,16 @@
+id: 152
+slug: endivie
+name:
+  de: Endivie
+name_tts:
+  de: endiwie
+entry:
+  de: Mit seinem aromatischen Blatt ist es in der Lage, die Temperatur und die Luftfeuchtigkeit seiner Umgebung zu messen. Es liegt gerne in der Sonne.
+types:
+  - grass
+height_m: 0.9
+weight_kg: 6.4
+signature_move: leaf-lullaby
+evolutions:
+  - target: 153
+    condition: Level 16

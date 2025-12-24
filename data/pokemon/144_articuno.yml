@@ -1,0 +1,16 @@
+id: 144
+slug: articuno
+name:
+  de: Arktos
+name_tts:
+  de: arktos
+entry:
+  de: Ein Legendäres Vogel-Pokémon. Es kann Blizzards verursachen, indem es Feuchtigkeit gefriert.
+types:
+  - ice
+  - flying
+height_m: 1.7
+weight_kg: 55.4
+signature_move: blizzard
+evolutions: []
+
