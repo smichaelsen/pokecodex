@@ -1,0 +1,14 @@
+id: 82
+slug: magneton
+name:
+  de: Magnetilo
+entry:
+  de: Schließen sich mehrere Magnetilo zusammen, entsteht dieses Pokémon. Es entlädt kräftige Hochspannungsmagnetwellen.
+types:
+  - electric
+  - steel
+height_m: 1.0
+weight_kg: 60.0
+evolves_from: 81
+signature_move: thunderbolt
+evolutions: []

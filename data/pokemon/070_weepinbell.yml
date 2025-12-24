@@ -1,0 +1,16 @@
+id: 70
+slug: weepinbell
+name:
+  de: Ultrigaria
+entry:
+  de: Die Blätter werden eingesetzt, um Gegner aufzuschlitzen. Dieses Pokémon spuckt eine Flüssigkeit, die alles auflöst.
+types:
+  - grass
+  - poison
+height_m: 1.0
+weight_kg: 6.4
+evolves_from: 69
+signature_move: acid
+evolutions:
+  - target: 71
+    condition: Blattstein

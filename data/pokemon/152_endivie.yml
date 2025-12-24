@@ -10,7 +10,7 @@ types:
   - grass
 height_m: 0.9
 weight_kg: 6.4
-signature_move: leaf-lullaby
+signature_move: razor-leaf
 evolutions:
   - target: 153
     condition: Level 16

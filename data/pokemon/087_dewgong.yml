@@ -1,0 +1,14 @@
+id: 87
+slug: dewgong
+name:
+  de: Jugong
+entry:
+  de: Sein Körper ist mit reinem, weißem Fell überzogen. Je kälter es wird, desto aktiver wird dieses Pokémon.
+types:
+  - water
+  - ice
+height_m: 1.7
+weight_kg: 120.0
+evolves_from: 86
+signature_move: surf
+evolutions: []

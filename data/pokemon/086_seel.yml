@@ -1,0 +1,14 @@
+id: 86
+slug: seel
+name:
+  de: Jurob
+entry:
+  de: Dieses Pokémon lebt auf Eisbergen. Es schwimmt im Eiswasser und bricht das Eis mithilfe seines Horns.
+types:
+  - water
+height_m: 1.1
+weight_kg: 90.0
+signature_move: ice-beam
+evolutions:
+  - target: 87
+    condition: Level 34

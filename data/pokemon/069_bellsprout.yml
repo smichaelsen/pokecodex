@@ -1,0 +1,15 @@
+id: 69
+slug: bellsprout
+name:
+  de: Knofensa
+entry:
+  de: Obwohl sein Körper sehr schmal ist, schnappt es blitzschnell nach Beute.
+types:
+  - grass
+  - poison
+height_m: 0.7
+weight_kg: 4.0
+signature_move: vine-whip
+evolutions:
+  - target: 70
+    condition: Level 21

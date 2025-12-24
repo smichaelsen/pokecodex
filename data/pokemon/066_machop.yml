@@ -1,0 +1,14 @@
+id: 66
+slug: machop
+name:
+  de: Machollo
+entry:
+  de: Es hebt Georok hoch, um seinen Körper zu trainieren. Außerdem übt es sich in jeder Art von Kampfsport.
+types:
+  - fighting
+height_m: 0.8
+weight_kg: 19.5
+signature_move: low-kick
+evolutions:
+  - target: 67
+    condition: Entwicklung auf Level 28

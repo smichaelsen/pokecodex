@@ -1,0 +1,14 @@
+id: 58
+slug: growlithe
+name:
+  de: Fukano
+entry:
+  de: Es ist sehr freundlich und bleibt den Menschen treu. Durch Bellen und Beißen versucht es, Gegner zu verscheuchen.
+types:
+  - fire
+height_m: 0.7
+weight_kg: 19.0
+signature_move: flamethrower
+evolutions:
+  - target: 59
+    condition: Entwicklung auf Level 40

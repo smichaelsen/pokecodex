@@ -1,0 +1,15 @@
+id: 67
+slug: machoke
+name:
+  de: Maschock
+entry:
+  de: Dieses Pokémon ist superstark. Es kann sich nur mit einem Kraft regulierenden Gürtel bewegen.
+types:
+  - fighting
+height_m: 1.5
+weight_kg: 70.5
+evolves_from: 66
+signature_move: brick-break
+evolutions:
+  - target: 68
+    condition: Tausch mit Machomei-Gürtel
