@@ -262,6 +262,14 @@
   power: 50
   description:
     de: Das Ziel wird mit einem kleinen Stein beworfen.
+- slug: earthquake
+  name:
+    de: Erdbeben
+    en: Earthquake
+  type: ground
+  power: 100
+  description:
+    de: Ein gewaltiger Erschütterungsangriff, der alles um den Anwender herum trifft.
 - slug: sand-attack
   name:
     de: Sandwirbel

@@ -1,0 +1,15 @@
+id: 102
+slug: exeggcute
+name:
+  de: Owei
+entry:
+  de: Die sechs Eier kommunizieren telepathisch. Werden sie getrennt, finden sie sich schnell wieder.
+types:
+  - grass
+  - psychic
+height_m: 0.4
+weight_kg: 2.5
+signature_move: sleep-powder
+evolutions:
+  - target: 103
+    condition: Blattstein

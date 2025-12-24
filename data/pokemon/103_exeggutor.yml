@@ -1,0 +1,14 @@
+id: 103
+slug: exeggutor
+name:
+  de: Kokowei
+entry:
+  de: Seine drei Köpfe denken unabhängig voneinander. Dennoch sind sie nett zueinander und streiten nie.
+types:
+  - grass
+  - psychic
+height_m: 2.0
+weight_kg: 120.0
+evolves_from: 102
+signature_move: solar-beam
+evolutions: []

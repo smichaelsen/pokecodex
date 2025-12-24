@@ -1,0 +1,14 @@
+id: 40
+slug: wigglytuff
+name:
+  de: Knuddeluff
+entry:
+  de: Sein Fell ist so flauschig, dass, wenn zwei zusammenstehen, sie nicht getrennt werden möchten.
+types:
+  - normal
+  - fairy
+height_m: 1.0
+weight_kg: 12.0
+evolves_from: 39
+signature_move: double-slap
+evolutions: []

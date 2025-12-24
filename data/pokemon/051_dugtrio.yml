@@ -1,0 +1,13 @@
+id: 51
+slug: dugtrio
+name:
+  de: Digdri
+entry:
+  de: Im Kampf gräbt es sich ein und attackiert den Gegner aus einer unvorhersehbaren Richtung.
+types:
+  - ground
+height_m: 0.7
+weight_kg: 33.3
+evolves_from: 50
+signature_move: earthquake
+evolutions: []
