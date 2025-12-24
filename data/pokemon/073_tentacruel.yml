@@ -1,0 +1,14 @@
+id: 73
+slug: tentacruel
+name:
+  de: Tentoxa
+entry:
+  de: Dieses Pokémon kann die Tentakel bei der Jagd ausfahren, um die Beute leichter zu fangen.
+types:
+  - water
+  - poison
+height_m: 1.6
+weight_kg: 55.0
+evolves_from: 72
+signature_move: hydro-pump
+evolutions: []

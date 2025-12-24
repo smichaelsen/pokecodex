@@ -1,0 +1,16 @@
+id: 42
+slug: golbat
+name:
+  de: Golbat
+entry:
+  de: Dieses Pokémon saugt dem Gegner selbst dann noch Energie ab, wenn es zu schwer zum Fliegen wird.
+types:
+  - poison
+  - flying
+height_m: 1.6
+weight_kg: 55.0
+evolves_from: 41
+signature_move: wing-attack
+evolutions:
+  - target: 169
+    condition: Level 55

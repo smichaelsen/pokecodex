@@ -1,0 +1,14 @@
+id: 56
+slug: mankey
+name:
+  de: Menki
+entry:
+  de: Da es grundlos angreift und nicht zwischen Freund oder Feind unterscheidet, ist es sehr gefährlich.
+types:
+  - fighting
+height_m: 0.5
+weight_kg: 28.0
+signature_move: karate-chop
+evolutions:
+  - target: 57
+    condition: Entwicklung auf Level 28

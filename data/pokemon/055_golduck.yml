@@ -1,0 +1,13 @@
+id: 55
+slug: golduck
+name:
+  de: Entoron
+entry:
+  de: An seinen langen, dünnen Gliedmaßen befinden sich Schwimmflossen. Mit diesen kann es anmutig durch Seen schwimmen.
+types:
+  - water
+height_m: 1.7
+weight_kg: 76.6
+evolves_from: 54
+signature_move: hydro-pump
+evolutions: []

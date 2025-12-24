@@ -1,0 +1,14 @@
+id: 47
+slug: parasect
+name:
+  de: Parasek
+entry:
+  de: Parasek wird von einem Pilz, der größer als das Pokémon ist, kontrolliert. Er gibt Giftsporen ab.
+types:
+  - bug
+  - grass
+height_m: 1.0
+weight_kg: 29.5
+evolves_from: 46
+signature_move: megahorn
+evolutions: []

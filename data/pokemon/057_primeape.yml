@@ -1,0 +1,13 @@
+id: 57
+slug: primeape
+name:
+  de: Rasaff
+entry:
+  de: In ganz seltenen Fällen beruhigt sich dieses sehr jähzornige Pokémon und ist für einen Moment friedlich.
+types:
+  - fighting
+height_m: 1.0
+weight_kg: 32.0
+evolves_from: 56
+signature_move: cross-chop
+evolutions: []

@@ -1,0 +1,15 @@
+id: 46
+slug: paras
+name:
+  de: Paras
+entry:
+  de: Auf seinem Rücken wachsen Pilze, die man Tochukaso nennt. Die Pilze wachsen mit ihrem Wirt.
+types:
+  - bug
+  - grass
+height_m: 0.3
+weight_kg: 5.4
+signature_move: stun-spore
+evolutions:
+  - target: 47
+    condition: Entwicklung auf Level 24

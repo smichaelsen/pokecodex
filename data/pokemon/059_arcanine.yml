@@ -1,0 +1,13 @@
+id: 59
+slug: arcanine
+name:
+  de: Arkani
+entry:
+  de: Es besitzt einen ausgeprägten Hitzesinn. Mit einer einzigen Bewegung erreicht es die maximale Laufgeschwindigkeit.
+types:
+  - fire
+height_m: 1.9
+weight_kg: 155.0
+evolves_from: 58
+signature_move: fire-blast
+evolutions: []

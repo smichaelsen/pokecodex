@@ -18,16 +18,14 @@
   power: 110
   description:
     de: Erzeugt einen heftigen Schneesturm und greift das Ziel an.
-- slug: leaf-lullaby
+- slug: razor-leaf
   name:
-    de: Blattwiegenlied
-    en: Leaf Lullaby
-  tts:
-    de: blattwiegenliet
+    de: Rasierblatt
+    en: Razor Leaf
   type: grass
-  power: 60
+  power: 55
   description:
-    de: Ein sanfter Blätterhauch mit beruhigendem Aroma, der Schaden verursacht und das Ziel einschläfern kann.
+    de: Trifft das Ziel mit Blättern. Hohe Volltrefferquote.
 - slug: leech-seed
   name:
     de: Egelsamen
@@ -45,6 +43,54 @@
   power: 0
   description:
     de: Verstreut Schlafpuder, der das Ziel eventuell in Schlaf versetzt.
+- slug: karate-chop
+  name:
+    de: Karateschlag
+    en: Karate Chop
+  type: fighting
+  power: 50
+  description:
+    de: Ein gezielter Hieb mit der flachen Hand, der das Ziel eventuell zurückschrecken lässt.
+- slug: cross-chop
+  name:
+    de: Kreuzhieb
+    en: Cross Chop
+  type: fighting
+  power: 100
+  description:
+    de: Ein kräftiger Doppelhieb, bei dem jeder Arm unterschiedlich zuschlägt. Hohe Volltrefferquote.
+- slug: low-kick
+  name:
+    de: Fußkick
+    en: Low Kick
+  type: fighting
+  power: 50
+  description:
+    de: Ein Tritt gegen die Beine, der bei schweren Gegnern mehr Schaden verursacht.
+- slug: brick-break
+  name:
+    de: Durchbruch
+    en: Brick Break
+  type: fighting
+  power: 75
+  description:
+    de: Bricht gegnerische Schutzschichten und greift mit einem kräftigen Hieb an.
+- slug: stun-spore
+  name:
+    de: Stachelspore
+    en: Stun Spore
+  type: grass
+  power: 0
+  description:
+    de: Ein giftiger Staub, der das Ziel eventuell paralysiert.
+- slug: vine-whip
+  name:
+    de: Rankenhieb
+    en: Vine Whip
+  type: grass
+  power: 45
+  description:
+    de: Die Ranken peitschen das Ziel. Kann den Verteidigungswert senken.
 - slug: solar-beam
   name:
     de: Solarstrahl
@@ -55,6 +101,14 @@
   power: 120
   description:
     de: Absorbiert Licht in Runde 1. In Runde 2 erfolgt der Angriff.
+- slug: absorb
+  name:
+    de: Absorber
+    en: Absorb
+  type: grass
+  power: 20
+  description:
+    de: Saugt dem Ziel KP und heilt den Anwender um die Hälfte des Schadens.
 - slug: ember
   name:
     de: Glut
@@ -111,6 +165,14 @@
   power: 110
   description:
     de: Spritzt eine Menge Wasser mit Hochdruck auf das Ziel.
+- slug: surf
+  name:
+    de: Surfer
+    en: Surf
+  type: water
+  power: 90
+  description:
+    de: Reitet auf einer gewaltigen Wasserwelle auf das Ziel zu.
 - slug: acid
   name:
     de: Säure
@@ -145,7 +207,7 @@
     de: Eine verheerende Elektro-Attacke, die das Ziel eventuell paralysiert.
 - slug: spark
   name:
-    de: Funken
+    de: Funkensprung
     en: Spark
   type: electric
   power: 65
@@ -254,6 +316,14 @@
   power: 25
   description:
     de: Feuert zwei bis fünf Eiszapfen auf das Ziel.
+- slug: ice-beam
+  name:
+    de: Eisstrahl
+    en: Ice Beam
+  type: ice
+  power: 90
+  description:
+    de: Schießt einen eisigen Strahl ab, der das Ziel eventuell einfrieren kann.
 - slug: rock-throw
   name:
     de: Steinwurf
@@ -262,6 +332,22 @@
   power: 50
   description:
     de: Das Ziel wird mit einem kleinen Stein beworfen.
+- slug: rock-slide
+  name:
+    de: Steinhagel
+    en: Rock Slide
+  type: rock
+  power: 75
+  description:
+    de: Feuert mehrere Steine auf das Ziel. Kann das Ziel zurückschrecken lassen.
+- slug: flame-wheel
+  name:
+    de: Flammenrad
+    en: Flame Wheel
+  type: fire
+  power: 60
+  description:
+    de: Läuft auf das Ziel zu und schlägt mit brennendem Huf ein. Kann Verbrennungen verursachen.
 - slug: earthquake
   name:
     de: Erdbeben
@@ -392,7 +478,7 @@
     de: Es passiert nichts.
 - slug: double-slap
   name:
-    de: Doppelschlag
+    de: Duplexhieb
     en: Double Slap
   type: normal
   power: 15

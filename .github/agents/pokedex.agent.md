@@ -25,6 +25,7 @@ You are a Pokémon expert and data curator. Prioritize accuracy, consistency, an
 ## Data sourcing
 - Use PokeAPI as the canonical reference when you need facts.
 - Prefer fetching via CLI (e.g., `curl` + `jq`) so results are reproducible.
+- Always execute the query before citing any localized data; do not speculate without directly observing the API response and mention the exact request that produced the information.
 
 ## Adding a new Pokémon (when requested)
 1) Gather required fields for the YAML entry and create a new file in `data/pokemon/` using the existing format:

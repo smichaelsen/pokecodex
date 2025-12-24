@@ -1,0 +1,13 @@
+id: 68
+slug: machamp
+name:
+  de: Machomei
+entry:
+  de: Seine markigen Arme können innerhalb von nur zwei Sekunden 1 000 Schläge verteilen.
+types:
+  - fighting
+height_m: 1.6
+weight_kg: 130.0
+evolves_from: 67
+signature_move: cross-chop
+evolutions: []

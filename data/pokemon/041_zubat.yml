@@ -1,0 +1,15 @@
+id: 41
+slug: zubat
+name:
+  de: Zubat
+entry:
+  de: Obwohl es keine Augen hat, kann es Hindernisse mithilfe von Ultraschallwellen wahrnehmen.
+types:
+  - poison
+  - flying
+height_m: 0.8
+weight_kg: 7.5
+signature_move: gust
+evolutions:
+  - target: 42
+    condition: Level 22

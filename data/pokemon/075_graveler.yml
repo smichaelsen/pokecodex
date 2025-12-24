@@ -1,0 +1,16 @@
+id: 75
+slug: graveler
+name:
+  de: Georok
+entry:
+  de: Es ist ihm völlig gleichgültig, wenn Stücke aus ihm herausbrechen, während es Berge hinabrollt.
+types:
+  - rock
+  - ground
+height_m: 1.0
+weight_kg: 105.0
+evolves_from: 74
+signature_move: rock-slide
+evolutions:
+  - target: 76
+    condition: Tausch mit Metallmantel

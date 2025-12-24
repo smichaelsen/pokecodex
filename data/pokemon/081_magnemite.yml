@@ -1,0 +1,15 @@
+id: 81
+slug: magnemite
+name:
+  de: Magnetilo
+entry:
+  de: Die Magneten an seinem Körper erzeugen ein Antigravitationsfeld, um es ständig in der Schwebe zu halten.
+types:
+  - electric
+  - steel
+height_m: 0.3
+weight_kg: 6.0
+signature_move: spark
+evolutions:
+  - target: 82
+    condition: Level 30

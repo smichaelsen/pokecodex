@@ -1,0 +1,14 @@
+id: 85
+slug: dodrio
+name:
+  de: Dodri
+entry:
+  de: Lässt ein Feind auch nur einen der drei Köpfe für eine Sekunde aus den Augen, wird er sofort gepickt.
+types:
+  - normal
+  - flying
+height_m: 1.8
+weight_kg: 85.2
+signature_move: drill-peck
+evolutions: []
+evolves_from: 84

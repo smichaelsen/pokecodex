@@ -1,0 +1,14 @@
+id: 76
+slug: golem
+name:
+  de: Geowaz
+entry:
+  de: Sie rollen Berge hinunter und hinterlassen Spurrillen. Halte dich von diesen Rillen fern.
+types:
+  - rock
+  - ground
+height_m: 1.4
+weight_kg: 300.0
+evolves_from: 75
+signature_move: stone-edge
+evolutions: []

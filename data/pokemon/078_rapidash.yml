@@ -1,0 +1,13 @@
+id: 78
+slug: rapidash
+name:
+  de: Gallopa
+entry:
+  de: Dieses Pokémon verfolgt schnelle Objekte in der Hoffnung, ein Wettrennen gegen sie zu gewinnen.
+types:
+  - fire
+height_m: 1.7
+weight_kg: 95.0
+evolves_from: 77
+signature_move: flame-wheel
+evolutions: []
