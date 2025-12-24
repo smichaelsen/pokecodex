@@ -1,0 +1,13 @@
+id: 53
+slug: persian
+name:
+  de: Snobilikat
+entry:
+  de: Dieses Pokémon hat sehr schönes Fell. Es ist jedoch ein schwer erziehbares Haustier.
+types:
+  - normal
+height_m: 1.0
+weight_kg: 32.0
+evolves_from: 52
+signature_move: slash
+evolutions: []

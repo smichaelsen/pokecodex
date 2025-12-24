@@ -1,0 +1,14 @@
+id: 62
+slug: poliwrath
+name:
+  de: Quappo
+entry:
+  de: Es hat extrem starke Muskeln und kann durch den Ozean schwimmen, ohne sich ausruhen zu müssen.
+types:
+  - water
+  - fighting
+height_m: 1.3
+weight_kg: 54.0
+evolves_from: 61
+signature_move: hydro-pump
+evolutions: []

@@ -3,10 +3,38 @@ import { escapeHtml } from './utils/escapeHtml.js';
 
 export const PAGE_SIZE = 12;
 
+const hexToRgb = (hex) => {
+  const normalized = hex.replace('#', '');
+  if (normalized.length === 3) {
+    return {
+      r: parseInt(normalized[0] + normalized[0], 16),
+      g: parseInt(normalized[1] + normalized[1], 16),
+      b: parseInt(normalized[2] + normalized[2], 16),
+    };
+  }
+  return {
+    r: parseInt(normalized.slice(0, 2), 16),
+    g: parseInt(normalized.slice(2, 4), 16),
+    b: parseInt(normalized.slice(4, 6), 16),
+  };
+};
+
+const getContrastColor = (hex) => {
+  try {
+    const { r, g, b } = hexToRgb(hex);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness < 128 ? '#fff' : '#111';
+  } catch (error) {
+    return '#111';
+  }
+};
+
 const badgeHtml = (t, typeInfo) => {
   const info = typeInfo?.[t];
   const label = escapeHtml(info?.name || t || 'Typ');
-  const style = info?.color ? ` style="background:${info.color};color:#111;"` : '';
+  const style = info?.color
+    ? ` style="background:${info.color};color:${getContrastColor(info.color)};"`
+    : '';
   const safeType = escapeHtml(t || '');
   return `<span class="badge ${typeClass(t)}" data-type="${safeType}"${style}>${label}</span>`;
 };

@@ -1,0 +1,14 @@
+id: 22
+slug: fearow
+name:
+  de: Ibitak
+entry:
+  de: Mit seinen riesigen Flügeln kann dieses Pokémon nahezu pausenlos in der Luft bleiben.
+types:
+  - normal
+  - flying
+height_m: 1.2
+weight_kg: 38.0
+evolves_from: 21
+signature_move: drill-peck
+evolutions: []

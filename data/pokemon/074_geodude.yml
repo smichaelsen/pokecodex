@@ -1,0 +1,15 @@
+id: 74
+slug: geodude
+name:
+  de: Kleinstein
+entry:
+  de: Wanderer stolpern in den Bergen häufig über dieses Pokémon, da es wie ein Stein aussieht.
+types:
+  - rock
+  - ground
+height_m: 0.4
+weight_kg: 20.0
+signature_move: rock-throw
+evolutions:
+  - target: 75
+    condition: Entwicklung auf Level 25

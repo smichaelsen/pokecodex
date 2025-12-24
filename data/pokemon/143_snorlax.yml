@@ -1,0 +1,16 @@
+id: 143
+slug: snorlax
+name:
+  de: Relaxo
+name_tts:
+  de: relakso
+entry:
+  de: Es ist erst satt, wenn es über 400 kg Nahrung am Tag gefressen hat. Ist es mit dem Essen fertig, schläft es sofort ein.
+types:
+  - normal
+height_m: 2.1
+weight_kg: 460.0
+evolves_from: 446
+signature_move: giga-impact
+evolutions: []
+

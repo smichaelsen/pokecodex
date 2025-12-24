@@ -1,0 +1,14 @@
+id: 100
+slug: voltorb
+name:
+  de: Voltobal
+entry:
+  de: Es wurde entdeckt, als man Pokébälle einführte. Es scheint, als gäbe es da einen Zusammenhang.
+types:
+  - electric
+height_m: 0.5
+weight_kg: 10.4
+signature_move: spark
+evolutions:
+  - target: 101
+    condition: Entwicklung auf Level 30

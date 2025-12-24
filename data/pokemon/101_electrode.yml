@@ -1,0 +1,13 @@
+id: 101
+slug: electrode
+name:
+  de: Lektrobal
+entry:
+  de: Es explodiert schon bei kleinsten Reizen. Sein Spitzname „Die Bombenkugel“ spiegelt die Furcht der Menschen wider.
+types:
+  - electric
+height_m: 1.2
+weight_kg: 66.6
+evolves_from: 100
+signature_move: thunderbolt
+evolutions: []

@@ -1,0 +1,15 @@
+id: 123
+slug: scyther
+name:
+  de: Sichlor
+entry:
+  de: Es zerreißt und zerkleinert seine Beute mit seinen unglaublich scharfen Sicheln. Selten breitet es seine Flügel aus, um zu fliegen.
+types:
+  - bug
+  - flying
+height_m: 1.5
+weight_kg: 56.0
+signature_move: slash
+evolutions:
+  - target: 212
+    condition: Tausch mit Metallmantel

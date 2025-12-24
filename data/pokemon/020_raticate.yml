@@ -1,0 +1,13 @@
+id: 20
+slug: raticate
+name:
+  de: Rattikarl
+entry:
+  de: Es wetzt seine ständig wachsenden Zähne an harten Dingen. Es kann Wände aus Beton zernagen.
+types:
+  - normal
+height_m: 0.7
+weight_kg: 18.5
+evolves_from: 19
+signature_move: hyper-fang
+evolutions: []

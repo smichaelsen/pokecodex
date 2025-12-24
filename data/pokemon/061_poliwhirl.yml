@@ -1,0 +1,17 @@
+id: 61
+slug: poliwhirl
+name:
+  de: Quaputzi
+entry:
+  de: Dieses Pokémon kann im Wasser und auch an Land leben. An Land schwitzt es sich den Körper nass.
+types:
+  - water
+height_m: 1.0
+weight_kg: 20.0
+evolves_from: 60
+signature_move: bubble
+evolutions:
+  - target: 62
+    condition: Wasserstein
+  - target: 186
+    condition: Tausch mit Königsstein

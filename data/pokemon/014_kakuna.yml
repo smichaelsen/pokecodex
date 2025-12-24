@@ -1,0 +1,16 @@
+id: 14
+slug: kakuna
+name:
+  de: Kokuna
+entry:
+  de: Dieses Pokémon kann sich kaum bewegen. Bei drohender Gefahr verhärtet es seinen Panzer.
+types:
+  - bug
+  - poison
+height_m: 0.6
+weight_kg: 10.0
+evolves_from: 13
+signature_move: poison-sting
+evolutions:
+  - target: 15
+    condition: Entwicklung auf Level 10
