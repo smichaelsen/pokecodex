@@ -18,6 +18,7 @@ export function createDexOS({
   let isPoweredOn = true;
   let powerTimer = null;
   let suppressClick = false;
+  let ignoreNextClickAfterPowerOff = false;
   let introActive = false;
   let audioLedTimer = null;
   const state = {
@@ -177,9 +178,12 @@ export function createDexOS({
     if (!menuButtonEl) return;
     if (powerTimer) clearTimeout(powerTimer);
     suppressClick = false;
+    ignoreNextClickAfterPowerOff = false;
     powerTimer = setTimeout(() => {
       suppressClick = true;
-      setPowerState(!isPoweredOn);
+      const nextState = !isPoweredOn;
+      if (!nextState) ignoreNextClickAfterPowerOff = true;
+      setPowerState(nextState);
     }, 5000);
   };
 
@@ -193,6 +197,14 @@ export function createDexOS({
   menuButtonEl?.addEventListener('click', (event) => {
     if (suppressClick) {
       suppressClick = false;
+      if (ignoreNextClickAfterPowerOff) {
+        ignoreNextClickAfterPowerOff = false;
+      }
+      event.preventDefault();
+      return;
+    }
+    if (ignoreNextClickAfterPowerOff) {
+      ignoreNextClickAfterPowerOff = false;
       event.preventDefault();
       return;
     }
