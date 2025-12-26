@@ -1,0 +1,14 @@
+id: 45
+slug: vileplume
+name:
+  de: Giflor
+entry:
+  de: Je größer die Blütenblätter, desto mehr giftige Pollen sind in der Blüte enthalten.
+types:
+  - grass
+  - poison
+height_m: 1.2
+weight_kg: 18.6
+evolves_from: 44
+signature_move: solar-beam
+evolutions: []

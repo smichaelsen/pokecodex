@@ -1,0 +1,15 @@
+id: 106
+slug: hitmonlee
+name:
+  de: Kicklee
+name_tts:
+  de: kicklieh
+entry:
+  de: Die Beine ziehen und strecken sich unabhängig voneinander. Mit seinen dehnbaren Beinen kann es einen entfernten Gegner treffen.
+types:
+  - fighting
+height_m: 1.5
+weight_kg: 49.8
+evolves_from: 236
+signature_move: brick-break
+evolutions: []

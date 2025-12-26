@@ -1,0 +1,18 @@
+id: 44
+slug: gloom
+name:
+  de: Duflor
+entry:
+  de: Dieses Pokémon sondert einen übelriechenden Geruch ab. Trotzdem halten einige Leute es im Haus.
+types:
+  - grass
+  - poison
+height_m: 0.8
+weight_kg: 8.6
+evolves_from: 43
+signature_move: sleep-powder
+evolutions:
+  - target: 45
+    condition: Blattstein
+  - target: 182
+    condition: Sonnenstein
