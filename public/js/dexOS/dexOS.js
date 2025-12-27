@@ -15,6 +15,8 @@ export function createDexOS({
   let defaultApp = null;
   const menuListeners = new Map();
   let reloadListener = null;
+  let autoRefreshTimer = null;
+  let autoRefreshInFlight = false;
   let isPoweredOn = true;
   let powerTimer = null;
   let suppressClick = false;
@@ -25,6 +27,9 @@ export function createDexOS({
     pokemon: [],
     typeInfo: config.typeInfo || {},
   };
+  const AUTO_REFRESH_INTERVAL_MS = Number.isFinite(config.autoRefreshIntervalMs)
+    ? config.autoRefreshIntervalMs
+    : 120000;
   const audioCache = new Map();
   const ledTimers = new Map();
   const audioActive = new Set();
@@ -247,6 +252,29 @@ export function createDexOS({
   const getPokemon = () => state.pokemon;
   const getTypeInfo = () => state.typeInfo;
   const getMoveInfo = () => null;
+
+  const clearAutoRefresh = () => {
+    if (autoRefreshTimer) {
+      clearInterval(autoRefreshTimer);
+      autoRefreshTimer = null;
+    }
+  };
+
+  const runAutoRefresh = () => {
+    if (!isPoweredOn || autoRefreshInFlight) return;
+    autoRefreshInFlight = true;
+    loadPokemon({ cacheBust: Date.now().toString(), source: 'auto' })
+      .catch(() => {})
+      .finally(() => {
+        autoRefreshInFlight = false;
+      });
+  };
+
+  const startAutoRefresh = () => {
+    clearAutoRefresh();
+    if (!AUTO_REFRESH_INTERVAL_MS || AUTO_REFRESH_INTERVAL_MS <= 0) return;
+    autoRefreshTimer = setInterval(runAutoRefresh, AUTO_REFRESH_INTERVAL_MS);
+  };
 
   const getAudio = (url) => {
     if (!url) return null;
@@ -498,6 +526,7 @@ export function createDexOS({
       menuItems.reload?.removeEventListener('click', reloadListener);
       reloadListener = null;
     }
+    clearAutoRefresh();
   };
 
   return {
@@ -511,6 +540,7 @@ export function createDexOS({
       await loadPokemon({ cacheBust, source });
       await startDefault();
       finishIntro();
+      startAutoRefresh();
     },
     registerMenu,
     hideMenu,
@@ -535,6 +565,8 @@ export function createDexOS({
       off: () => setPowerState(false),
       isOn: () => isPoweredOn,
     },
+    startAutoRefresh,
+    stopAutoRefresh: clearAutoRefresh,
     destroy,
   };
 }
