@@ -1,0 +1,14 @@
+id: 31
+slug: nidoqueen
+name:
+  de: Nidoqueen
+entry:
+  de: Es benutzt seinen schuppigen Körper, um den Höhleneingang als Schutz für seine Jungen zu sperren.
+types:
+  - poison
+  - ground
+height_m: 1.3
+weight_kg: 60.0
+evolves_from: 30
+signature_move: earthquake
+evolutions: []

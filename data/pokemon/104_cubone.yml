@@ -1,0 +1,14 @@
+id: 104
+slug: cubone
+name:
+  de: Tragosso
+entry:
+  de: Es trägt den Schädel seiner verstorbenen Mutter auf seinem Kopf. Fühlt es sich einsam, soll es laut weinen.
+types:
+  - ground
+height_m: 0.4
+weight_kg: 6.5
+signature_move: bone-club
+evolutions:
+  - target: 105
+    condition: Level 28

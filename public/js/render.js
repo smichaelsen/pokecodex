@@ -120,9 +120,12 @@ export function showDetail(p, ctx, opts = {}) {
     if (!typeSlug) return;
     preloadAudio(ctx.paths.typeAudioPath(typeSlug));
   });
-  const chimeAudio = preloadAudio(ctx.paths.chimePath(p.id));
-  const nameAudio = preloadAudio(ctx.paths.nameAudioPath(p.id));
-  const descAudio = preloadAudio(ctx.paths.descriptionAudioPath(p.id));
+  const chimeUrl = ctx.paths.chimePath(p.id);
+  const nameUrl = ctx.paths.nameAudioPath(p.id);
+  const descUrl = ctx.paths.descriptionAudioPath(p.id);
+  const chimeAudio = preloadAudio(chimeUrl);
+  const nameAudio = preloadAudio(nameUrl);
+  const descAudio = preloadAudio(descUrl);
   const moveSlugRaw = p.signature_move_data?.slug || p.signature_move;
   if (moveSlugRaw) {
     preloadAudio(ctx.paths.moveAudioPath(moveSlugRaw));
@@ -130,8 +133,11 @@ export function showDetail(p, ctx, opts = {}) {
 
   ctx.detailAudio = {
     chimeAudio,
+    chimeUrl,
     nameAudio,
+    nameUrl,
     descAudio,
+    descUrl,
   };
 
   const evolvesFrom = p.evolves_from

@@ -1,0 +1,14 @@
+id: 71
+slug: victreebel
+name:
+  de: Sarzenia
+entry:
+  de: Dieses Pokémon soll in großen Kolonien tief im Dschungel leben, doch niemand kann dies bestätigen.
+types:
+  - grass
+  - poison
+height_m: 1.7
+weight_kg: 15.5
+evolves_from: 70
+signature_move: solar-beam
+evolutions: []

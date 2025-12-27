@@ -28,6 +28,9 @@ export function createDexOS({
   const audioCache = new Map();
   const ledTimers = new Map();
   const audioActive = new Set();
+  const audioLoading = new Set();
+  const audioLoadTimers = new Map();
+  const AUDIO_LOAD_TIMEOUT = 8000;
   let defaultCtx = null;
   const storage = (() => {
     const memory = new Map();
@@ -154,6 +157,10 @@ export function createDexOS({
       });
       audioActive.clear();
       updateAudioLed();
+      audioLoading.clear();
+      updateLoadingLed();
+      audioLoadTimers.forEach((timer) => clearTimeout(timer));
+      audioLoadTimers.clear();
       if (audioLedTimer) {
         clearInterval(audioLedTimer);
         audioLedTimer = null;
@@ -246,6 +253,11 @@ export function createDexOS({
     const existing = audioCache.get(url);
     if (existing) return existing;
     const audio = new Audio(url);
+    audio.addEventListener('playing', () => {
+      audioActive.add(url);
+      clearAudioLoading(url);
+      updateAudioLed();
+    });
     audio.addEventListener('ended', () => {
       audioActive.delete(url);
       updateAudioLed();
@@ -255,9 +267,11 @@ export function createDexOS({
       audioActive.delete(url);
       updateAudioLed();
     });
+    audio.addEventListener('loadeddata', () => clearAudioLoading(url));
+    audio.addEventListener('canplaythrough', () => clearAudioLoading(url));
+    audio.addEventListener('loadedmetadata', () => clearAudioLoading(url));
     audio.addEventListener('error', () => {
-      audioActive.delete(url);
-      updateAudioLed();
+      handleAudioError(url);
     });
     audioCache.set(url, audio);
     return audio;
@@ -288,15 +302,81 @@ export function createDexOS({
     };
   };
 
+  const flashLedTimes = (index, times = 3, interval = 220) => {
+    const existing = ledTimers.get(index);
+    if (existing) clearInterval(existing);
+    let count = 0;
+    const timer = setInterval(() => {
+      const on = count % 2 === 0;
+      setLed(index, on);
+      count += 1;
+      if (count >= times * 2) {
+        clearInterval(timer);
+        ledTimers.delete(index);
+        setLed(index, false);
+      }
+    }, interval);
+    ledTimers.set(index, timer);
+  };
+
   const updateAudioLed = () => {
     const hasAudio = audioActive.size > 0;
     setLed(0, hasAudio);
+  };
+
+  const updateLoadingLed = () => {
+    setLed(2, audioLoading.size > 0);
+  };
+
+  const clearAudioLoadTimer = (url) => {
+    const timeoutId = audioLoadTimers.get(url);
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      audioLoadTimers.delete(url);
+    }
+  };
+
+  const clearAudioLoading = (url) => {
+    if (!url) return;
+    audioLoading.delete(url);
+    updateLoadingLed();
+    clearAudioLoadTimer(url);
+  };
+
+  const handleAudioError = (url) => {
+    const audio = audioCache.get(url);
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    clearAudioLoading(url);
+    audioActive.delete(url);
+    updateAudioLed();
+    flashLedTimes(1, 3, 220);
+  };
+
+  const markAudioLoading = (url, audio) => {
+    if (!url || !audio) return;
+    audioLoading.add(url);
+    updateLoadingLed();
+    clearAudioLoadTimer(url);
+    const timer = setTimeout(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      handleAudioError(url);
+    }, AUDIO_LOAD_TIMEOUT);
+    audioLoadTimers.set(url, timer);
   };
 
   const preloadAudio = (url) => {
     const audio = getAudio(url);
     if (!audio) return null;
     audio.preload = 'auto';
+    if (audio.readyState < HTMLMediaElement.HAVE_ENOUGH_DATA) {
+      markAudioLoading(url, audio);
+    } else {
+      clearAudioLoading(url);
+    }
     audio.load();
     return audio;
   };
@@ -304,8 +384,11 @@ export function createDexOS({
   const playAudio = (url) => {
     const audio = getAudio(url);
     if (!audio) return null;
-    audioActive.add(url);
-    updateAudioLed();
+    if (audio.readyState < HTMLMediaElement.HAVE_ENOUGH_DATA) {
+      markAudioLoading(url, audio);
+    } else {
+      clearAudioLoading(url);
+    }
     audio.currentTime = 0;
     audio.play().catch(() => {});
     return audio;

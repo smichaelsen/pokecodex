@@ -148,22 +148,25 @@ export async function createPokedexApp(ctx) {
 
     if (target.closest('.detail-title')) {
       const audio = pokedexCtx.detailAudio?.nameAudio;
-      if (!audio) return;
-      host.audio?.play?.(audio.src);
+      const url = pokedexCtx.detailAudio?.nameUrl;
+      if (!audio && !url) return;
+      host.audio?.play?.(url || audio?.src);
       return;
     }
 
     if (target.closest('.art')) {
       const audio = pokedexCtx.detailAudio?.chimeAudio;
-      if (!audio) return;
-      host.audio?.play?.(audio.src);
+      const url = pokedexCtx.detailAudio?.chimeUrl;
+      if (!audio && !url) return;
+      host.audio?.play?.(url || audio?.src);
       return;
     }
 
     if (target.closest('.entry')) {
       const audio = pokedexCtx.detailAudio?.descAudio;
-      if (!audio) return;
-      host.audio?.play?.(audio.src);
+      const url = pokedexCtx.detailAudio?.descUrl;
+      if (!audio && !url) return;
+      host.audio?.play?.(url || audio?.src);
       return;
     }
 

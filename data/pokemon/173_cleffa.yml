@@ -1,0 +1,14 @@
+id: 173
+slug: cleffa
+name:
+  de: Pii
+entry:
+  de: Aufgrund seiner ungewöhnlichen Sternform sagt man, es sei auf einem Meteor hierhergereist. In Nächten mit vielen Sternschnuppen sieht man diese Pokémon. Am Morgen sind sie verschwunden.
+types:
+  - fairy
+height_m: 0.3
+weight_kg: 3.0
+signature_move: sing
+evolutions:
+  - target: 35
+    condition: Freundschaft

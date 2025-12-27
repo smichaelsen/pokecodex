@@ -1,0 +1,14 @@
+id: 122
+slug: mr-mime
+name:
+  de: Pantimos
+entry:
+  de: Es erzeugt unsichtbare Wände aus Luft, die es durch seine Mimik kontrolliert, und hält Angreifer damit fern.
+types:
+  - psychic
+  - fairy
+height_m: 1.3
+weight_kg: 54.5
+evolves_from: 439
+signature_move: psychic
+evolutions: []

@@ -1,0 +1,14 @@
+id: 108
+slug: lickitung
+name:
+  de: Schlurp
+entry:
+  de: Seine Zunge ist mit klebrigem Speichel bedeckt, der überall haftet. Seine Zunge ist doppelt so lang wie sein Körper.
+types:
+  - normal
+height_m: 1.2
+weight_kg: 65.5
+signature_move: lick
+evolutions:
+  - target: 463
+    condition: Levelaufstieg mit Walzer

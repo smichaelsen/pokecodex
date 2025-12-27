@@ -68,7 +68,9 @@ Event payload example:
 
 ## Audio + LED Integration
 - Audio playback is centralized through `host.audio` for consistent caching and controls.
-- LED 0 lights while any audio is playing (host-managed).
+- LED 2 (yellow) lights while audio is loading.
+- LED 0 (blue) lights only while audio is actively playing.
+- LED 1 (red) flashes 3x on audio load failures (including timeouts).
 
 ## LED Helpers
 ```js
@@ -93,7 +95,7 @@ host.power.isOn()           // returns boolean
 dexOS shows a boot animation on initial start and when powering on:
 - Both panes are covered with white layers.
 - The right pane shows the "dexOS" label.
-- LED sequence: wait 1s, blue on 1s, green on 1s, yellow on 1s, all off.
+- LED sequence: wait 1s, blue on 1s, red on 1s, yellow on 1s, all off.
 - 1s after the sequence, the covers are removed.
 - Menu button clicks are ignored during the intro (power-off hold still works).
 

@@ -1,0 +1,14 @@
+id: 124
+slug: jynx
+name:
+  de: Rossana
+entry:
+  de: Der beschwingte Gang dieses Pokémon bezaubert Zuschauer und lässt sie im Takt dazu tanzen.
+types:
+  - ice
+  - psychic
+height_m: 1.4
+weight_kg: 40.6
+evolves_from: 238
+signature_move: lovely-kiss
+evolutions: []

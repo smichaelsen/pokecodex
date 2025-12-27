@@ -1,0 +1,14 @@
+id: 77
+slug: ponyta
+name:
+  de: Ponita
+entry:
+  de: Neugeboren kann es kaum stehen. Durch das Galoppieren werden seine Beine aber schneller und kräftiger.
+types:
+  - fire
+height_m: 1.0
+weight_kg: 30.0
+signature_move: ember
+evolutions:
+  - target: 78
+    condition: Level 40

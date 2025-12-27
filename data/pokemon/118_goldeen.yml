@@ -1,0 +1,14 @@
+id: 118
+slug: goldeen
+name:
+  de: Goldini
+entry:
+  de: Seine Brust-, Rücken- und Schweifflossen wirken anmutig, weshalb man es den Wassertänzer nennt.
+types:
+  - water
+height_m: 0.6
+weight_kg: 15.0
+signature_move: horn-attack
+evolutions:
+  - target: 119
+    condition: Level 33

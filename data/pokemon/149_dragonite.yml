@@ -1,0 +1,14 @@
+id: 149
+slug: dragonite
+name:
+  de: Dragoran
+entry:
+  de: Trotz seines massiven Körpers fliegt es mühelos und kann die Welt in nur 16 Stunden umrunden.
+types:
+  - dragon
+  - flying
+height_m: 2.2
+weight_kg: 210.0
+evolves_from: 148
+signature_move: hyper-beam
+evolutions: []

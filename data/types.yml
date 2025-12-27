@@ -40,6 +40,10 @@
   name:
     de: Flug
   color: '#90caf9'
+- slug: ghost
+  name:
+    de: Geist
+  color: '#7e57c2'
 - slug: dark
   name:
     de: Unlicht

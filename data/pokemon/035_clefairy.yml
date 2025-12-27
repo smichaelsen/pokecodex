@@ -8,6 +8,7 @@ types:
   - fairy
 height_m: 0.6
 weight_kg: 7.5
+evolves_from: 173
 signature_move: double-slap
 evolutions:
   - target: 36

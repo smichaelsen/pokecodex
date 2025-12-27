@@ -1,0 +1,13 @@
+id: 119
+slug: seaking
+name:
+  de: Golking
+entry:
+  de: Es baut Nester, indem es Steine in Flüssen mit seinem Horn aushöhlt und verteidigt seine Eier mit allem Einsatz.
+types:
+  - water
+height_m: 1.3
+weight_kg: 39.0
+evolves_from: 118
+signature_move: horn-drill
+evolutions: []

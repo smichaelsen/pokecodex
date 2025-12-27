@@ -1,0 +1,15 @@
+id: 30
+slug: nidorina
+name:
+  de: Nidorina
+entry:
+  de: Das Weibchen ist ausgeglichener. Es stößt Schreie im Ultraschallwellenbereich aus, die den Gegner verwirren können.
+types:
+  - poison
+height_m: 0.8
+weight_kg: 20.0
+evolves_from: 29
+signature_move: bite
+evolutions:
+  - target: 31
+    condition: Mondstein

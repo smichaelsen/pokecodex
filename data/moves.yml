@@ -460,6 +460,14 @@
   power: 65
   description:
     de: Spießt das Ziel mit einem spitzen Horn auf.
+- slug: horn-drill
+  name:
+    de: Hornbohrer
+    en: Horn Drill
+  type: normal
+  power: 0
+  description:
+    de: Ein Volltreffer-K.-o.-Angriff, der nur trifft, wenn der Anwender schneller ist.
 - slug: metronome
   name:
     de: Metronom
@@ -542,3 +550,27 @@
   power: 80
   description:
     de: Feuert drei Strahlen ab. Verursacht eventuell Paralyse, Verbrennung oder Einfrieren.
+- slug: bone-club
+  name:
+    de: Knochenkeule
+    en: Bone Club
+  type: ground
+  power: 65
+  description:
+    de: Schwingt eine Knochenkeule und trifft das Ziel. Kann es eventuell zurückschrecken lassen.
+- slug: lick
+  name:
+    de: Schlecker
+    en: Lick
+  type: ghost
+  power: 30
+  description:
+    de: Leckt das Ziel mit der Zunge. Kann es eventuell paralysieren.
+- slug: lovely-kiss
+  name:
+    de: Todeskuss
+    en: Lovely Kiss
+  type: normal
+  power: 0
+  description:
+    de: Anwender zwingt dem Ziel einen Kuss auf, der Schlaf verursacht.

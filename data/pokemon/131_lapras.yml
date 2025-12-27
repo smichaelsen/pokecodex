@@ -1,0 +1,13 @@
+id: 131
+slug: lapras
+name:
+  de: Lapras
+entry:
+  de: Aufgrund seiner hohen Intelligenz versteht es die menschliche Sprache und trägt gern Menschen auf seinem Rücken.
+types:
+  - water
+  - ice
+height_m: 2.5
+weight_kg: 220.0
+signature_move: ice-beam
+evolutions: []
