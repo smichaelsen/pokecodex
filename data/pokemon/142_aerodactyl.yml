@@ -1,0 +1,13 @@
+id: 142
+slug: aerodactyl
+name:
+  de: Aerodactyl
+entry:
+  de: In Bernstein eingeschlossenes genetisches Material eines Dinosauriers war der Ursprung dieses Pokémon. Beim Fliegen schreit es schrill.
+types:
+  - rock
+  - flying
+height_m: 1.8
+weight_kg: 59.0
+signature_move: rock-slide
+evolutions: []
