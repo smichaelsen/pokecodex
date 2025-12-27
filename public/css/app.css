@@ -515,6 +515,17 @@
       cursor: pointer;
       transition: transform 120ms ease, box-shadow 120ms ease;
     }
+    .menu-item--with-illustration {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
     .menu-item:hover {
       transform: translateY(-1px);
       box-shadow: 0 6px 14px rgba(0,0,0,0.12);

@@ -35,7 +35,7 @@ Returns
 - `registerApp(id, factory)`: register an app factory.
 - `start(id, ctx)`: start the given app.
 - `switchTo(id, ctx)`: switch to another app, destroying the current one.
-- `registerMenu(handlers)`: register menu handlers for menu items (excluding `reload`).
+- `registerMenu(items)`: register menu items (excluding `reload`; each item must include `pokedexNumber` so dexOS can render the Pokémon illustration).
 - `clearMenu()`: remove registered menu handlers.
 - `showMenu()` / `hideMenu()`: control menu overlays.
 - `loadPokemon({ cacheBust, source })`: fetch data and dispatch update event.
@@ -51,8 +51,8 @@ Returns
 
 ## Menu Ownership
 - dexOS owns menu visibility and the hardware button.
-- The `reload` menu item is owned by dexOS and triggers a data refresh.
-- Other menu items can be wired by apps via `registerMenu`.
+- The `reload` menu item is owned by dexOS, uses Pokémon #137 (Porygon) as its illustration, and triggers a data refresh.
+- Other menu items can be wired by apps via `registerMenu`; each must provide a `pokedexNumber`. Extra emojis are discouraged since dexOS shows the Pokémon illustration.
 
 ## Data Ownership
 - dexOS fetches `data/pokemon.json` and stores it in memory.
