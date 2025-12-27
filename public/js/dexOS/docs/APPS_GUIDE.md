@@ -54,13 +54,15 @@ window.addEventListener('dexos:data:updated', onDataUpdated);
 ```
 
 ## Menu API
-- `host.registerMenu(handlers)`: register menu handlers for menu items (excluding `reload`).
+- `host.registerMenu(items)`: register menu items (excluding `reload`).
+  - Shape: `{ settings: { handler() {}, pokedexNumber: 25 } }`
+  - `pokedexNumber` is required; dexOS renders that Pokémon’s illustration next to the item.
 - `host.clearMenu()`: remove registered menu handlers.
 - `host.showMenu()` / `host.hideMenu()`: control menu overlays.
 
 Notes:
-- The `reload` menu item is owned by dexOS and always triggers a data refresh.
-- Apps register handlers only for additional menu items.
+- The `reload` menu item is owned by dexOS, uses Pokémon #137 (Porygon) as its illustration, and always triggers a data refresh.
+- Apps register handlers only for additional menu items; avoid adding extra emojis since illustrations are shown automatically.
 
 ## Audio API
 ```js
@@ -112,11 +114,14 @@ export async function createExampleApp(ctx) {
     detailContentEl.innerHTML = '<div>Bereit.</div>';
   };
 
-  host.registerMenu({
-    example() {
+host.registerMenu({
+  example: {
+    handler() {
       detailContentEl.innerHTML = '<div>Menu action.</div>';
     },
-  });
+    pokedexNumber: 25,
+  },
+});
 
   window.addEventListener('dexos:data:updated', onDataUpdated);
   onDataUpdated({ detail: { pokemon: host.getPokemon() || [] } });

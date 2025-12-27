@@ -1,3 +1,5 @@
+import { createPaths } from '../paths.js';
+
 export function createDexOS({
   menuButtonEl,
   menuOverlayLeftEl,
@@ -15,6 +17,8 @@ export function createDexOS({
   let defaultApp = null;
   const menuListeners = new Map();
   let reloadListener = null;
+  const paths = createPaths(config);
+  const RELOAD_MENU_POKEDEX = 137;
   let autoRefreshTimer = null;
   let autoRefreshInFlight = false;
   let isPoweredOn = true;
@@ -253,6 +257,35 @@ export function createDexOS({
   const getTypeInfo = () => state.typeInfo;
   const getMoveInfo = () => null;
 
+  const setMenuIllustration = (el, pokedexNumber) => {
+    if (!el || !Number.isFinite(pokedexNumber)) return;
+    el.classList.add('menu-item--with-illustration');
+    let img = el.querySelector('.menu-icon');
+    if (!img) {
+      img = document.createElement('img');
+      img.className = 'menu-icon';
+      img.setAttribute('aria-hidden', 'true');
+      el.prepend(img);
+    }
+    img.src = paths.spritePath(pokedexNumber);
+    img.alt = `Pokémon #${pokedexNumber}`;
+  };
+
+  const normalizeMenuEntry = (entry) => {
+    if (typeof entry === 'function') return { handler: entry };
+    if (!entry || typeof entry !== 'object') return {};
+    const handler = entry.handler || entry.onSelect;
+    const pokedexNumber = entry.pokedexNumber ?? entry.pokedexId;
+    return { handler, pokedexNumber };
+  };
+
+  const requirePokedexNumber = (pokedexNumber, id) => {
+    if (!Number.isInteger(pokedexNumber)) {
+      throw new Error(`Menu item "${id}" requires a valid pokedexNumber`);
+    }
+    return pokedexNumber;
+  };
+
   const clearAutoRefresh = () => {
     if (autoRefreshTimer) {
       clearInterval(autoRefreshTimer);
@@ -431,10 +464,14 @@ export function createDexOS({
 
   const registerMenu = (handlers = {}) => {
     clearMenu();
-    Object.entries(handlers).forEach(([id, handler]) => {
+    Object.entries(handlers).forEach(([id, entry]) => {
       if (id === 'reload') return;
       const el = menuItems[id];
-      if (!el || typeof handler !== 'function') return;
+      if (!el) return;
+      const { handler, pokedexNumber } = normalizeMenuEntry(entry);
+      if (typeof handler !== 'function') return;
+      const requiredNumber = requirePokedexNumber(pokedexNumber, id);
+      setMenuIllustration(el, requiredNumber);
       const listener = () => {
         hideMenu();
         handler();
@@ -445,6 +482,7 @@ export function createDexOS({
   };
 
   if (menuItems.reload) {
+    setMenuIllustration(menuItems.reload, RELOAD_MENU_POKEDEX);
     reloadListener = () => {
       hideMenu();
       loadPokemon({ cacheBust: Date.now().toString(), source: 'reload' }).catch(() => {
