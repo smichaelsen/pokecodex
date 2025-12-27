@@ -1,0 +1,13 @@
+id: 110
+slug: weezing
+name:
+  de: Smogmog
+entry:
+  de: Pumpt sich eines der zwei Smogon auf, lässt das andere Luft ab. So findet ein Giftgasaustausch statt.
+types:
+  - poison
+height_m: 1.2
+weight_kg: 9.5
+evolves_from: 109
+signature_move: sludge-bomb
+evolutions: []

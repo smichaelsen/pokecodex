@@ -271,6 +271,14 @@
   power: 0
   description:
     de: Eine Giftwolke, die das Ziel eventuell vergiftet.
+- slug: sludge-bomb
+  name:
+    de: Matschbombe
+    en: Sludge Bomb
+  type: poison
+  power: 90
+  description:
+    de: Wirft Schlamm auf das Ziel. Dieses wird eventuell vergiftet.
 - slug: glare
   name:
     de: Schlangenblick

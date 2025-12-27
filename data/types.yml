@@ -2,77 +2,107 @@
   name:
     de: Pflanze
   tts:
-    de: Pflanzeh
+    de: Typ Pflanzeh
   color: '#4caf50'
 - slug: poison
   name:
     de: Gift
   tts:
-    de: giftig
+    de: Typ giftig
   color: '#9c27b0'
 - slug: fire
   name:
     de: Feuer
+  tts:
+    de: Typ Feuer
   color: '#ff7043'
 - slug: water
   name:
     de: Wasser
+  tts:
+    de: Typ Wasser
   color: '#42a5f5'
 - slug: electric
   name:
     de: Elektro
+  tts:
+    de: Typ Elektro
   color: '#fdd835'
 - slug: normal
   name:
     de: Normal
+  tts:
+    de: Typ Normal
   color: '#bdbdbd'
 - slug: fighting
   name:
     de: Kampf
+  tts:
+    de: Typ Kampf
   color: '#f44336'
 - slug: ground
   name:
     de: Boden
   tts:
-    de: Bohden
+    de: Typ Bohden
   color: '#b58d4a'
 - slug: flying
   name:
     de: Flug
+  tts:
+    de: Typ Flug
   color: '#90caf9'
 - slug: ghost
   name:
     de: Geist
+  tts:
+    de: Typ Geist
   color: '#7e57c2'
 - slug: dark
   name:
     de: Unlicht
+  tts:
+    de: Typ Unlicht
   color: '#212121'
 - slug: rock
   name:
     de: Gestein
+  tts:
+    de: Typ Gestein
   color: '#a1887f'
 - slug: psychic
   name:
     de: Psycho
+  tts:
+    de: Typ Psycho
   color: '#f06292'
 - slug: bug
   name:
     de: Käfer
+  tts:
+    de: Typ Käfer
   color: '#8bc34a'
 - slug: ice
   name:
     de: Eis
+  tts:
+    de: Typ Eis
   color: '#81d4fa'
 - slug: steel
   name:
     de: Stahl
+  tts:
+    de: Typ Stahl
   color: '#90a4ae'
 - slug: dragon
   name:
     de: Drache
+  tts:
+    de: Typ Drache
   color: '#5c6bc0'
 - slug: fairy
   name:
     de: Fee
+  tts:
+    de: Typ Fee
   color: '#f48fb1'

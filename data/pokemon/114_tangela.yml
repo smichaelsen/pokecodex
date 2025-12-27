@@ -1,0 +1,14 @@
+id: 114
+slug: tangela
+name:
+  de: Tangela
+entry:
+  de: Aufgrund der Ranken, die seinen Körper bedecken, kennt keiner seine wahre Form. Die blauen Ranken wachsen immer weiter.
+types:
+  - grass
+height_m: 1.0
+weight_kg: 35.0
+signature_move: vine-whip
+evolutions:
+  - target: 465
+    condition: Levelaufstieg mit Antik-Kraft

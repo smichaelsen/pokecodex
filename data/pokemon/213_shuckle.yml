@@ -1,0 +1,13 @@
+id: 213
+slug: shuckle
+name:
+  de: Pottrott
+entry:
+  de: In seinem topfförmigen Panzer gelagerte Beeren verwandeln sich im Nu zu einem dickflüssigen Saft. Es sammelt Beeren in seiner Schale und versteckt sich zum Schutz unter Steinen.
+types:
+  - bug
+  - rock
+height_m: 0.6
+weight_kg: 20.5
+signature_move: stone-edge
+evolutions: []
