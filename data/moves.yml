@@ -541,7 +541,7 @@
   type: flying
   power: 140
   description:
-    de: Runde 1: Der Anwender sucht das Ziel. Runde 2: Angriff mit voller Kraft.
+    de: "Runde 1: Der Anwender sucht das Ziel. Runde 2: Angriff mit voller Kraft."
 - slug: play-rough
   name:
     de: Knuddler

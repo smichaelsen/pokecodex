@@ -1,0 +1,15 @@
+id: 48
+slug: venonat
+name:
+  de: Bluzuk
+entry:
+  de: Seine großen Augen bestehen aus vielen kleinen Augen. Nachts wird es von Licht angezogen.
+types:
+  - bug
+  - poison
+height_m: 1.0
+weight_kg: 30.0
+signature_move: psybeam
+evolutions:
+  - target: 49
+    condition: Entwicklung auf Level 31

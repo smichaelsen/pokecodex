@@ -1,0 +1,14 @@
+id: 88
+slug: grimer
+name:
+  de: Sleima
+entry:
+  de: Schlamm, der Röntgenstrahlung vom Mond ausgesetzt war, wurde zu Sleima. Es isst am liebsten dreckige Dinge.
+types:
+  - poison
+height_m: 0.9
+weight_kg: 30.0
+signature_move: poison-gas
+evolutions:
+  - target: 89
+    condition: Entwicklung auf Level 38

@@ -1,0 +1,14 @@
+id: 37
+slug: vulpix
+name:
+  de: Vulpix
+entry:
+  de: Dieses Pokémon hat bei seiner Geburt nur einen Schweif, der sich mit zunehmendem Alter aufspaltet.
+types:
+  - fire
+height_m: 0.6
+weight_kg: 9.9
+signature_move: flamethrower
+evolutions:
+  - target: 38
+    condition: Feuerstein
