@@ -68,6 +68,7 @@ async function boot() {
     } else {
       await host.startIntro?.({ reveal: false });
       await host.loadPokemon({ cacheBust: config.assetVersion || Date.now().toString(), source: 'init' });
+      host.startAutoRefresh?.();
       await host.startDefault?.();
       host.finishIntro?.();
     }
