@@ -1,10 +1,10 @@
 ---
 id: task-8
 title: 'Menu API: require Pokédex number for menu items'
-status: In Progress
+status: Done
 assignee: []
 created_date: '2025-12-27 17:18'
-updated_date: '2025-12-27 17:20'
+updated_date: '2025-12-28 11:56'
 labels:
   - os
   - feature
