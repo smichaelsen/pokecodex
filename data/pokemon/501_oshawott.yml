@@ -1,0 +1,14 @@
+id: 501
+slug: oshawott
+name:
+  de: Ottaro
+entry:
+  de: Die Muschel an seinem Bauch dient ihm als Waffe und Werkzeug. Es pariert Angriffe damit und schlägt sofort mit einer Schnitt-Attacke zurück.
+types:
+  - water
+height_m: 0.5
+weight_kg: 5.9
+signature_move: razor-shell
+evolutions:
+  - target: 502
+    condition: Entwicklung auf Level 17

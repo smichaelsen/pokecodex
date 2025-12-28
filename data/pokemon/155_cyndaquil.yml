@@ -1,0 +1,14 @@
+id: 155
+slug: cyndaquil
+name:
+  de: Feurigel
+entry:
+  de: Feurigel lässt Flammen aus seinem Rücken lodern, wenn es sich schützen muss. Die Flammen sind sehr stark, wenn es wütend ist, doch bei Müdigkeit flackern sie nur unregelmäßig.
+types:
+  - fire
+height_m: 0.5
+weight_kg: 7.9
+signature_move: ember
+evolutions:
+  - target: 156
+    condition: Entwicklung auf Level 14

@@ -1,0 +1,12 @@
+id: 132
+slug: ditto
+name:
+  de: Ditto
+entry:
+  de: Es kann seine Zellstruktur so verändern, dass es sich in alles verwandeln kann, was es sieht.
+types:
+  - normal
+height_m: 0.3
+weight_kg: 4.0
+signature_move: transform
+evolutions: []

@@ -1,0 +1,14 @@
+id: 98
+slug: krabby
+name:
+  de: Krabby
+entry:
+  de: Krabby lebt an Stränden und versteckt sich in Löchern im Sand. Wenn Nahrung knapp ist, streitet es sich mit Artgenossen um sein Revier.
+types:
+  - water
+height_m: 0.4
+weight_kg: 6.5
+signature_move: crabhammer
+evolutions:
+  - target: 99
+    condition: Entwicklung auf Level 28

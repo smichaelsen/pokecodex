@@ -1,0 +1,14 @@
+id: 96
+slug: drowzee
+name:
+  de: Traumato
+entry:
+  de: Traumato versetzt Gegner in den Schlaf und frisst deren Träume. Von Alpträumen wird ihm aber übel.
+types:
+  - psychic
+height_m: 1.0
+weight_kg: 32.4
+signature_move: psybeam
+evolutions:
+  - target: 97
+    condition: Entwicklung auf Level 26

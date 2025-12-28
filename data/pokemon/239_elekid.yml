@@ -1,0 +1,14 @@
+id: 239
+slug: elekid
+name:
+  de: Elekid
+entry:
+  de: Elekid rotiert seine Arme, um Elektrizität zu erzeugen. Die entladene Energie muss es ständig neu aufladen, indem es weiterkreist.
+types:
+  - electric
+height_m: 0.6
+weight_kg: 23.5
+signature_move: spark
+evolutions:
+  - target: 125
+    condition: Entwicklung auf Level 30

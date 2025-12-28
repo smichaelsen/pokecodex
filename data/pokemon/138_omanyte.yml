@@ -1,0 +1,15 @@
+id: 138
+slug: omanyte
+name:
+  de: Amonitas
+entry:
+  de: Ein einst ausgestorbenes Urzeit-Pokémon, das durch das geschickte Bewegen seiner zehn Tentakel durchs Wasser paddelt, als würde es schweben.
+types:
+  - rock
+  - water
+height_m: 0.4
+weight_kg: 7.5
+signature_move: rock-throw
+evolutions:
+  - target: 139
+    condition: Entwicklung auf Level 40

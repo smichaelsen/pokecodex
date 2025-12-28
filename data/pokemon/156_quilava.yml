@@ -1,0 +1,15 @@
+id: 156
+slug: quilava
+name:
+  de: Igelavar
+entry:
+  de: Igelavar hält seine Gegner mit Flammen und Böen heißer Luft auf Distanz. Seine Gewandtheit hilft ihm, Angriffen auszuweichen und den Gegner gleichzeitig zu versengen.
+types:
+  - fire
+height_m: 0.9
+weight_kg: 19.0
+evolves_from: 155
+signature_move: flame-wheel
+evolutions:
+  - target: 157
+    condition: Entwicklung auf Level 36

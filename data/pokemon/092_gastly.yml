@@ -1,0 +1,15 @@
+id: 92
+slug: gastly
+name:
+  de: Nebulak
+entry:
+  de: Nebulak hat einen gasförmigen Körper. Wenn es starkem Wind ausgesetzt wird, kann es davongeweht werden. Scharen dieser Pokémon sammeln sich unter Dachrinnen, um sich vor dem gefährlichen Wind zu schützen.
+types:
+  - ghost
+  - poison
+height_m: 1.3
+weight_kg: 0.1
+signature_move: poison-gas
+evolutions:
+  - target: 93
+    condition: Entwicklung auf Level 25

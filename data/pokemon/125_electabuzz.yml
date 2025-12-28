@@ -1,0 +1,14 @@
+id: 125
+slug: electabuzz
+name:
+  de: Elektek
+entry:
+  de: Bei Gewittern versammeln sich Elektek in der Nähe von hohen Bäumen und warten regungslos auf Blitzeinschläge, die sie als Energiequelle nutzen.
+types:
+  - electric
+height_m: 1.1
+weight_kg: 30.0
+signature_move: thunderbolt
+evolutions:
+  - target: 466
+    condition: Tausch mit Stromisierer

@@ -1,0 +1,14 @@
+id: 151
+slug: mew
+name:
+  de: Mew
+name_tts:
+  de: Miuh
+entry:
+  de: Mew soll die genetische Zusammensetzung aller Pokémon besitzen. Es kann sich unsichtbar machen und sich Menschen nähern, ohne bemerkt zu werden.
+types:
+  - psychic
+height_m: 0.4
+weight_kg: 4.0
+signature_move: metronome
+evolutions: []

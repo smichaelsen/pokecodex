@@ -1,0 +1,14 @@
+id: 150
+slug: mewtwo
+name:
+  de: Mewtu
+name_tts:
+  de: Miuh Tuh
+entry:
+  de: Mewtu ist ein Pokémon, das durch Genmanipulation entstanden ist. Die Menschen haben es zwar mit ihrem wissenschaftlichen Sachverstand erzeugt, aber nicht mit einem mitfühlenden Herzen ausgestattet.
+types:
+  - psychic
+height_m: 2.0
+weight_kg: 122.0
+signature_move: psychic
+evolutions: []

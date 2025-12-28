@@ -1,0 +1,14 @@
+id: 139
+slug: omastar
+name:
+  de: Amoroso
+entry:
+  de: Mit seinen scharfen Zähnen kann es sogar Felsen zermalmen; doch angreifen kann es nur Beute erreichen, die in die Reichweite seiner Tentakel kommt.
+types:
+  - rock
+  - water
+height_m: 1.0
+weight_kg: 35.0
+evolves_from: 138
+signature_move: hydro-pump
+evolutions: []

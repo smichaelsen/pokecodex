@@ -1,0 +1,13 @@
+id: 97
+slug: hypno
+name:
+  de: Hypno
+entry:
+  de: Hypno hält ein Pendel in der Hand. Das Schwingen und Glitzern des Pendels versetzt seine Feinde in eine tiefe Hypnose.
+types:
+  - psychic
+height_m: 1.6
+weight_kg: 75.6
+evolves_from: 96
+signature_move: psychic
+evolutions: []

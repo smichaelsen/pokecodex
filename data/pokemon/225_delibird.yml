@@ -1,0 +1,13 @@
+id: 225
+slug: delibird
+name:
+  de: Botogel
+entry:
+  de: Botogel sammelt Nahrung in seinem eingerollten Schweif und teilt sie mit Verirrten in den Bergen.
+types:
+  - ice
+  - flying
+height_m: 0.9
+weight_kg: 16.0
+signature_move: present
+evolutions: []

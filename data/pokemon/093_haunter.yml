@@ -1,0 +1,16 @@
+id: 93
+slug: haunter
+name:
+  de: Alpollo
+entry:
+  de: Alpollo ist ein gefährliches Pokémon. Wenn es dir ein Zeichen gibt, während es durch die Dunkelheit schwebt, darfst du dich ihm nicht nähern. Dieses Pokémon wird versuchen, an dir zu lecken und dein Leben zu stehlen.
+types:
+  - ghost
+  - poison
+height_m: 1.6
+weight_kg: 0.1
+evolves_from: 92
+signature_move: lick
+evolutions:
+  - target: 94
+    condition: Tausch

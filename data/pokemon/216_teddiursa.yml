@@ -1,0 +1,14 @@
+id: 216
+slug: teddiursa
+name:
+  de: Teddiursa
+entry:
+  de: Teddiursa leckt gern seine mit Honig bedeckten Pfoten ab. Es stellt seinen eigenen Honig her, indem es Früchte und Pollen miteinander vermengt.
+types:
+  - normal
+height_m: 0.6
+weight_kg: 8.8
+signature_move: slash
+evolutions:
+  - target: 217
+    condition: Entwicklung auf Level 30

@@ -1,0 +1,12 @@
+id: 127
+slug: pinsir
+name:
+  de: Pinsir
+entry:
+  de: Pinsir nimmt Gegner mit seinen Hörnern in die Zange und drückt kräftig zu. Es lebt an warmen Orten, da es bei niedrigen Temperaturen erstarrt.
+types:
+  - bug
+height_m: 1.5
+weight_kg: 55.0
+signature_move: megahorn
+evolutions: []

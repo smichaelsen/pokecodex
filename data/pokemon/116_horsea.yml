@@ -1,0 +1,14 @@
+id: 116
+slug: horsea
+name:
+  de: Seeper
+entry:
+  de: Seeper ernährt sich von kleinen Insekten und dem Moos auf Steinen. Bei unruhiger See verankert sich dieses Pokémon mit seinem Schweif an Steinen oder Korallen, damit es nicht weggespült wird.
+types:
+  - water
+height_m: 0.4
+weight_kg: 8.0
+signature_move: bubble
+evolutions:
+  - target: 117
+    condition: Entwicklung auf Level 32

@@ -1,0 +1,12 @@
+id: 128
+slug: tauros
+name:
+  de: Tauros
+entry:
+  de: Tauros peitscht sich mit seinen drei Schweifen auf, bevor es zum Angriff stürmt. Findet es keinen Gegner, rammt es starke Bäume, um sich abzureagieren.
+types:
+  - normal
+height_m: 1.4
+weight_kg: 88.4
+signature_move: horn-attack
+evolutions: []

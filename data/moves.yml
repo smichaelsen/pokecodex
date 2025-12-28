@@ -173,6 +173,14 @@
   power: 90
   description:
     de: Reitet auf einer gewaltigen Wasserwelle auf das Ziel zu.
+- slug: razor-shell
+  name:
+    de: Kalkklinge
+    en: Razor Shell
+  type: water
+  power: 75
+  description:
+    de: Schneidet das Ziel mit einer scharfen Muschel. Kann dessen Verteidigung senken.
 - slug: acid
   name:
     de: Säure
@@ -412,6 +420,14 @@
   power: 150
   description:
     de: Eine starke Attacke, die den Anwender in der nächsten Runde aussetzen lässt.
+- slug: mega-punch
+  name:
+    de: Megahieb
+    en: Mega Punch
+  type: normal
+  power: 80
+  description:
+    de: Ein wuchtiger Schlag mit einer gewaltigen Faust.
 - slug: thunder-wave
   name:
     de: Donnerwelle
@@ -484,6 +500,22 @@
   power: 0
   description:
     de: Lässt den Anwender eine zufällige Attacke einsetzen.
+- slug: transform
+  name:
+    de: Wandler
+    en: Transform
+  type: normal
+  power: 0
+  description:
+    de: Der Anwender verwandelt sich in sein Ziel und übernimmt dessen Statuswerte und Attacken.
+- slug: present
+  name:
+    de: Geschenk
+    en: Present
+  type: normal
+  power: 0
+  description:
+    de: Überreicht ein Geschenk, das entweder Schaden verursacht oder das Ziel heilt.
 - slug: splash
   name:
     de: Platscher
@@ -508,6 +540,14 @@
   power: 0
   description:
     de: Ein Lied, das das Ziel eventuell einschläfert.
+- slug: hypnosis
+  name:
+    de: Hypnose
+    en: Hypnosis
+  type: psychic
+  power: 0
+  description:
+    de: Versetzt das Ziel in Schlaf.
 - slug: gust
   name:
     de: Windstoß
@@ -518,6 +558,14 @@
   power: 40
   description:
     de: Lässt einen starken Wind auf das Ziel los.
+- slug: peck
+  name:
+    de: Schnabel
+    en: Peck
+  type: flying
+  power: 35
+  description:
+    de: Ein schneller Schnabelhieb.
 - slug: wing-attack
   name:
     de: Flügelschlag

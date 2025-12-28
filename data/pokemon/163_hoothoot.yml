@@ -1,0 +1,15 @@
+id: 163
+slug: hoothoot
+name:
+  de: Hoothoot
+entry:
+  de: Hoothoot besitzt ein inneres Organ, das die Erdumdrehung wahrnimmt. Dadurch kann es jeden Tag zur gleichen Zeit schreien.
+types:
+  - normal
+  - flying
+height_m: 0.7
+weight_kg: 21.2
+signature_move: hypnosis
+evolutions:
+  - target: 164
+    condition: Entwicklung auf Level 20

@@ -1,0 +1,15 @@
+id: 117
+slug: seadra
+name:
+  de: Seemon
+entry:
+  de: Seemon erzeugt Strudel, indem es sich schnell um die eigene Achse dreht. Diese Strudel können sogar Fischerboote in die Tiefe reißen. Damit schwächt es Beute, bevor es sie im Ganzen verschlingt.
+types:
+  - water
+height_m: 1.2
+weight_kg: 25.0
+evolves_from: 116
+signature_move: hydro-pump
+evolutions:
+  - target: 230
+    condition: Tausch mit Drachenschuppe

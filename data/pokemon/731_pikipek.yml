@@ -1,0 +1,15 @@
+id: 731
+slug: pikipek
+name:
+  de: Peppeck
+entry:
+  de: Pickt 16-mal pro Sekunde auf Bäume ein, um Löcher ins Holz zu schlagen. Diese nutzt es als Futterspeicher oder Nest.
+types:
+  - normal
+  - flying
+height_m: 0.3
+weight_kg: 1.2
+signature_move: peck
+evolutions:
+  - target: 732
+    condition: Entwicklung auf Level 14

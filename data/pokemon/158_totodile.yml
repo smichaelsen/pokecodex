@@ -1,0 +1,14 @@
+id: 158
+slug: totodile
+name:
+  de: Karnimani
+entry:
+  de: Karnimani ist zwar klein, aber seine Kiefer sind sehr stark. Wenn es zubeißt, kann es schwere Verletzungen verursachen, selbst wenn es nur spielen will.
+types:
+  - water
+height_m: 0.6
+weight_kg: 9.5
+signature_move: water-gun
+evolutions:
+  - target: 159
+    condition: Entwicklung auf Level 18

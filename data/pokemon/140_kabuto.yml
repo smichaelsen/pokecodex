@@ -1,0 +1,15 @@
+id: 140
+slug: kabuto
+name:
+  de: Kabuto
+entry:
+  de: Dieses Pokémon ist so gut wie ausgestorben. Sein Panzer wird immer härter, indem es sich alle drei Tage häutet.
+types:
+  - rock
+  - water
+height_m: 0.5
+weight_kg: 11.5
+signature_move: rock-slide
+evolutions:
+  - target: 141
+    condition: Entwicklung auf Level 40

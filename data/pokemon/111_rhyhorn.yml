@@ -1,0 +1,15 @@
+id: 111
+slug: rhyhorn
+name:
+  de: Rihorn
+entry:
+  de: Rihorn läuft immer geradeaus und zerstampft alles, was ihm in die Quere kommt. Es macht ihm auch nichts aus, wenn es mit dem Kopf voran gegen einen Stahlklotz rennt.
+types:
+  - ground
+  - rock
+height_m: 1.0
+weight_kg: 115.0
+signature_move: rock-slide
+evolutions:
+  - target: 112
+    condition: Entwicklung auf Level 42

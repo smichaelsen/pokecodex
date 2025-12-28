@@ -1,0 +1,12 @@
+id: 115
+slug: kangaskhan
+name:
+  de: Kangama
+entry:
+  de: Wenn du auf ein junges, spielendes Kangama stößt, solltest du es nicht stören. Die Mutter ist immer in der Nähe und verteidigt ihr Junges erbittert.
+types:
+  - normal
+height_m: 2.2
+weight_kg: 80.0
+signature_move: mega-punch
+evolutions: []

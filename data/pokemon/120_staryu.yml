@@ -1,0 +1,14 @@
+id: 120
+slug: staryu
+name:
+  de: Sterndu
+entry:
+  de: In Sterndus Körpermitte befindet sich ein hellrot leuchtender Kern. Selbst wenn Teile fehlen, kann es sie regenerieren, solange der Kern aktiv bleibt.
+types:
+  - water
+height_m: 0.8
+weight_kg: 34.5
+signature_move: water-gun
+evolutions:
+  - target: 121
+    condition: Wasserstein
