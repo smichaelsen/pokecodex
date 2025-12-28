@@ -3,8 +3,16 @@
 This document covers internal features and device integration details for dexOS.
 
 ## Location
-- Implementation: `public/js/dexOS/dexOS.js`
+- Implementation: `public/js/dexOS/dexOS.js` (composes helpers under `public/js/dexOS/`)
 - Entry wiring: `public/js/app.js`
+
+### Modules
+- `audio.js`: audio caching/playback orchestration and LED hooks
+- `apps.js`: app registry and switching
+- `data.js`: Pokémon data loading and cache
+- `leds.js`: LED helpers (set, pulse, flash)
+- `menu.js`: menu overlays and menu item registration (incl. reload)
+- `storage.js`: localStorage-backed helper with in-memory fallback
 
 ## Scope
 - Owns menu behavior (hardware button, overlays).
