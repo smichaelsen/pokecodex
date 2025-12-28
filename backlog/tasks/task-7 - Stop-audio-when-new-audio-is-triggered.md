@@ -1,7 +1,7 @@
 ---
 id: task-7
 title: 'Stop audio, when new audio is triggered'
-status: To Do
+status: Done
 assignee: []
 created_date: '2025-12-23 13:48'
 labels:

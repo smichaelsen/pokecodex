@@ -389,6 +389,17 @@ export function createDexOS({
     setLed(2, audioLoading.size > 0);
   };
 
+  const stopAllAudio = (exceptUrl = null) => {
+    audioCache.forEach((audio, url) => {
+      if (url === exceptUrl) return;
+      audio.pause();
+      audio.currentTime = 0;
+      audioActive.delete(url);
+      clearAudioLoading(url);
+    });
+    updateAudioLed();
+  };
+
   const clearAudioLoadTimer = (url) => {
     const timeoutId = audioLoadTimers.get(url);
     if (timeoutId) {
@@ -445,6 +456,7 @@ export function createDexOS({
   const playAudio = (url) => {
     const audio = getAudio(url);
     if (!audio) return null;
+    stopAllAudio(url);
     if (audio.readyState < HTMLMediaElement.HAVE_ENOUGH_DATA) {
       markAudioLoading(url, audio);
     } else {
