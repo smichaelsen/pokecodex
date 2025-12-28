@@ -25,6 +25,34 @@ export async function createPokedexApp(ctx) {
     page: 1,
     selectedSlug: null,
   };
+  const collapsePlaceholders = (list) => {
+    const source = Array.isArray(list) ? list : [];
+    const result = [];
+    for (let i = 0; i < source.length; i++) {
+      const item = source[i];
+      if (!item?.placeholder) {
+        result.push(item);
+        continue;
+      }
+      let startId = item?.id ?? null;
+      let endId = startId;
+      let j = i + 1;
+      while (j < source.length && source[j]?.placeholder) {
+        const nextId = source[j]?.id ?? null;
+        if (nextId !== null) endId = nextId;
+        j += 1;
+      }
+      result.push({
+        placeholder: true,
+        range: true,
+        id: startId ?? endId ?? 0,
+        startId: startId ?? endId ?? 0,
+        endId: endId ?? startId ?? 0,
+      });
+      i = j - 1;
+    }
+    return result;
+  };
   const SEEN_STORAGE_KEY = 'dexos.pokedex.seen';
   const seenSlugs = (() => {
     const stored = host.storage?.get ? host.storage.get(SEEN_STORAGE_KEY, []) : [];
@@ -50,7 +78,7 @@ export async function createPokedexApp(ctx) {
   const [, { createPaths }, renderModule] = await Promise.all([
     import(`../../components/pokedex-card.js${moduleVersion}`),
     import(`../../paths.js${moduleVersion}`),
-    import(`../../render.js${moduleVersion}`),
+    import(`./render.js${moduleVersion}`),
   ]);
   const { PAGE_SIZE, renderList, showDetail } = renderModule;
 
@@ -83,7 +111,7 @@ export async function createPokedexApp(ctx) {
   };
 
   const applyPokemon = (pokemon, opts = {}) => {
-    state.pokemon = pokemon || [];
+    state.pokemon = collapsePlaceholders(pokemon || []);
     if (!opts.keepPage) state.page = 1;
     renderList(state.pokemon, pokedexCtx);
     const hasList = state.pokemon.length > 0;
