@@ -1,5 +1,5 @@
-import { padId, typeClass } from './dom.js';
-import { escapeHtml } from './utils/escapeHtml.js';
+import { padId, typeClass } from '../../dom.js';
+import { escapeHtml } from '../../utils/escapeHtml.js';
 
 export const PAGE_SIZE = 12;
 
@@ -51,6 +51,25 @@ export function renderList(items, ctx) {
   } else {
     ctx.listEl.innerHTML = paged
       .map((p) => {
+        if (p.range) {
+          const startId = p.startId ?? p.id ?? 0;
+          const endId = p.endId ?? p.startId ?? p.id ?? 0;
+          const label =
+            startId === endId
+              ? 'Nr. ' + padId(startId)
+              : 'Nr. ' + padId(startId) + ' - Nr. ' + padId(endId);
+          return (
+            '<div class="card range" data-placeholder="1">' +
+            '<div class="thumb missing"></div>' +
+            '<div>' +
+            '<div class="id">' +
+            label +
+            '</div>' +
+            '<div class="name muted">—</div>' +
+            '</div>' +
+            '</div>'
+          );
+        }
         if (p.placeholder) {
           return '<pokedex-card placeholder pid="' + p.id + '"></pokedex-card>';
         }
