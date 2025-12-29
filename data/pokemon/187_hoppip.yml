@@ -1,0 +1,15 @@
+id: 187
+slug: hoppip
+name:
+  de: Hoppspross
+entry:
+  de: Hoppspross lässt sich vom Wind treiben. Wenn es bemerkt, dass ein Sturm aufkommt, verbindet es seine Blätter mit anderen Hoppspross, damit es nicht davongeweht wird.
+types:
+  - grass
+  - flying
+height_m: 0.4
+weight_kg: 0.5
+signature_move: tailwind
+evolutions:
+  - target: 188
+    condition: Entwicklung auf Level 18

@@ -1,0 +1,14 @@
+id: 94
+slug: gengar
+name:
+  de: Gengar
+entry:
+  de: Man sagt, es sei aus Dunkelheit entstanden, um denjenigen, die sich in den Bergen verirrt haben, das Leben zu rauben.
+types:
+  - ghost
+  - poison
+height_m: 1.5
+weight_kg: 40.5
+evolves_from: 93
+signature_move: shadow-ball
+evolutions: []

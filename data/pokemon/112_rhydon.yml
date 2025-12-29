@@ -1,0 +1,18 @@
+id: 112
+slug: rhydon
+name:
+  de: Rizeros
+name_tts:
+  de: rizeros
+entry:
+  de: Sein ganzer Körper ist von einer panzerähnlichen Haut geschützt. Es kann sogar in bis zu 2 000 ºC heißer Lava leben.
+types:
+  - ground
+  - rock
+height_m: 1.9
+weight_kg: 120.0
+signature_move: earth-power
+evolves_from: 111
+evolutions:
+  - target: 464
+    condition: Tausch mit Protektor

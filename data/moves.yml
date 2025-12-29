@@ -18,6 +18,16 @@
   power: 110
   description:
     de: Erzeugt einen heftigen Schneesturm und greift das Ziel an.
+- slug: bonemerang
+  name:
+    de: Knochmerang
+    en: Bonemerang
+  tts:
+    de: knochmerang
+  type: ground
+  power: 50
+  description:
+    de: Ein Bumerang aus Knochen, der zweimal trifft.
 - slug: razor-leaf
   name:
     de: Rasierblatt
@@ -43,6 +53,16 @@
   power: 0
   description:
     de: Verstreut Schlafpuder, der das Ziel eventuell in Schlaf versetzt.
+- slug: leafage
+  name:
+    de: Blattwerk
+    en: Leafage
+  tts:
+    de: blattwerk
+  type: grass
+  power: 40
+  description:
+    de: Der Anwender greift das Ziel mit Blättern an.
 - slug: karate-chop
   name:
     de: Karateschlag
@@ -133,6 +153,26 @@
   power: 110
   description:
     de: Feuersbrunst, die das Ziel versengt und ihm eventuell eine Verbrennung zufügt.
+- slug: fire-punch
+  name:
+    de: Feuerschlag
+    en: Fire Punch
+  tts:
+    de: feuerschlag
+  type: fire
+  power: 75
+  description:
+    de: Feuriger Schlag, der dem Ziel eventuell Verbrennungen zufügt.
+- slug: fire-fang
+  name:
+    de: Feuerzahn
+    en: Fire Fang
+  tts:
+    de: feuerzahn
+  type: fire
+  power: 65
+  description:
+    de: Anwender beißt mit flammenden Reißzähnen zu. Ziel schreckt eventuell zurück oder erleidet Verbrennungen.
 - slug: water-gun
   name:
     de: Aquaknarre
@@ -197,6 +237,16 @@
   power: 0
   description:
     de: Ein Fadenschuss, der die Initiative des Zieles senkt.
+- slug: bug-buzz
+  name:
+    de: Käfergebrumm
+    en: Bug Buzz
+  tts:
+    de: käfergebrumm
+  type: bug
+  power: 90
+  description:
+    de: Anwender erzeugt Schallwellen, die beim Ziel Schaden verursachen und eventuell dessen Spezial-Verteidigung senken.
 - slug: thunder-shock
   name:
     de: Donnerschock
@@ -372,6 +422,26 @@
   power: 100
   description:
     de: Ein gewaltiger Erschütterungsangriff, der alles um den Anwender herum trifft.
+- slug: earth-power
+  name:
+    de: Erdkräfte
+    en: Earth Power
+  tts:
+    de: erdkräfte
+  type: ground
+  power: 90
+  description:
+    de: Der Boden unter dem Ziel erzittert durch die Kraft der Erde. Senkt eventuell Spezial-Verteidigung.
+- slug: drill-run
+  name:
+    de: Schlagbohrer
+    en: Drill Run
+  tts:
+    de: schlagbohrer
+  type: ground
+  power: 80
+  description:
+    de: Anwender rammt das Ziel, während er seinen Körper wie einen Bohrer dreht. Hohe Volltrefferquote.
 - slug: sand-attack
   name:
     de: Sandwirbel
@@ -540,6 +610,16 @@
   power: 0
   description:
     de: Ein Lied, das das Ziel eventuell einschläfert.
+- slug: sketch
+  name:
+    de: Nachahmer
+    en: Sketch
+  tts:
+    de: nachahmer
+  type: normal
+  power: 0
+  description:
+    de: Anwender lernt die letzte Attacke des Zieles dauerhaft. Nachahmer verschwindet nach Gebrauch.
 - slug: hypnosis
   name:
     de: Hypnose
@@ -598,6 +678,16 @@
   power: 90
   description:
     de: Der Anwender drückt das Ziel. Kann den Angriff senken.
+- slug: tailwind
+  name:
+    de: Rückenwind
+    en: Tailwind
+  tts:
+    de: rückenwind
+  type: flying
+  power: 0
+  description:
+    de: Anwender erzeugt einen Wirbelwind, der die Initiative aller Pokémon im Team für vier Runden erhöht.
 - slug: tri-attack
   name:
     de: Triplette
@@ -622,6 +712,16 @@
   power: 30
   description:
     de: Leckt das Ziel mit der Zunge. Kann es eventuell paralysieren.
+- slug: shadow-ball
+  name:
+    de: Spukball
+    en: Shadow Ball
+  tts:
+    de: spukball
+  type: ghost
+  power: 80
+  description:
+    de: Bewirft das Ziel mit einem gruseligen Ball und senkt eventuell die Spezial-Verteidigung.
 - slug: lovely-kiss
   name:
     de: Todeskuss

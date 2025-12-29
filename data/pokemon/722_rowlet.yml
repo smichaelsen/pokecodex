@@ -1,0 +1,17 @@
+id: 722
+slug: rowlet
+name:
+  de: Bauz
+name_tts:
+  de: bauz
+entry:
+  de: Tagsüber sammelt es per Photosynthese Kräfte, um nachts lautlos durch die Lüfte zu fliegen und nach Beute zu suchen.
+types:
+  - grass
+  - flying
+height_m: 0.3
+weight_kg: 1.5
+signature_move: leafage
+evolutions:
+  - target: 723
+    condition: Entwicklung auf Level 17

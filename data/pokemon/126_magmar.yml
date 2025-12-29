@@ -1,0 +1,17 @@
+id: 126
+slug: magmar
+name:
+  de: Magmar
+name_tts:
+  de: magmar
+entry:
+  de: Sein Körper ist ständig in Flammen gehüllt, wodurch es als eine Ursache von Bränden gefürchtet wird.
+types:
+  - fire
+height_m: 0.8
+weight_kg: 15.0
+signature_move: fire-punch
+evolves_from: 240
+evolutions:
+  - target: 467
+    condition: Tausch mit Magmarizer

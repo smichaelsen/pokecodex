@@ -1,0 +1,14 @@
+id: 728
+slug: popplio
+name:
+  de: Robball
+entry:
+  de: Es trainiert jeden Tag fleißig, um irgendwann eine Blase zu erschaffen, welche die perfekte Form und Größe vorweist.
+types:
+  - water
+height_m: 0.4
+weight_kg: 7.5
+signature_move: bubble
+evolutions:
+  - target: 729
+    condition: Entwicklung auf Level 17

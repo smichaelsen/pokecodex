@@ -1,0 +1,15 @@
+id: 415
+slug: combee
+name:
+  de: Wadribie
+entry:
+  de: Sie sammeln von der Morgendämmerung bis zum Sonnenuntergang unentwegt Blütenhonig für Honweisel und die Kolonie.
+types:
+  - bug
+  - flying
+height_m: 0.3
+weight_kg: 5.5
+signature_move: bug-buzz
+evolutions:
+  - target: 416
+    condition: Entwicklung auf Level 21 (nur Weibchen)

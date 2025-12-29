@@ -1,0 +1,14 @@
+id: 725
+slug: litten
+name:
+  de: Flamiau
+entry:
+  de: Personen, denen es nicht vertraut, sollten sich davor hüten, es zu streicheln. Mit seinen scharfen Krallen verteilt es nämlich üble Kratzwunden.
+types:
+  - fire
+height_m: 0.4
+weight_kg: 4.3
+signature_move: fire-fang
+evolutions:
+  - target: 726
+    condition: Entwicklung auf Level 17

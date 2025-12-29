@@ -1,0 +1,15 @@
+id: 105
+slug: marowak
+name:
+  de: Knogga
+name_tts:
+  de: knogga
+entry:
+  de: Durch die Entwicklung wurde der Schädel seiner Mutter, den es stets trug, zu einem Teil von ihm und es bekam einen aggressiven Charakter.
+types:
+  - ground
+height_m: 1.0
+weight_kg: 45.0
+signature_move: bonemerang
+evolves_from: 104
+evolutions: []

@@ -1,0 +1,14 @@
+id: 464
+slug: rhyperior
+name:
+  de: Rihornior
+entry:
+  de: Mit seinem Schützer wehrt es Angriffe ab und durchsticht dann den verdutzten Gegner mit seinem Bohrer, auf den es sehr stolz ist.
+types:
+  - ground
+  - rock
+height_m: 2.4
+weight_kg: 282.8
+evolves_from: 112
+signature_move: drill-run
+evolutions: []

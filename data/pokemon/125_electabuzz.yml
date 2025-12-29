@@ -9,6 +9,7 @@ types:
 height_m: 1.1
 weight_kg: 30.0
 signature_move: thunderbolt
+evolves_from: 239
 evolutions:
   - target: 466
     condition: Tausch mit Stromisierer

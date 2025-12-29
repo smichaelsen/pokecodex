@@ -2,8 +2,10 @@ id: 83
 slug: farfetchd
 name:
   de: Porenta
+name_tts:
+  de: porenta
 entry:
-  de: Dieses Pokémon nutzt eine Lauchstange als Waffe. Es setzt sie wie ein Schwert ein.
+  de: Im Kampf verwendet es eine Lauchstange als Waffe. Es gibt verschiedene Meinungen dazu, wie diese korrekt zu schwingen sei.
 types:
   - normal
   - flying

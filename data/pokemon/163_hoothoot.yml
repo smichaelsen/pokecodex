@@ -2,6 +2,8 @@ id: 163
 slug: hoothoot
 name:
   de: Hoothoot
+name_tts:
+  de: Hut Hut
 entry:
   de: Hoothoot besitzt ein inneres Organ, das die Erdumdrehung wahrnimmt. Dadurch kann es jeden Tag zur gleichen Zeit schreien.
 types:
