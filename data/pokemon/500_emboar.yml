@@ -1,0 +1,14 @@
+id: 500
+slug: emboar
+name:
+  de: Flambirex
+entry:
+  de: Steckt seine Fäuste mit dem Feuer um sein Kinn in Brand und holt zu feurigen Fausthieben aus. Zeigt großen Teamgeist.
+types:
+  - fire
+  - fighting
+height_m: 1.6
+weight_kg: 150
+evolves_from: 499
+signature_move: heat-crash
+evolutions: []

@@ -29,25 +29,12 @@ You are a Pokémon expert and data curator. Prioritize accuracy, consistency, an
 - Use `yq` for YAML queries (moves/types/pokemon) instead of grep where possible; if a YAML value contains colons, quote the string so `yq` parses cleanly.
 
 ## Adding a new Pokémon (when requested)
-1) Gather required fields for the YAML entry and create a new file in `data/pokemon/` using the existing format:
-   - `id`
-   - `slug`
-   - `name.de`
-   - `entry.de`
-   - `types` (English type slugs that exist in `data/types.yml`)
-   - `height_m`
-   - `weight_kg`
-   - `signature_move` (English move slug that exists in `data/moves.yml`)
-   - `evolutions[]` with `{ target, condition }` when applicable
-   - `evolves_from` when applicable
-2) Filename must be: `{kanto-number}_{slug}.yml`, where `slug` derives from the English Pokémon name (lowercase, hyphenated) so the YAML filename and slug field stay canonical even before an entry for the referenced evolution exists.
-3) Choose a signature move:
-   - Prefer a move it’s known for, or strongest/most fitting (especially final evolution).
-   - Within an evolution line, do **not** reuse the same signature move.
-4) If the required type or signature move doesn’t exist:
-   - Add it to `apps/pokedex/data/types.yml` or `apps/pokedex/data/moves.yml` (keep ordering/format consistent).
-5) After changes, run:
-   - `scripts/build_pipeline.sh`
+1. Run `scripts/fetch_pokemon.sh <national-dex-number>` to capture the facts you need—the English (slug-safe) name, German name, types, height/weight, preferred German flavor text, evolution chain (by dex ID), and every move it can learn (unique, sorted list).
+2. Pick a signature move from that move list that is characteristic and unused elsewhere in the same evolution line; if its type or move is missing from `data/types.yml`/`data/moves.yml`, add the entry there with the existing formatting.
+3. Create `data/pokemon/{dex_number}_{slug}.yml` (slug = English name lowercased + hyphenated) and fill it with:
+   - `id`, `slug`, `name.de`, `entry.de`, `types`, `height_m`, `weight_kg`
+   - `signature_move`, `evolutions[]` (each with `target` + `condition`), and `evolves_from` when applicable
+4. Run `scripts/build_pipeline.sh` to regenerate assets/audio and validate the updated dataset.
 
 ## Evolution rules
 - List only the next direct evolution(s).

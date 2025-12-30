@@ -145,6 +145,16 @@
   power: 90
   description:
     de: Starke Feuer-Attacke, durch die das Ziel eventuell Verbrennungen erleidet.
+- slug: flare-blitz
+  name:
+    de: Flammenblitz
+    en: Flare Blitz
+  tts:
+    de: flammenblitz
+  type: fire
+  power: 120
+  description:
+    de: Anwender hüllt sich in Flammen und stürmt auf das Ziel zu, das dadurch eventuell Verbrennungen erleidet. Anwender nimmt selbst großen Schaden.
 - slug: fire-blast
   name:
     de: Feuersturm
@@ -173,6 +183,26 @@
   power: 65
   description:
     de: Anwender beißt mit flammenden Reißzähnen zu. Ziel schreckt eventuell zurück oder erleidet Verbrennungen.
+- slug: heat-crash
+  name:
+    de: Brandstempel
+    en: Heat Crash
+  tts:
+    de: brandstempel
+  type: fire
+  power: 0
+  description:
+    de: Stürzt mit seinem feurigen Körper auf das Ziel und richtet mehr Schaden an, je schwerer er im Vergleich zum Gegner ist (bis zu 120).
+- slug: lava-plume
+  name:
+    de: Flammensturm
+    en: Lava Plume
+  tts:
+    de: flammensturm
+  type: fire
+  power: 80
+  description:
+    de: Greift alles in seiner Umgebung mit tiefroten Flammen an. Ziel kann Verbrennungen erleiden.
 - slug: water-gun
   name:
     de: Aquaknarre

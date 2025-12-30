@@ -1,0 +1,14 @@
+id: 498
+slug: tepig
+name:
+  de: Floink
+entry:
+  de: Weicht flink gegnerischen Angriffen aus und schießt Flammen aus dem Rüssel, mit denen es gern auch mal Nüsse röstet.
+types:
+  - fire
+height_m: 0.5
+weight_kg: 9.9
+signature_move: ember
+evolutions:
+  - target: 499
+    condition: Entwicklung auf Level 17

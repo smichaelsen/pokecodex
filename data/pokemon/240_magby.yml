@@ -1,0 +1,14 @@
+id: 240
+slug: magby
+name:
+  de: Magby
+entry:
+  de: Es lebt in der Nähe von Vulkanen. Nach einem anstrengenden Tag badet es in Magma und schöpft so neue Energie.
+types:
+  - fire
+height_m: 0.7
+weight_kg: 21.4
+signature_move: lava-plume
+evolutions:
+  - target: 126
+    condition: Entwicklung durch hohe Freundschaft

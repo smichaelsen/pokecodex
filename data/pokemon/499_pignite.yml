@@ -1,0 +1,16 @@
+id: 499
+slug: pignite
+name:
+  de: Ferkokel
+entry:
+  de: Lodert das Feuer in ihm auf, bewegt es sich geschmeidiger und schneller. Bei Gefahr lässt es ordentlich Dampf ab.
+types:
+  - fire
+  - fighting
+height_m: 1.0
+weight_kg: 55.5
+evolves_from: 498
+signature_move: flare-blitz
+evolutions:
+  - target: 500
+    condition: Entwicklung auf Level 36
