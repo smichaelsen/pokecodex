@@ -1,0 +1,14 @@
+id: 819
+slug: skwovet
+name:
+  de: Raffel
+entry:
+  de: Da es unentwegt Beeren futtert, ist es zäher als es aussieht. Man sieht es oft auf Feldern, wo es nach Beeren sucht.
+types:
+  - normal
+height_m: 0.3
+weight_kg: 2.5
+signature_move: tail-slap
+evolutions:
+  - target: 820
+    condition: Entwicklung auf Level 24

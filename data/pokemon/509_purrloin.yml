@@ -1,0 +1,14 @@
+id: 509
+slug: purrloin
+name:
+  de: Felilou
+entry:
+  de: Es wiegt andere durch liebenswertes Verhalten in Sicherheit, kratzt sie dann plötzlich und amüsiert sich prächtig darüber.
+types:
+  - dark
+height_m: 0.4
+weight_kg: 10.1
+signature_move: dark-pulse
+evolutions:
+  - target: 510
+    condition: Entwicklung auf Level 20

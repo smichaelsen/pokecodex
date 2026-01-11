@@ -1,0 +1,14 @@
+id: 833
+slug: chewtle
+name:
+  de: Kamehaps
+entry:
+  de: Im Kampf greift es mit dem steinharten Horn auf seinem Kopf an. Schreckt der Gegner zurück, schnappt es zu und lässt nicht wieder los.
+types:
+  - water
+height_m: 0.3
+weight_kg: 8.5
+signature_move: jaw-lock
+evolutions:
+  - target: 834
+    condition: Entwicklung auf Level 22

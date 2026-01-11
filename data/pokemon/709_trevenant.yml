@@ -1,0 +1,14 @@
+id: 709
+slug: trevenant
+name:
+  de: Trombork
+entry:
+  de: Es streckt die dünnen Wurzeln an seinen Beinen aus, um sich so mit den Bäumen im Wald zu verbinden und sie nach Belieben zu kontrollieren.
+types:
+  - ghost
+  - grass
+height_m: 1.5
+weight_kg: 71
+evolves_from: 708
+signature_move: leaf-storm
+evolutions: []

@@ -1,0 +1,18 @@
+id: 744
+slug: rockruff
+name:
+  de: Wuffels
+entry:
+  de: Mit seinem steinernen Fellkragen schlägt Wuffels auf den Boden, um Gegner einzuschüchtern. Schrecken diese zurück, greift es sie sofort an.
+types:
+  - rock
+height_m: 0.5
+weight_kg: 9.2
+signature_move: stealth-rock
+evolutions:
+  - target: 745
+    condition: Entwicklung auf Level 25 (Tagsüber)
+  - target: 745
+    condition: Entwicklung auf Level 25 (Nachts)
+  - target: 745
+    condition: Entwicklung auf Level 25 (Dämmerung, Fähigkeit Tempomacher)

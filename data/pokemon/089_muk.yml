@@ -1,0 +1,13 @@
+id: 89
+slug: muk
+name:
+  de: Sleimok
+entry:
+  de: Sie treffen sich an stinkenden Orten, an denen der Schleim sich türmt. Dies merkt man am Gestank.
+types:
+  - poison
+height_m: 1.2
+weight_kg: 30
+evolves_from: 88
+signature_move: gunk-shot
+evolutions: []

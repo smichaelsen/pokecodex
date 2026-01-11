@@ -1,0 +1,14 @@
+id: 319
+slug: sharpedo
+name:
+  de: Tohaido
+entry:
+  de: Man nennt es den Rowdy der Meere. Sobald es Blut riecht, rastet es aus und attackiert alles in seiner Nähe.
+types:
+  - water
+  - dark
+height_m: 1.8
+weight_kg: 88.8
+evolves_from: 318
+signature_move: dark-pulse
+evolutions: []

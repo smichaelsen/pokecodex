@@ -1,0 +1,14 @@
+id: 341
+slug: corphish
+name:
+  de: Krebscorps
+entry:
+  de: Es stammt eigentlich aus dem Ausland und verwilderte. Es passt sich auch an die dreckigsten Flüsse an.
+types:
+  - water
+height_m: 0.6
+weight_kg: 11.5
+signature_move: crabhammer
+evolutions:
+  - target: 342
+    condition: Entwicklung auf Level 30

@@ -1,0 +1,13 @@
+id: 777
+slug: togedemaru
+name:
+  de: Togedemaru
+entry:
+  de: Normalerweise liegen seine Stacheln am Rücken an, aber wenn es sich aufregt, stellen sie sich auf und stechen angreifende Gegner.
+types:
+  - electric
+  - steel
+height_m: 0.3
+weight_kg: 3.3
+signature_move: zing-zap
+evolutions: []

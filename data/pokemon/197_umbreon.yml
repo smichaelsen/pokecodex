@@ -1,0 +1,13 @@
+id: 197
+slug: umbreon
+name:
+  de: Nachtara
+entry:
+  de: Bei Vollmond oder bei Aufregung leuchten die ringförmigen Muster auf seinem Körper gelb auf.
+types:
+  - dark
+height_m: 1
+weight_kg: 27
+evolves_from: 133
+signature_move: dark-pulse
+evolutions: []

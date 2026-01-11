@@ -1,0 +1,13 @@
+id: 474
+slug: porygon-z
+name:
+  de: Porygon-Z
+entry:
+  de: Es heißt, es habe sich durch eine neue Software entwickelt, doch Wissenschaftler sind sich nicht einig, ob Porygon-Z wirklich eine Entwicklung ist.
+types:
+  - normal
+height_m: 0.9
+weight_kg: 34
+evolves_from: 233
+signature_move: shadow-ball
+evolutions: []

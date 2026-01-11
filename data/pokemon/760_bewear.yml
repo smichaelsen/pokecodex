@@ -1,0 +1,14 @@
+id: 760
+slug: bewear
+name:
+  de: Kosturso
+entry:
+  de: Es zeigt Zuneigung mit kräftigen Umarmungen, doch ein unbedachter Knuddler kann Knochen brechen.
+types:
+  - normal
+  - fighting
+height_m: 2.1
+weight_kg: 135.0
+evolves_from: 759
+signature_move: brick-break
+evolutions: []

@@ -8,6 +8,14 @@
   power: 150
   description:
     de: Der Anwender greift mit voller Kraft an. In der nächsten Runde muss er sich erholen.
+- slug: gunk-shot
+  name:
+    de: Mülltreffer
+    en: Gunk Shot
+  type: poison
+  power: 120
+  description:
+    de: Anwender schießt mit Müll auf das Ziel. Vergiftet dieses eventuell.
 - slug: blizzard
   name:
     de: Blizzard
@@ -63,6 +71,14 @@
   power: 40
   description:
     de: Der Anwender greift das Ziel mit Blättern an.
+- slug: grassy-glide
+  name:
+    de: Grasrutsche
+    en: Grassy Glide
+  type: grass
+  power: 55
+  description:
+    de: Der Anwender rutscht über den Boden und greift das Ziel an. Ermöglicht den Erstschlag, wenn ein Grasfeld aktiv ist.
 - slug: karate-chop
   name:
     de: Karateschlag
@@ -183,6 +199,24 @@
   power: 65
   description:
     de: Anwender beißt mit flammenden Reißzähnen zu. Ziel schreckt eventuell zurück oder erleidet Verbrennungen.
+- slug: blaze-kick
+  name:
+    de: Feuerfeger
+    en: Blaze Kick
+  type: fire
+  power: 85
+  description:
+    de: Starker Tritt mit hoher Volltrefferquote. Verursacht eventuell Verbrennungen.
+- slug: foul-play
+  name:
+    de: Schmarotzer
+    en: Foul Play
+  tts:
+    de: schmarotzer
+  type: dark
+  power: 95
+  description:
+    de: Anwender macht sich die Kraft des Zieles zunutze. Je höher dessen Angriff, desto mehr Schaden richtet die Attacke an.
 - slug: heat-crash
   name:
     de: Brandstempel
@@ -203,6 +237,17 @@
   power: 80
   description:
     de: Greift alles in seiner Umgebung mit tiefroten Flammen an. Ziel kann Verbrennungen erleiden.
+
+- slug: mystical-fire
+  name:
+    de: Magieflamme
+    en: Mystical Fire
+  tts:
+    de: magieflamme
+  type: fire
+  power: 75
+  description:
+    de: Der Anwender greift das Ziel an, indem er ihm eine besondere, heiße Flamme entgegenbläst. Der Spezial-Angriff des Zieles sinkt.
 - slug: water-gun
   name:
     de: Aquaknarre
@@ -251,6 +296,14 @@
   power: 75
   description:
     de: Schneidet das Ziel mit einer scharfen Muschel. Kann dessen Verteidigung senken.
+- slug: water-shuriken
+  name:
+    de: Wasser-Shuriken
+    en: Water Shuriken
+  type: water
+  power: 15
+  description:
+    de: Der Anwender schleudert dem Ziel Wurfsterne aus Wasser entgegen. Diese Erstschlag-Attacke trifft zwei- bis fünfmal.
 - slug: acid
   name:
     de: Säure
@@ -259,6 +312,14 @@
   power: 40
   description:
     de: Sprüht Säure, die das Ziel eventuell seine Verteidigung senken lässt.
+- slug: coil
+  name:
+    de: Einrollen
+    en: Coil
+  type: poison
+  power: 0
+  description:
+    de: Anwender rollt sich zusammen und sammelt sich. Dabei werden Angriff, Verteidigung und Genauigkeit erhöht.
 - slug: string-shot
   name:
     de: Fadenschuss
@@ -277,6 +338,14 @@
   power: 90
   description:
     de: Anwender erzeugt Schallwellen, die beim Ziel Schaden verursachen und eventuell dessen Spezial-Verteidigung senken.
+- slug: attack-order
+  name:
+    de: Schlagbefehl
+    en: Attack Order
+  type: bug
+  power: 90
+  description:
+    de: Anwender ruft seine Untergebenen zum Angriff. Hat eine hohe Volltrefferquote.
 - slug: thunder-shock
   name:
     de: Donnerschock
@@ -317,6 +386,16 @@
   power: 40
   description:
     de: Wirft Münzen auf das Ziel. Nach dem Kampf gibt es extra Geld.
+- slug: perish-song
+  name:
+    de: Abgesang
+    en: Perish Song
+  tts:
+    de: abgesang
+  type: normal
+  power: 0
+  description:
+    de: Wer diese Musik hört, wird nach drei Runden besiegt. Rettung ist durch den Eintausch eines neuen Pokémon möglich.
 - slug: harden
   name:
     de: Härtner
@@ -359,6 +438,14 @@
   power: 0
   description:
     de: Eine Giftwolke, die das Ziel eventuell vergiftet.
+- slug: venom-drench
+  name:
+    de: Giftfalle
+    en: Venom Drench
+  type: poison
+  power: 0
+  description:
+    de: Anwender bespritzt das Ziel mit einer speziellen Giftflüssigkeit. Senkt den Angriff, den Spezial-Angriff und die Initiative von vergifteten Zielen.
 - slug: sludge-bomb
   name:
     de: Matschbombe
@@ -436,6 +523,14 @@
   power: 75
   description:
     de: Feuert mehrere Steine auf das Ziel. Kann das Ziel zurückschrecken lassen.
+- slug: stealth-rock
+  name:
+    de: Tarnsteine
+    en: Stealth Rock
+  type: rock
+  power: 0
+  description:
+    de: Der Anwender legt eine Falle aus schwebenden Steinen aus, die gegnerische Pokémon verletzen, die in den Kampf gerufen werden.
 - slug: flame-wheel
   name:
     de: Flammenrad
@@ -512,6 +607,16 @@
   power: 100
   description:
     de: Der Anwender greift mit seinem harten Schweif an. Kann die Verteidigung des Zieles senken.
+- slug: jaw-lock
+  name:
+    de: Fesselbiss
+    en: Jaw Lock
+  tts:
+    de: fesselbiss
+  type: dark
+  power: 80
+  description:
+    de: Anwender und Ziel können nicht ausgetauscht werden, bis einer kampfunfähig wird; der Effekt endet, sobald eines das Feld verlässt.
 - slug: hyper-beam
   name:
     de: Hyperstrahl
@@ -560,6 +665,14 @@
   power: 60
   description:
     de: Beißt zu und lässt das Ziel eventuell zurückschrecken.
+- slug: dark-pulse
+  name:
+    de: Finsteraura
+    en: Dark Pulse
+  type: dark
+  power: 80
+  description:
+    de: Anwender greift mit fürchterlicher Aura schlechter Gedanken an. Ziel schreckt eventuell zurück.
 - slug: crabhammer
   name:
     de: Krabbhammer
@@ -708,6 +821,16 @@
   power: 90
   description:
     de: Der Anwender drückt das Ziel. Kann den Angriff senken.
+- slug: tail-slap
+  name:
+    de: Kehrschelle
+    en: Tail Slap
+  tts:
+    de: kehrschelle
+  type: normal
+  power: 25
+  description:
+    de: Anwender greift das Ziel mit seiner schlagfesten Rute zwei- bis fünfmal hintereinander an.
 - slug: tailwind
   name:
     de: Rückenwind
@@ -742,6 +865,14 @@
   power: 30
   description:
     de: Leckt das Ziel mit der Zunge. Kann es eventuell paralysieren.
+- slug: zing-zap
+  name:
+    de: Elektropikser
+    en: Zing Zap
+  type: electric
+  power: 80
+  description:
+    de: Der Anwender rammt das Ziel und schockt es mit starkem Strom. Das Ziel schreckt eventuell zurück.
 - slug: shadow-ball
   name:
     de: Spukball
@@ -752,6 +883,14 @@
   power: 80
   description:
     de: Bewirft das Ziel mit einem gruseligen Ball und senkt eventuell die Spezial-Verteidigung.
+- slug: hex
+  name:
+    de: Bürde
+    en: Hex
+  type: ghost
+  power: 65
+  description:
+    de: Fügt Zielen mit Statusproblemen hohen Schaden zu.
 - slug: lovely-kiss
   name:
     de: Todeskuss
@@ -760,3 +899,27 @@
   power: 0
   description:
     de: Anwender zwingt dem Ziel einen Kuss auf, der Schlaf verursacht.
+- slug: leaf-storm
+  name:
+    de: Blättersturm
+    en: Leaf Storm
+  type: grass
+  power: 130
+  description:
+    de: Anwender erzeugt einen Sturm aus scharfen Blättern. Rückstoß senkt den Spezial-Angriff des Anwenders stark.
+- slug: petal-blizzard
+  name:
+    de: Blütenwirbel
+    en: Petal Blizzard
+  type: grass
+  power: 90
+  description:
+    de: Der Anwender erzeugt einen turbulenten Blütenwirbel, der alle Pokémon in der Nähe erfasst und ihnen Schaden zufügt.
+- slug: beak-blast
+  name:
+    de: Schnabelkanone
+    en: Beak Blast
+  type: flying
+  power: 100
+  description:
+    de: Der Anwender erhitzt zuerst seinen Schnabel und greift dann an. Pokémon, die ihn während des Erhitzens berühren, erleiden Verbrennungen.

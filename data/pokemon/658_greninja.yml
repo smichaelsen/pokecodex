@@ -1,0 +1,14 @@
+id: 658
+slug: greninja
+name:
+  de: Quajutsu
+entry:
+  de: Es stellt Wurfsterne aus komprimiertem Wasser her, die durch ihre hohe Drehgeschwindigkeit beim Werfen sogar Metall durchtrennen.
+types:
+  - water
+  - dark
+height_m: 1.5
+weight_kg: 40
+evolves_from: 657
+signature_move: water-shuriken
+evolutions: []

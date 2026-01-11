@@ -1,0 +1,15 @@
+id: 233
+slug: porygon2
+name:
+  de: Porygon2
+entry:
+  de: Als es mit künstlicher Intelligenz ausgestattet wurde, begann es, eine rätselhafte Sprache zu sprechen, die nur andere Porygon2 verstehen.
+types:
+  - normal
+height_m: 0.6
+weight_kg: 32.5
+evolves_from: 137
+signature_move: psybeam
+evolutions:
+  - target: 474
+    condition: Tausch mit Dubiosdisc

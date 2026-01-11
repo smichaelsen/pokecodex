@@ -1,0 +1,15 @@
+id: 814
+slug: raboot
+name:
+  de: Kickerlo
+entry:
+  de: Es pflückt Beeren von Ästen, ohne seine Hände zu benutzen, und jongliert sie mit den Füßen. Damit trainiert es seine Fußfertigkeiten.
+types:
+  - fire
+height_m: 0.6
+weight_kg: 9.0
+evolves_from: 813
+signature_move: blaze-kick
+evolutions:
+  - target: 815
+    condition: Entwicklung auf Level 35

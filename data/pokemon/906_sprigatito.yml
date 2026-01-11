@@ -1,0 +1,14 @@
+id: 906
+slug: sprigatito
+name:
+  de: Felori
+entry:
+  de: Sein flauschiges Fell ähnelt Pflanzen. Es wäscht sich häufig das Gesicht, damit es nicht austrocknet.
+types:
+  - grass
+height_m: 0.4
+weight_kg: 4.1
+signature_move: grassy-glide
+evolutions:
+  - target: 907
+    condition: Entwicklung auf Level 16

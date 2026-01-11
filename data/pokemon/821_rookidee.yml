@@ -1,0 +1,14 @@
+id: 821
+slug: rookidee
+name:
+  de: Meikro
+entry:
+  de: Mit seinem kleinen Körper kann es flink fliegen und so mithilfe von trickreichen Taktiken größere Gegner überlisten.
+types:
+  - flying
+height_m: 0.2
+weight_kg: 1.8
+signature_move: drill-peck
+evolutions:
+  - target: 822
+    condition: Entwicklung auf Level 18

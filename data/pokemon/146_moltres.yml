@@ -1,0 +1,13 @@
+id: 146
+slug: moltres
+name:
+  de: Lavados
+entry:
+  de: Überlieferungen nach soll Lavados mit seinen wunderschön lodernden Flügeln Bergpfade erleuchtet und dadurch Verirrten geholfen haben.
+types:
+  - fire
+  - flying
+height_m: 2.0
+weight_kg: 60.0
+signature_move: sky-attack
+evolutions: []

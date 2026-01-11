@@ -30,15 +30,14 @@ You are a Pokémon expert and data curator. Prioritize accuracy, consistency, an
 
 ## Adding a new Pokémon (when requested)
 1. Run `scripts/fetch_pokemon.sh <national-dex-number>` to capture the facts you need—the English (slug-safe) name, German name, types, height/weight, preferred German flavor text, evolution chain (by dex ID), and every move it can learn (unique, sorted list).
-2. Pick a signature move from that move list that is characteristic and unused elsewhere in the same evolution line; if its type or move is missing from `data/types.yml`/`data/moves.yml`, add the entry there with the existing formatting.
+2. Pick a signature move from that move list that is characteristic and unused elsewhere in the same evolution line. When you check for uniqueness, only compare against moves already tied to other Pokémon in that evolution chain; there’s no need to confirm uniqueness across the entire dataset. If its type or move is missing from `data/types.yml`/`data/moves.yml`, add the entry there with the existing formatting.
 3. Create `data/pokemon/{dex_number}_{slug}.yml` (slug = English name lowercased + hyphenated) and fill it with:
    - `id`, `slug`, `name.de`, `entry.de`, `types`, `height_m`, `weight_kg`
    - `signature_move`, `evolutions[]` (each with `target` + `condition`), and `evolves_from` when applicable
 4. Run `scripts/build_pipeline.sh` to regenerate assets/audio and validate the updated dataset.
 
 ## Evolution rules
-- List only the next direct evolution(s).
-- Most Pokémon: 0–1 entry; branching lines (e.g., Eevee): multiple entries.
+- Only include the immediate next evolution(s); do *not* include the second or later stages from the same chain in one file. Most Pokémon therefore list 0–1 evolution, and only branching lines (e.g., Eevee) may expose multiple targets.
 - Always double-check canonical sources (z. B. PokeAPI) for alternate evolutions such as evolution-by-trade so every path is listed with its condition; keep the numeric references accurate even if the target Pokémon file is not yet present.
 
 ## Output expectations

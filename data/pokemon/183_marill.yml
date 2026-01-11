@@ -1,0 +1,16 @@
+id: 183
+slug: marill
+name:
+  de: Marill
+entry:
+  de: Sein wasserabweisendes Fell trocknet sofort und hält Marill warm, selbst wenn es aus kaltem Meerwasser auftaucht.
+types:
+  - water
+  - fairy
+height_m: 0.4
+weight_kg: 8.5
+evolves_from: 298
+signature_move: play-rough
+evolutions:
+  - target: 184
+    condition: Entwicklung auf Level 18

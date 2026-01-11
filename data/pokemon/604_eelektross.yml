@@ -1,0 +1,13 @@
+id: 604
+slug: eelektross
+name:
+  de: Zapplarang
+entry:
+  de: Mit dem Saugnapf an seinem Maul hakt es sich an seiner Beute fest und versetzt ihr über seine Fangzähne Stromschläge.
+types:
+  - electric
+height_m: 2.1
+weight_kg: 80.5
+evolves_from: 603
+signature_move: coil
+evolutions: []

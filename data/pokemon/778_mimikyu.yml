@@ -1,0 +1,13 @@
+id: 778
+slug: mimikyu
+name:
+  de: Mimigma
+entry:
+  de: Es versteckt seinen wahren Körper unter Lumpen. Wer unter das Tuch blickt, soll von einem schweren Fluch getroffen werden.
+types:
+  - ghost
+  - fairy
+height_m: 0.2
+weight_kg: 0.7
+signature_move: play-rough
+evolutions: []

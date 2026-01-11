@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.pokedex.rule=Host(`pokedex.michaelsen.io`)"
       - "traefik.http.routers.pokedex.entrypoints=websecure,web"
       - "traefik.http.routers.pokedex.tls=true"
-      - "traefik.http.routers.pokedex.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.pokedex.tls.certresolver=letsencrypt-dns"
       - "traefik.http.middlewares.pokedex-redirect.redirectscheme.scheme=https"
       - "traefik.http.middlewares.pokedex-redirect.redirectscheme.permanent=true"
       - "traefik.http.routers.pokedex.middlewares=pokedex-redirect"

@@ -1,0 +1,14 @@
+id: 827
+slug: nickit
+name:
+  de: Kleptifux
+entry:
+  de: Es ist sehr vorsichtig und gerissen. Nachdem es Futter stibitzt hat, macht es sich davon und verwischt dabei seine Spuren mit seinem Schweif.
+types:
+  - dark
+height_m: 0.6
+weight_kg: 8.9
+signature_move: foul-play
+evolutions:
+  - target: 828
+    condition: Entwicklung auf Level 18

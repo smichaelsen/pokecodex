@@ -1,0 +1,14 @@
+id: 416
+slug: vespiquen
+name:
+  de: Honweisel
+entry:
+  de: Je mehr Pheromone ein Honweisel freisetzt, desto mehr Wadribie kann es kontrollieren.
+types:
+  - bug
+  - flying
+height_m: 1.2
+weight_kg: 38.5
+evolves_from: 415
+signature_move: attack-order
+evolutions: []

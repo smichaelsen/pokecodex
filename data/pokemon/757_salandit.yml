@@ -1,0 +1,15 @@
+id: 757
+slug: salandit
+name:
+  de: Molunk
+entry:
+  de: Es schleicht sich von hinten an seine Beute heran. Noch bevor diese auf es aufmerksam wird, setzt es sie mit seinem Giftgas außer Gefecht.
+types:
+  - poison
+  - fire
+height_m: 0.6
+weight_kg: 4.8
+signature_move: venom-drench
+evolutions:
+  - target: 758
+    condition: Level 33 (nur weiblich)

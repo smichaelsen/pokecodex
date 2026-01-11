@@ -1,0 +1,14 @@
+id: 420
+slug: cherubi
+name:
+  de: Kikugi
+entry:
+  de: Sonnenlicht färbt es rot. Verliert das kleine Bällchen Nährstoffe, welkt es und die Entwicklung beginnt.
+types:
+  - grass
+height_m: 0.4
+weight_kg: 3.3
+signature_move: petal-blizzard
+evolutions:
+  - target: 421
+    condition: Level 25

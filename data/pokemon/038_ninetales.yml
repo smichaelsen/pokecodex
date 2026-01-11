@@ -1,0 +1,13 @@
+id: 38
+slug: ninetales
+name:
+  de: Vulnona
+entry:
+  de: Dieses Pokémon ist intelligent, aber rachsüchtig. Wer zum Spaß einen seiner Schweife ergreift, kann sich einen tausendjährigen Fluch einhandeln.
+types:
+  - fire
+height_m: 1.1
+weight_kg: 19.9
+evolves_from: 37
+signature_move: fire-blast
+evolutions: []

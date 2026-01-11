@@ -1,0 +1,13 @@
+id: 467
+slug: magmortar
+name:
+  de: Magbrant
+entry:
+  de: Durch das Leben in Vulkankratern ähnelt Magbrants Körper seinem Umfeld. Es besitzt ein Organ, das einer Magmakammer gleicht.
+types:
+  - fire
+height_m: 1.6
+weight_kg: 68.0
+evolves_from: 126
+signature_move: mystical-fire
+evolutions: []

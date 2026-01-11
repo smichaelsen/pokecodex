@@ -1,0 +1,14 @@
+id: 121
+slug: starmie
+name:
+  de: Starmie
+entry:
+  de: Starmie bewegt sich im Wasser fort, indem es seinen Körper mit hoher Geschwindigkeit rotieren lässt. Unterwegs absorbiert es winziges Plankton.
+types:
+  - water
+  - psychic
+height_m: 1.1
+weight_kg: 80
+evolves_from: 120
+signature_move: psychic
+evolutions: []

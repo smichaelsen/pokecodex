@@ -1,0 +1,14 @@
+id: 733
+slug: toucannon
+name:
+  de: Tukanon
+entry:
+  de: Erhitzt vor jedem Kampf seinen Schnabel auf über 100 °C. Dadurch erleiden Gepiesackte schwere Verbrennungen.
+types:
+  - normal
+  - flying
+height_m: 1.1
+weight_kg: 26.0
+evolves_from: 732
+signature_move: beak-blast
+evolutions: []

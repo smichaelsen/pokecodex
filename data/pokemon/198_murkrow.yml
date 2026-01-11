@@ -1,0 +1,15 @@
+id: 198
+slug: murkrow
+name:
+  de: Kramurx
+entry:
+  de: Es versteckt jeden schimmernden Gegenstand. Kramurx und Mauzi rauben sich gegenseitig die Beute.
+types:
+  - dark
+  - flying
+height_m: 0.5
+weight_kg: 2.1
+signature_move: perish-song
+evolutions:
+  - target: 430
+    condition: Finsterstein

@@ -1,0 +1,14 @@
+id: 49
+slug: venomoth
+name:
+  de: Omot
+entry:
+  de: Wer die von ihm verstreuten Schuppen berührt, wird gelähmt und muss sich setzen.
+types:
+  - bug
+  - poison
+height_m: 1.5
+weight_kg: 12.5
+evolves_from: 48
+signature_move: bug-buzz
+evolutions: []

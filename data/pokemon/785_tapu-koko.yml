@@ -1,0 +1,13 @@
+id: 785
+slug: tapu-koko
+name:
+  de: Kapu-Riki
+entry:
+  de: Es ist ständig in Bewegung und sammelt elektrische Energie. Kämpft zum Schutz seiner Insel, folgt aber nur seiner Laune.
+types:
+  - electric
+  - fairy
+height_m: 1.8
+weight_kg: 20.5
+signature_move: thunderbolt
+evolutions: []

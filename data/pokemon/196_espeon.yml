@@ -1,0 +1,13 @@
+id: 196
+slug: espeon
+name:
+  de: Psiana
+entry:
+  de: Über die Kugel an seiner Stirn feuert es Psycho-Kräfte ab. Geht ihm die Kraft aus, verliert die Farbe der Kugel an Glanz.
+types:
+  - psychic
+height_m: 0.9
+weight_kg: 26.5
+evolves_from: 133
+signature_move: psychic
+evolutions: []

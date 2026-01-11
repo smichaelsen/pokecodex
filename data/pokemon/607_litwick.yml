@@ -1,0 +1,15 @@
+id: 607
+slug: litwick
+name:
+  de: Lichtel
+entry:
+  de: Je jünger das Opfer, dem es die Lebensenergie entzieht, desto höher und unheimlicher brennt die Flamme auf seinem Kopf.
+types:
+  - ghost
+  - fire
+height_m: 0.3
+weight_kg: 3.1
+signature_move: hex
+evolutions:
+  - target: 608
+    condition: Entwicklung auf Level 41
